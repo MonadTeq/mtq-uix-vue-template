@@ -179,38 +179,6 @@ export const constantRoutes: RouteRecordRaw[] = [
         }
       }
     ]
-  },
-  {
-    path: "/link",
-    meta: {
-      title: "Docs Links"
-    },
-    children: [
-      {
-        path: "https://juejin.cn/post/7445151895121543209",
-        component: () => {},
-        name: "Link1",
-        meta: {
-          title: "Chinese Docs"
-        }
-      },
-      {
-        path: "https://juejin.cn/column/7207659644487139387",
-        component: () => {},
-        name: "Link2",
-        meta: {
-          title: "Beginner Tutorial"
-        }
-      },
-      {
-        path: "https://juejin.cn/column/7046214632771420196",
-        component: () => {},
-        name: "Link3",
-        meta: {
-          title: "Related News"
-        }
-      }
-    ]
   }
 ]
 
@@ -219,44 +187,7 @@ export const constantRoutes: RouteRecordRaw[] = [
  * @description Used to hold routes that have permissions (roles / permissions properties)
  * @description Must have a unique Name property
  */
-export const dynamicRoutes: RouteRecordRaw[] = [
-  {
-    path: "/permission",
-    component: Layouts,
-    redirect: "/permission/page-level",
-    name: "Permission",
-    meta: {
-      title: "Permission Demo",
-      alwaysShow: true
-    },
-    children: [
-      {
-        path: "page-level",
-        component: () => import("@/pages/demo/permission/page-level.vue"),
-        name: "PermissionPageLevel",
-        meta: {
-          title: "Page Level",
-          // Set roles in the route to control access
-          roles: ["admin"],
-          // Set permission identifiers in the route to control access
-          permissions: ["permission:page-level"]
-        }
-      },
-      {
-        path: "button-level",
-        component: () => import("@/pages/demo/permission/button-level.vue"),
-        name: "PermissionButtonLevel",
-        meta: {
-          title: "Button Level",
-          // If not set, access to the page is unrestricted
-          roles: undefined,
-          // Set permission identifiers in the route to control access
-          permissions: ["permission:button-level"]
-        }
-      }
-    ]
-  }
-]
+export const dynamicRoutes: RouteRecordRaw[] = []
 
 /** Router instance */
 export const router = createRouter({
