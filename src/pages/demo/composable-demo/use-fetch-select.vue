@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { useFetchSelect } from "@@/composables/useFetchSelect"
+import { useFetchSelect } from "@/shared/lib/use-fetch-select"
 import { getSelectDataApi } from "./apis/use-fetch-select"
 
 const { loading, options, value } = useFetchSelect({

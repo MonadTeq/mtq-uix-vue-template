@@ -20,9 +20,7 @@ export default defineConfig(({ mode }) => {
     resolve: {
       alias: {
         // The @ alias points to the src directory
-        "@": resolve(__dirname, "src"),
-        // The @@ alias points to the src/common directory
-        "@@": resolve(__dirname, "src/common")
+        "@": resolve(__dirname, "src")
       }
     },
     // Development server configuration
@@ -50,9 +48,9 @@ export default defineConfig(({ mode }) => {
       // Pre-warm frequently used files to improve initial page load speed
       warmup: {
         clientFiles: [
-          "./src/layouts/**/*.*",
-          "./src/pinia/**/*.*",
-          "./src/router/**/*.*"
+          "./src/widgets/**/*.*",
+          "./src/entities/**/*.*",
+          "./src/app/router/**/*.*"
         ]
       }
     },
@@ -121,8 +119,8 @@ export default defineConfig(({ mode }) => {
       }),
       // Auto-generate the SvgIcon component and SVG sprite sheet
       SvgComponent({
-        iconDir: [resolve(__dirname, "src/common/assets/icons")],
-        preserveColor: resolve(__dirname, "src/common/assets/icons/preserve-color"),
+        iconDir: [resolve(__dirname, "src/shared/assets/icons")],
+        preserveColor: resolve(__dirname, "src/shared/assets/icons/preserve-color"),
         dts: true,
         dtsDir: resolve(__dirname, "types/auto")
       }),

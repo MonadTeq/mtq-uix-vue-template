@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { useUserStore } from "@/pinia/stores/user"
+import { useUserStore } from "@/entities/user"
 
 const userStore = useUserStore()
 

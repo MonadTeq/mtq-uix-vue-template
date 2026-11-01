@@ -1,10 +1,10 @@
 <script lang="ts" setup>
 import type { FormRules } from "element-plus"
 import type { LoginRequestData } from "./apis/type"
-import ThemeSwitch from "@@/components/ThemeSwitch/index.vue"
+import ThemeSwitch from "@/features/theme/ui/ThemeSwitch.vue"
 import { Key, Loading, Lock, Picture, User } from "@element-plus/icons-vue"
-import { useSettingsStore } from "@/pinia/stores/settings"
-import { useUserStore } from "@/pinia/stores/user"
+import { useSettingsStore } from "@/entities/settings"
+import { useUserStore } from "@/entities/user"
 import { getCaptchaApi, loginApi } from "./apis"
 import Owl from "./components/Owl.vue"
 import { useFocus } from "./composables/useFocus"
@@ -91,7 +91,7 @@ createCode()
     <Owl :close-eyes="isFocus" />
     <div class="login-card">
       <div class="title">
-        <img src="@@/assets/images/layouts/logo-text-2.png">
+        <img src="@/shared/assets/images/layouts/logo-text-2.png">
       </div>
       <div class="content">
         <el-form ref="loginFormRef" :model="loginFormData" :rules="loginFormRules" @keyup.enter="handleLogin">

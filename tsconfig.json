@@ -18,8 +18,7 @@
     "moduleResolution": "bundler",
     // Path mapping configuration for non-relative module imports; paths are calculated based on the baseUrl configuration, kept in sync with the alias configuration in vite.config
     "paths": {
-      "@/*": ["src/*"],
-      "@@/*": ["src/common/*"]
+      "@/*": ["src/*"]
     },
     "resolveJsonModule": true,
     "types": ["vite/client", "element-plus/global"],

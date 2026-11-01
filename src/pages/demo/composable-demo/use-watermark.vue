@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { useWatermark } from "@@/composables/useWatermark"
+import { useWatermark } from "@/shared/lib/use-watermark"
 
 const localRef = useTemplateRef("localRef")
 

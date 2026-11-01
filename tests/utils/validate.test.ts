@@ -1,4 +1,4 @@
-import { isArray } from "@@/utils/validate"
+import { isArray } from "@/shared/lib/validate"
 import { describe, expect, it } from "vitest"
 
 describe("isArray", () => {

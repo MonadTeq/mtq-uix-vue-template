@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { checkPermission } from "@@/utils/permission"
+import { checkPermission } from "@/features/permission/lib/permission"
 import SwitchUser from "./components/SwitchUser.vue"
 </script>
 

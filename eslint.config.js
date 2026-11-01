@@ -39,5 +39,109 @@ export default antfu(
       "antfu/if-newline": "off",
       "unicorn/no-instanceof-builtins": "off"
     }
+  },
+  // FSD layer boundary enforcement (top → bottom: app > pages > widgets > features > entities > shared)
+  {
+    name: "fsd/shared",
+    files: ["src/shared/**"],
+    rules: {
+      "no-restricted-imports": [
+        "error",
+        {
+          patterns: [
+            {
+              group: ["@/app/**", "@/pages/**", "@/widgets/**", "@/features/**", "@/entities/**"],
+              message: "The shared layer must not import upper layers"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    name: "fsd/entities",
+    files: ["src/entities/**"],
+    ignores: ["src/entities/user/**", "src/entities/permission/**"],
+    rules: {
+      "no-restricted-imports": [
+        "error",
+        {
+          patterns: [
+            {
+              group: ["@/features/**", "@/widgets/**", "@/pages/**", "@/app/**"],
+              message: "The entities layer must not import upper layers"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    name: "fsd/entities-router-coupled",
+    files: ["src/entities/user/**", "src/entities/permission/**"],
+    rules: {
+      "no-restricted-imports": [
+        "error",
+        {
+          patterns: [
+            {
+              group: ["@/features/**", "@/widgets/**", "@/pages/**"],
+              message: "The entities layer must not import upper layers"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    name: "fsd/features",
+    files: ["src/features/**"],
+    rules: {
+      "no-restricted-imports": [
+        "error",
+        {
+          patterns: [
+            {
+              group: ["@/widgets/**", "@/pages/**", "@/app/**"],
+              message: "The features layer must not import upper layers"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    name: "fsd/widgets",
+    files: ["src/widgets/**"],
+    rules: {
+      "no-restricted-imports": [
+        "error",
+        {
+          patterns: [
+            {
+              group: ["@/pages/**", "@/app/**"],
+              message: "The widgets layer must not import upper layers"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    name: "fsd/pages",
+    files: ["src/pages/**"],
+    rules: {
+      "no-restricted-imports": [
+        "error",
+        {
+          patterns: [
+            {
+              group: ["@/app/**"],
+              message: "The pages layer must not import the app layer"
+            }
+          ]
+        }
+      ]
+    }
   }
 )
