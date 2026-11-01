@@ -30,7 +30,7 @@ const { isLeft, isTop } = useLayoutMode()
 .layout-logo-container {
   position: relative;
   width: 100%;
-  height: var(--v3-header-height);
+  height: var(--mtq-uix-header-height);
   display: flex;
   justify-content: center;
   overflow: hidden;
@@ -47,7 +47,7 @@ const { isLeft, isTop } = useLayoutMode()
 }
 
 .layout-mode-top {
-  height: var(--v3-navigationbar-height);
+  height: var(--mtq-uix-navigationbar-height);
 }
 
 .collapse {

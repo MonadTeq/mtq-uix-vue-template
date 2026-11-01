@@ -42,7 +42,7 @@ $transition-time: 0.35s;
   z-index: 1002;
   width: 100%;
   .logo {
-    width: var(--v3-sidebar-width);
+    width: var(--mtq-uix-sidebar-width);
   }
   .content {
     display: flex;
@@ -53,9 +53,9 @@ $transition-time: 0.35s;
 }
 
 .layout-header {
-  background-color: var(--v3-header-bg-color);
-  box-shadow: var(--v3-header-box-shadow);
-  border-bottom: var(--v3-header-border-bottom);
+  background-color: var(--mtq-uix-header-bg-color);
+  box-shadow: var(--mtq-uix-header-box-shadow);
+  border-bottom: var(--mtq-uix-header-border-bottom);
 }
 
 .main-container {
@@ -64,14 +64,14 @@ $transition-time: 0.35s;
 
 .app-main {
   transition: padding-left $transition-time;
-  padding-top: var(--v3-navigationbar-height);
+  padding-top: var(--mtq-uix-navigationbar-height);
   height: 100vh;
   overflow: auto;
 }
 
 .has-tags-view {
   .app-main {
-    padding-top: var(--v3-header-height);
+    padding-top: var(--mtq-uix-header-height);
   }
 }
 </style>

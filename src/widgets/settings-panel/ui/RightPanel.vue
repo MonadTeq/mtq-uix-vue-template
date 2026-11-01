@@ -19,7 +19,7 @@ const show = ref(false)
 .handle-button {
   width: 40px;
   height: 48px;
-  background-color: var(--v3-rightpanel-button-bg-color);
+  background-color: var(--mtq-uix-rightpanel-button-bg-color);
   position: fixed;
   top: 45%;
   right: 0;
@@ -27,7 +27,7 @@ const show = ref(false)
   z-index: 2000;
   cursor: pointer;
   pointer-events: auto;
-  color: #ffffff;
+  color: var(--white);
   display: flex;
   align-items: center;
   justify-content: center;

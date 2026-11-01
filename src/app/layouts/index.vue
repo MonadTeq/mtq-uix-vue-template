@@ -24,7 +24,7 @@ const settingsStore = useSettingsStore()
 const { showSettings, showTagsView, showWatermark } = storeToRefs(settingsStore)
 
 // #region When the tags bar is hidden, remove its height so that the Logo component height and the Header area height stay consistent
-const cssVarName = "--v3-tagsview-height"
+const cssVarName = "--mtq-uix-tagsview-height"
 
 const v3TagsviewHeight = getCssVar(cssVarName)
 

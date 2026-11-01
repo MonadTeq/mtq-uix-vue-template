@@ -27,6 +27,6 @@ function toggleClick() {
 
 <style lang="scss" scoped>
 .icon {
-  color: var(--v3-hamburger-text-color);
+  color: var(--mtq-uix-hamburger-text-color);
 }
 </style>

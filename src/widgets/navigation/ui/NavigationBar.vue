@@ -74,9 +74,9 @@ function toggleSidebar() {
 
 <style lang="scss" scoped>
 .navigation-bar {
-  height: var(--v3-navigationbar-height);
+  height: var(--mtq-uix-navigationbar-height);
   overflow: hidden;
-  color: var(--v3-navigationbar-text-color);
+  color: var(--mtq-uix-navigationbar-text-color);
   display: flex;
   justify-content: space-between;
   .hamburger {

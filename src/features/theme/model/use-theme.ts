@@ -70,9 +70,9 @@ function setTheme({ clientX, clientY }: MouseEvent, value: ThemeName, doc: Docum
     Math.max(clientX, win.innerWidth - clientX),
     Math.max(clientY, win.innerHeight - clientY)
   )
-  setCssVar("--v3-theme-x", `${clientX}px`)
-  setCssVar("--v3-theme-y", `${clientY}px`)
-  setCssVar("--v3-theme-r", `${maxRadius}px`)
+  setCssVar("--mtq-uix-theme-x", `${clientX}px`)
+  setCssVar("--mtq-uix-theme-y", `${clientY}px`)
+  setCssVar("--mtq-uix-theme-r", `${maxRadius}px`)
   const handler = () => {
     activeThemeName.value = value
   }

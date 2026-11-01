@@ -1,18 +1,17 @@
 <script lang="ts" setup>
 import { useDevice } from "@/shared/lib"
 import { useLayoutMode } from "@/features/layout-mode"
-import { getCssVar } from "@/shared/lib"
 import { useAppStore } from "@/entities/app-ui"
 import { usePermissionStore } from "@/entities/permission"
 import { useSettingsStore } from "@/entities/settings"
 import Logo from "./Logo.vue"
 import Item from "./Item.vue"
 
-const v3SidebarMenuBgColor = getCssVar("--v3-sidebar-menu-bg-color")
+const v3SidebarMenuBgColor = "var(--mtq-uix-sidebar-menu-bg-color)"
 
-const v3SidebarMenuTextColor = getCssVar("--v3-sidebar-menu-text-color")
+const v3SidebarMenuTextColor = "var(--mtq-uix-sidebar-menu-text-color)"
 
-const v3SidebarMenuActiveTextColor = getCssVar("--v3-sidebar-menu-active-text-color")
+const v3SidebarMenuActiveTextColor = "var(--mtq-uix-sidebar-menu-active-text-color)"
 
 const { isMobile } = useDevice()
 
@@ -40,9 +39,9 @@ const textColor = computed(() => (isLeft.value ? v3SidebarMenuTextColor : undefi
 
 const activeTextColor = computed(() => (isLeft.value ? v3SidebarMenuActiveTextColor : undefined))
 
-const sidebarMenuItemHeight = computed(() => !isTop.value ? "var(--v3-sidebar-menu-item-height)" : "var(--v3-navigationbar-height)")
+const sidebarMenuItemHeight = computed(() => !isTop.value ? "var(--mtq-uix-sidebar-menu-item-height)" : "var(--mtq-uix-navigationbar-height)")
 
-const sidebarMenuHoverBgColor = computed(() => !isTop.value ? "var(--v3-sidebar-menu-hover-bg-color)" : "transparent")
+const sidebarMenuHoverBgColor = computed(() => !isTop.value ? "var(--mtq-uix-sidebar-menu-hover-bg-color)" : "transparent")
 
 const tipLineWidth = computed(() => !isTop.value ? "2px" : "0px")
 </script>
@@ -80,13 +79,13 @@ const tipLineWidth = computed(() => !isTop.value ? "2px" : "0px")
     left: 0;
     width: v-bind(tipLineWidth);
     height: 100%;
-    background-color: var(--v3-sidebar-menu-tip-line-bg-color);
+    background-color: var(--mtq-uix-sidebar-menu-tip-line-bg-color);
   }
 }
 
 .has-logo {
   .el-scrollbar {
-    height: calc(100% - var(--v3-header-height));
+    height: calc(100% - var(--mtq-uix-header-height));
   }
 }
 
