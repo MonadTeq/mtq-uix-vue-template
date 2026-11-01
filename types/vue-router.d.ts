@@ -9,55 +9,55 @@ type ElementPlusIconsName = keyof typeof ElementPlusIconsVue
 declare module "vue-router" {
   interface RouteMeta {
     /**
-     * @description 设置该路由在侧边栏和面包屑中展示的名字
+     * @description Set the name displayed for this route in the sidebar and breadcrumb
      */
     title?: string
     /**
-     * @description 设置该路由的图标，记得将 svg 导入 src/common/assets/icons
+     * @description Set the icon for this route; remember to import the svg into src/common/assets/icons
      */
     svgIcon?: SvgName
     /**
-     * @description 设置该路由的图标，直接使用 Element Plus 的 Icon（与 svgIcon 同时设置时，svgIcon 将优先生效）
+     * @description Set the icon for this route by directly using an Element Plus Icon (when set together with svgIcon, svgIcon takes precedence)
      */
     elIcon?: ElementPlusIconsName
     /**
-     * @description 默认 false，设置 true 的时候该路由不会在侧边栏出现
+     * @description Defaults to false; when set to true, the route will not appear in the sidebar
      */
     hidden?: boolean
     /**
-     * @description 设置能进入该路由的角色，支持多个角色叠加
+     * @description Set the roles that can access this route; multiple roles can be stacked
      */
     roles?: string[]
     /**
-     * @description 设置能进入该路由的权限标识字符，支持多个权限标识字符叠加
+     * @description Set the permission identifiers that can access this route; multiple permission identifiers can be stacked
      */
     permissions?: string[]
     /**
-     * @description 默认 true，如果设置为 false，则不会在面包屑中显示
+     * @description Defaults to true; if set to false, it will not be shown in the breadcrumb
      */
     breadcrumb?: boolean
     /**
-     * @description 默认 false，如果设置为 true，它则会固定在 tags-view 中
+     * @description Defaults to false; if set to true, it will be pinned in the tags-view
      */
     affix?: boolean
     /**
-     * @description 当一个路由的 children 属性中声明的非隐藏子路由只有 1 个且该子路由为叶子节点时，会将这个子路由当做父路由显示在侧边栏
-     * @description 当大于 1 个时，会恢复成嵌套模式
-     * @description 如果想不管个数总是显示父路由，可以在父路由上设置 alwaysShow: true
+     * @description When a route has only 1 non-hidden child route declared in its children property and that child route is a leaf node, that child route will be displayed as the parent route in the sidebar
+     * @description When there is more than 1, it will revert to nested mode
+     * @description If you want to always show the parent route regardless of the count, set alwaysShow: true on the parent route
      */
     alwaysShow?: boolean
     /**
-     * @description 示例: activeMenu: "/xxx/xxx"，
-     * @description 当设置了该属性进入路由时，则会高亮 activeMenu 属性对应的侧边栏
-     * @description 该属性适合使用在有 hidden: true 属性的路由上
+     * @description Example: activeMenu: "/xxx/xxx",
+     * @description When this property is set and the route is entered, the sidebar item corresponding to the activeMenu property will be highlighted
+     * @description This property is suitable for routes with the hidden: true property
      */
     activeMenu?: string
     /**
-     * @description 是否缓存该路由页面
-     * @description 默认为 false，为 true 时代表需要缓存，此时该路由和该页面都需要设置一致的 Name
+     * @description Whether to cache this route's page
+     * @description Defaults to false; true means caching is needed, in which case both the route and the page need a consistent Name set
      */
     keepAlive?: boolean
   }
 
-  // 路由的 redirect 属性设为 "noRedirect" 时，该路由在面包屑中显示为纯文本（不可点击）
+  // When a route's redirect property is set to "noRedirect", the route is shown in the breadcrumb as plain text (not clickable)
 }

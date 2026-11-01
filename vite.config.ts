@@ -15,39 +15,39 @@ import svgLoader from "vite-svg-loader"
 export default defineConfig(({ mode }) => {
   const { VITE_PUBLIC_PATH } = loadEnv(mode, process.cwd(), "") as ImportMetaEnv
   return {
-    // 开发或打包构建时用到的公共基础路径
+    // Public base path used in development or build
     base: VITE_PUBLIC_PATH,
     resolve: {
       alias: {
-        // @ 符号指向 src 目录
+        // The @ alias points to the src directory
         "@": resolve(__dirname, "src"),
-        // @@ 符号指向 src/common 通用目录
+        // The @@ alias points to the src/common directory
         "@@": resolve(__dirname, "src/common")
       }
     },
-    // 开发环境服务器配置
+    // Development server configuration
     server: {
-      // 是否监听所有地址
+      // Whether to listen on all addresses
       host: true,
-      // 端口号
+      // Port number
       port: 3333,
-      // 端口被占用时，是否直接退出
+      // Whether to exit directly when the port is occupied
       strictPort: false,
-      // 是否自动打开浏览器
+      // Whether to open the browser automatically
       open: true,
-      // 反向代理
+      // Reverse proxy
       proxy: {
         "/api/v1": {
           target: "https://apifoxmock.com/m1/2930465-2145633-default",
-          // 是否为 WebSocket
+          // Whether it is WebSocket
           ws: false,
-          // 是否允许跨域
+          // Whether to allow cross-origin
           changeOrigin: true
         }
       },
-      // 是否允许跨域
+      // Whether to allow cross-origin
       cors: true,
-      // 预热常用文件，提高初始页面加载速度
+      // Pre-warm frequently used files to improve initial page load speed
       warmup: {
         clientFiles: [
           "./src/layouts/**/*.*",
@@ -56,15 +56,15 @@ export default defineConfig(({ mode }) => {
         ]
       }
     },
-    // 构建配置
+    // Build configuration
     build: {
-      // 自定义底层的 Rollup 打包配置
+      // Customize the underlying Rollup bundling configuration
       rollupOptions: {
         output: {
           /**
-           * @name 分块策略
-           * @description 1. 注意这些包名必须存在，否则打包会报错
-           * @description 2. 如果你不想自定义 chunk 分割策略，可以直接移除这段配置
+           * @name Chunking strategy
+           * @description 1. Note that these package names must exist, otherwise the build will error
+           * @description 2. If you don't want to customize the chunk splitting strategy, you can simply remove this configuration
            */
           manualChunks: {
             vue: ["vue", "vue-router", "pinia"],
@@ -73,36 +73,36 @@ export default defineConfig(({ mode }) => {
           }
         }
       },
-      // 是否开启 gzip 压缩大小报告，禁用时能略微提高构建性能
+      // Whether to enable the gzip compressed size report; disabling it slightly improves build performance
       reportCompressedSize: false,
-      // 单个 chunk 文件的大小超过 2048kB 时发出警告
+      // Warn when a single chunk file exceeds 2048kB
       chunkSizeWarningLimit: 2048
     },
-    // 混淆器
+    // Minifier
     esbuild:
       mode === "development"
         ? undefined
         : {
-            // 打包构建时移除 console.log
+            // Remove console.log during build
             pure: ["console.log"],
-            // 打包构建时移除 debugger
+            // Remove debugger during build
             drop: ["debugger"],
-            // 打包构建时移除所有注释
+            // Remove all comments during build
             legalComments: "none"
           },
-    // 依赖预构建
+    // Dependency pre-bundling
     optimizeDeps: {
       include: ["element-plus/es/components/*/style/css"]
     },
-    // CSS 相关配置
+    // CSS-related configuration
     css: {
-      // 线程中运行 CSS 预处理器
+      // Run the CSS preprocessor in threads
       preprocessorMaxWorkers: true
     },
-    // 插件配置
+    // Plugin configuration
     plugins: [
       vue(),
-      // 支持将 SVG 文件导入为 Vue 组件
+      // Support importing SVG files as Vue components
       svgLoader({
         defaultImport: "url",
         svgoConfig: {
@@ -119,27 +119,27 @@ export default defineConfig(({ mode }) => {
           ]
         }
       }),
-      // 自动生成 SvgIcon 组件和 SVG 雪碧图
+      // Auto-generate the SvgIcon component and SVG sprite sheet
       SvgComponent({
         iconDir: [resolve(__dirname, "src/common/assets/icons")],
         preserveColor: resolve(__dirname, "src/common/assets/icons/preserve-color"),
         dts: true,
         dtsDir: resolve(__dirname, "types/auto")
       }),
-      // 原子化 CSS
+      // Atomic CSS
       UnoCSS(),
-      // 自动按需导入 API
+      // Auto-import APIs on demand
       AutoImport({
         imports: ["vue", "vue-router", "pinia"],
         dts: "types/auto/auto-imports.d.ts",
         resolvers: [ElementPlusResolver({ importStyle: false })]
       }),
-      // 自动按需导入组件
+      // Auto-import components on demand
       Components({
         dts: "types/auto/components.d.ts",
         resolvers: [ElementPlusResolver({ importStyle: false })]
       }),
-      // 为项目开启 MCP Server
+      // Enable the MCP Server for the project
       ViteMcp()
     ],
     // Configuring Vitest: https://cn.vitest.dev/config

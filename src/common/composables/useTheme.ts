@@ -5,7 +5,7 @@ const DEFAULT_THEME_NAME = "normal"
 
 type DefaultThemeName = typeof DEFAULT_THEME_NAME
 
-/** 注册的主题名称, 其中 DefaultThemeName 是必填的 */
+/** Registered theme names, where DefaultThemeName is required */
 export type ThemeName = DefaultThemeName | "dark" | "dark-blue"
 
 interface ThemeList {
@@ -13,26 +13,26 @@ interface ThemeList {
   name: ThemeName
 }
 
-/** 主题列表 */
+/** Theme list */
 const themeList: ThemeList[] = [
   {
-    title: "默认",
+    title: "Default",
     name: DEFAULT_THEME_NAME
   },
   {
-    title: "黑暗",
+    title: "Dark",
     name: "dark"
   },
   {
-    title: "深蓝",
+    title: "Deep Blue",
     name: "dark-blue"
   }
 ]
 
-/** 正在应用的主题名称 */
+/** The theme name currently being applied */
 const activeThemeName = ref<ThemeName>(getActiveThemeName() || DEFAULT_THEME_NAME)
 
-/** 设置主题 */
+/** Set the theme */
 function setTheme({ clientX, clientY }: MouseEvent, value: ThemeName) {
   const maxRadius = Math.hypot(
     Math.max(clientX, window.innerWidth - clientX),
@@ -47,20 +47,20 @@ function setTheme({ clientX, clientY }: MouseEvent, value: ThemeName) {
   document.startViewTransition ? document.startViewTransition(handler) : handler()
 }
 
-/** 在 html 根元素上挂载 class */
+/** Mount a class on the html root element */
 function addHtmlClass(value: ThemeName) {
   document.documentElement.classList.add(value)
 }
 
-/** 在 html 根元素上移除其他主题 class */
+/** Remove other theme classes from the html root element */
 function removeHtmlClass(value: ThemeName) {
   const otherThemeNameList = themeList.map(item => item.name).filter(name => name !== value)
   document.documentElement.classList.remove(...otherThemeNameList)
 }
 
-/** 初始化 */
+/** Initialize */
 function initTheme() {
-  // watchEffect 来收集副作用
+  // Use watchEffect to collect side effects
   watchEffect(() => {
     const value = activeThemeName.value
     removeHtmlClass(value)
@@ -69,7 +69,7 @@ function initTheme() {
   })
 }
 
-/** 主题 Composable */
+/** Theme composable */
 export function useTheme() {
   return { themeList, activeThemeName, initTheme, setTheme }
 }

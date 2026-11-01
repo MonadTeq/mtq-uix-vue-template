@@ -1,7 +1,7 @@
 import type * as Tables from "./type"
 import { request } from "@/http/axios"
 
-/** 增 */
+/** Create */
 export function createTableDataApi(data: Tables.CreateOrUpdateTableRequestData) {
   return request({
     url: "tables",
@@ -10,7 +10,7 @@ export function createTableDataApi(data: Tables.CreateOrUpdateTableRequestData) 
   })
 }
 
-/** 删 */
+/** Delete */
 export function deleteTableDataApi(id: number) {
   return request({
     url: `tables/${id}`,
@@ -18,7 +18,7 @@ export function deleteTableDataApi(id: number) {
   })
 }
 
-/** 改 */
+/** Update */
 export function updateTableDataApi(data: Tables.CreateOrUpdateTableRequestData) {
   return request({
     url: "tables",
@@ -27,7 +27,7 @@ export function updateTableDataApi(data: Tables.CreateOrUpdateTableRequestData) 
   })
 }
 
-/** 查 */
+/** Read */
 export function getTableDataApi(params: Tables.TableRequestData) {
   return request<Tables.TableResponseData>({
     url: "tables",

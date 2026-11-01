@@ -15,42 +15,42 @@ const { setTitle } = useTitle()
 const LOGIN_PATH = "/login"
 
 export function registerNavigationGuard(router: Router) {
-  // 全局前置守卫
+  // Global before guard
   router.beforeEach(async (to, _from) => {
     NProgress.start()
     const userStore = useUserStore()
     const permissionStore = usePermissionStore()
-    // 如果没有登录
+    // If not logged in
     if (!getToken()) {
-      // 如果在免登录的白名单中，则直接进入
+      // If in the login-free whitelist, enter directly
       if (isWhiteList(to)) return true
-      // 其他没有访问权限的页面将被重定向到登录页面
+      // Other pages without access permission will be redirected to the login page
       return `${LOGIN_PATH}?redirect=${encodeURIComponent(to.fullPath)}`
     }
-    // 如果已经登录，并准备进入 Login 页面，则重定向到主页
+    // If already logged in and about to enter the Login page, redirect to the home page
     if (to.path === LOGIN_PATH) return "/"
-    // 如果用户已经获得其权限信息
+    // If the user has already obtained their permission info
     if (userStore.isGotUserInfo) return true
-    // 否则要重新获取权限信息
+    // Otherwise, fetch the permission info again
     try {
       await userStore.getInfo()
-      // 注意：角色和权限必须是数组！ 例如: ["admin"] 或 ["permission:page-level"]
+      // Note: roles and permissions must be arrays! For example: ["admin"] or ["permission:page-level"]
       const { roles, permissions } = userStore
-      // 生成可访问的 Routes
+      // Generate accessible Routes
       routerConfig.dynamic ? permissionStore.setRoutes({ roles, permissions }) : permissionStore.setAllRoutes()
-      // 将 "有访问权限的动态路由" 添加到 Router 中
+      // Add the "dynamic routes with access permission" to the Router
       permissionStore.addRoutes.forEach(route => router.addRoute(route))
-      // 设置 replace: true, 因此导航将不会留下历史记录
+      // Set replace: true, so navigation will not leave a history record
       return { ...to, replace: true }
     } catch (error) {
-      // 过程中发生任何错误，都直接重置 Token，并重定向到登录页面
+      // If any error occurs during the process, reset the Token directly and redirect to the login page
       userStore.resetToken()
-      ElMessage.error((error as Error).message || "路由守卫发生错误")
+      ElMessage.error((error as Error).message || "Route guard error")
       return LOGIN_PATH
     }
   })
 
-  // 全局后置钩子
+  // Global after hook
   router.afterEach((to) => {
     setRouteChange(to)
     setTitle(to.meta.title)

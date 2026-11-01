@@ -1,4 +1,4 @@
-// 统一处理 localStorage
+// Unified handling of localStorage
 
 import type { ThemeName } from "@@/composables/useTheme"
 import type { SidebarClosed, SidebarOpened } from "@@/constants/app-key"
@@ -20,7 +20,7 @@ export function removeToken() {
 }
 // #endregion
 
-// #region 系统布局配置
+// #region System layout configuration
 export function getLayoutsConfig() {
   const json = localStorage.getItem(CacheKey.CONFIG_LAYOUT)
   return json ? (JSON.parse(json) as LayoutsConfig) : null
@@ -35,7 +35,7 @@ export function removeLayoutsConfig() {
 }
 // #endregion
 
-// #region 侧边栏状态
+// #region Sidebar status
 export function getSidebarStatus() {
   return localStorage.getItem(CacheKey.SIDEBAR_STATUS)
 }
@@ -45,7 +45,7 @@ export function setSidebarStatus(sidebarStatus: SidebarOpened | SidebarClosed) {
 }
 // #endregion
 
-// #region 正在应用的主题名称
+// #region The theme name currently being applied
 export function getActiveThemeName() {
   return localStorage.getItem(CacheKey.ACTIVE_THEME_NAME) as ThemeName | null
 }
@@ -55,7 +55,7 @@ export function setActiveThemeName(themeName: ThemeName) {
 }
 // #endregion
 
-// #region 标签栏
+// #region Tags bar
 export function getVisitedViews() {
   const json = localStorage.getItem(CacheKey.VISITED_VIEWS)
   return JSON.parse(json ?? "[]") as TagView[]
@@ -63,7 +63,7 @@ export function getVisitedViews() {
 
 export function setVisitedViews(views: TagView[]) {
   views.forEach((view) => {
-    // 删除不必要的属性，防止 JSON.stringify 处理到循环引用
+    // Delete unnecessary properties to prevent JSON.stringify from hitting circular references
     delete view.matched
     delete view.redirectedFrom
   })

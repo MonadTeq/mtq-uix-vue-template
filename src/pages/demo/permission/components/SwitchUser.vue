@@ -13,20 +13,20 @@ watch(username, (value) => {
 <template>
   <el-card shadow="never">
     <div class="switch-user">
-      <span>切换用户：</span>
+      <span>Switch user:</span>
       <el-radio-group v-model="username">
         <el-radio-button label="editor" value="editor" />
         <el-radio-button label="admin" value="admin" />
       </el-radio-group>
     </div>
     <div class="roles">
-      <span>你的角色：</span>
+      <span>Your roles:</span>
       <el-tag v-for="(role, index) in userStore.roles" :key="index" effect="plain" size="large">
         {{ role }}
       </el-tag>
     </div>
     <div class="permissions">
-      <span>你的权限：</span>
+      <span>Your permissions:</span>
       <el-tag v-for="(permission, index) in userStore.permissions" :key="index" effect="plain" size="large">
         {{ permission }}
       </el-tag>

@@ -1,10 +1,10 @@
 {
-  "Vue3 Composable 代码结构一键生成": {
+  "Vue3 Composable code structure one-click generation": {
     "prefix": "Vue3 Composable",
     "body": [
-      "const refName1 = ref<string>(\"这是一个响应式变量\")\n",
+      "const refName1 = ref<string>(\"This is a reactive variable\")\n",
       "export function useName() {",
-      "\tconst refName2 = ref<string>(\"这是一个响应式变量\")\n",
+      "\tconst refName2 = ref<string>(\"This is a reactive variable\")\n",
       "\tconst fnName = () => {}\n",
       "\treturn { refName1, refName2, fnName }",
       "}",

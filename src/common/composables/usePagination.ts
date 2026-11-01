@@ -12,7 +12,7 @@ interface UsePaginationOptions extends PaginationData {
   callback?: () => void
 }
 
-/** 默认的分页参数 */
+/** Default pagination parameters */
 const DEFAULT_PAGINATION_DATA = {
   currentPage: 1,
   pageSize: 10,
@@ -21,29 +21,29 @@ const DEFAULT_PAGINATION_DATA = {
   layout: "total, sizes, prev, pager, next, jumper"
 }
 
-/** 分页 Composable */
+/** Pagination composable */
 export function usePagination(options: UsePaginationOptions = {}) {
   const { callback, ...initPaginationData } = options
 
-  // 合并分页参数
+  // Merge pagination parameters
   const paginationData = reactive({ ...DEFAULT_PAGINATION_DATA, ...initPaginationData })
 
-  // 改变当前页码
+  // Change the current page number
   const handleCurrentChange = (value: number) => {
     paginationData.currentPage = value
   }
 
-  // 改变每页显示条数
+  // Change the number of items per page
   const handleSizeChange = (value: number) => {
     paginationData.pageSize = value
   }
 
-  // 重置当前页码，已在第一页时直接执行回调
+  // Reset the current page number; execute the callback directly when already on the first page
   const resetCurrentPage = () => {
     paginationData.currentPage === 1 ? callback?.() : (paginationData.currentPage = 1)
   }
 
-  // 监听分页参数变化，并执行回调
+  // Watch pagination parameter changes and execute the callback
   const watchPagination = (options: WatchOptions = { immediate: true }) => {
     watch(
       [() => paginationData.currentPage, () => paginationData.pageSize],

@@ -19,41 +19,41 @@ const settingsStore = useSettingsStore()
 
 const { isFocus, handleBlur, handleFocus } = useFocus()
 
-/** 登录表单元素的引用 */
+/** Reference to the login form element */
 const loginFormRef = useTemplateRef("loginFormRef")
 
-/** 登录按钮 Loading */
+/** Login button loading */
 const loading = ref(false)
 
-/** 验证码图片 URL */
+/** Captcha image URL */
 const codeUrl = ref("")
 
-/** 登录表单数据 */
+/** Login form data */
 const loginFormData: LoginRequestData = reactive({
   username: "admin",
   password: "12345678",
   code: ""
 })
 
-/** 登录表单校验规则 */
+/** Login form validation rules */
 const loginFormRules: FormRules = {
   username: [
-    { required: true, message: "请输入用户名", trigger: "blur" }
+    { required: true, message: "Please enter username", trigger: "blur" }
   ],
   password: [
-    { required: true, message: "请输入密码", trigger: "blur" },
-    { min: 8, max: 16, message: "长度在 8 到 16 个字符", trigger: "blur" }
+    { required: true, message: "Please enter password", trigger: "blur" },
+    { min: 8, max: 16, message: "Length must be 8 to 16 characters", trigger: "blur" }
   ],
   code: [
-    { required: true, message: "请输入验证码", trigger: "blur" }
+    { required: true, message: "Please enter captcha", trigger: "blur" }
   ]
 }
 
-/** 登录 */
+/** Log in */
 function handleLogin() {
   loginFormRef.value?.validate((valid) => {
     if (!valid) {
-      ElMessage.error("表单校验不通过")
+      ElMessage.error("Form validation failed")
       return
     }
     loading.value = true
@@ -69,19 +69,19 @@ function handleLogin() {
   })
 }
 
-/** 创建验证码 */
+/** Create the captcha */
 function createCode() {
-  // 清空已输入的验证码
+  // Clear the entered captcha
   loginFormData.code = ""
-  // 清空验证图片
+  // Clear the captcha image
   codeUrl.value = ""
-  // 获取验证码图片
+  // Get the captcha image
   getCaptchaApi().then((res) => {
     codeUrl.value = res.data
   })
 }
 
-// 初始化验证码
+// Initialize the captcha
 createCode()
 </script>
 
@@ -98,7 +98,7 @@ createCode()
           <el-form-item prop="username">
             <el-input
               v-model.trim="loginFormData.username"
-              placeholder="用户名"
+              placeholder="Username"
               type="text"
               tabindex="1"
               :prefix-icon="User"
@@ -108,7 +108,7 @@ createCode()
           <el-form-item prop="password">
             <el-input
               v-model.trim="loginFormData.password"
-              placeholder="密码"
+              placeholder="Password"
               type="password"
               tabindex="2"
               :prefix-icon="Lock"
@@ -121,7 +121,7 @@ createCode()
           <el-form-item prop="code">
             <el-input
               v-model.trim="loginFormData.code"
-              placeholder="验证码"
+              placeholder="Captcha"
               type="text"
               tabindex="3"
               :prefix-icon="Key"
@@ -147,7 +147,7 @@ createCode()
             </el-input>
           </el-form-item>
           <el-button :loading="loading" type="primary" size="large" @click.prevent="handleLogin">
-            登 录
+            Login
           </el-button>
         </el-form>
       </div>

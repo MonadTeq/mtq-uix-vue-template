@@ -6,7 +6,7 @@ const COLOR_WEAKNESS = "color-weakness"
 
 const classList = document.documentElement.classList
 
-/** 初始化 */
+/** Initialize */
 function initGreyAndColorWeakness() {
   const settingsStore = useSettingsStore()
   watchEffect(() => {
@@ -15,7 +15,7 @@ function initGreyAndColorWeakness() {
   })
 }
 
-/** 灰色模式和色弱模式 Composable */
+/** Gray mode and color weakness mode composable */
 export function useGreyAndColorWeakness() {
   return { initGreyAndColorWeakness }
 }

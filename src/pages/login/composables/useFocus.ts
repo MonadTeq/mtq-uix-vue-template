@@ -1,14 +1,14 @@
-/** 焦点 Composable */
+/** Focus composable */
 export function useFocus() {
-  // 是否有焦点
+  // Whether it has focus
   const isFocus = ref<boolean>(false)
 
-  // 失去焦点
+  // Lose focus
   const handleBlur = () => {
     isFocus.value = false
   }
 
-  // 获取焦点
+  // Gain focus
   const handleFocus = () => {
     isFocus.value = true
   }

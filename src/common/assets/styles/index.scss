@@ -1,4 +1,4 @@
-// 全局 CSS 变量
+// Global CSS variables
 @import "./variables.css";
 // Transition
 @import "./transition.scss";
@@ -8,25 +8,25 @@
 // Vxe Table
 @import "./vxe-table.css";
 @import "./vxe-table.scss";
-// 注册多主题
+// Register multiple themes
 @import "./theme/register.scss";
 // Mixins
 @import "./mixins.scss";
 // View Transition
 @import "./view-transition.scss";
 
-// 业务页面几乎都应该在根元素上挂载 class="app-container"，以保持页面美观
+// Business pages should almost always mount class="app-container" on the root element to keep the page looking good
 .app-container {
   padding: 20px;
 }
 
 html {
   height: 100%;
-  // 灰色模式
+  // Gray mode
   &.grey-mode {
     filter: grayscale(1);
   }
-  // 色弱模式
+  // Color weakness mode
   &.color-weakness {
     filter: invert(0.8);
   }
@@ -39,7 +39,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   font-family:
-    Inter, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial,
+    Inter, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Arial,
     sans-serif;
   @extend %scrollbar;
 }

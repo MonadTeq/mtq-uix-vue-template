@@ -2,25 +2,25 @@ import { useRouteListener } from "@@/composables/useRouteListener"
 import { DeviceEnum } from "@@/constants/app-key"
 import { useAppStore } from "@/pinia/stores/app"
 
-/** 参考 Bootstrap 的响应式设计将最大移动端宽度设置为 992 */
+/** Following Bootstrap's responsive design, the maximum mobile width is set to 992 */
 const MAX_MOBILE_WIDTH = 992
 
 /**
- * @name 浏览器宽度变化 Composable
- * @description 根据浏览器宽度变化，变换 Layout 布局
+ * @name Browser width change composable
+ * @description Change the Layout according to browser width changes
  */
 export function useResize() {
   const appStore = useAppStore()
 
   const { listenerRouteChange } = useRouteListener()
 
-  // 用于判断当前设备是否为移动端
+  // Used to determine whether the current device is mobile
   const isMobile = () => {
     const rect = document.body.getBoundingClientRect()
     return rect.width - 1 < MAX_MOBILE_WIDTH
   }
 
-  // 用于处理窗口大小变化事件
+  // Used to handle window resize events
   const resizeHandler = () => {
     if (!document.hidden) {
       const _isMobile = isMobile()
@@ -29,19 +29,19 @@ export function useResize() {
     }
   }
 
-  // 监听路由变化，根据设备类型调整布局
+  // Listen to route changes and adjust the layout according to the device type
   listenerRouteChange(() => {
     if (appStore.device === DeviceEnum.Mobile && appStore.sidebar.opened) {
       appStore.closeSidebar(false)
     }
   })
 
-  // 在组件挂载前添加窗口大小变化事件监听器
+  // Add the window resize event listener before the component mounts
   onBeforeMount(() => {
     window.addEventListener("resize", resizeHandler)
   })
 
-  // 在组件挂载后根据窗口大小判断设备类型并调整布局
+  // After the component mounts, determine the device type based on the window size and adjust the layout
   onMounted(() => {
     if (isMobile()) {
       appStore.toggleDevice(DeviceEnum.Mobile)
@@ -49,7 +49,7 @@ export function useResize() {
     }
   })
 
-  // 在组件卸载前移除窗口大小变化事件监听器
+  // Remove the window resize event listener before the component unmounts
   onBeforeUnmount(() => {
     window.removeEventListener("resize", resizeHandler)
   })

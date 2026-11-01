@@ -1,14 +1,14 @@
-/** 判断是否为数组 */
+/** Check whether it is an array */
 export function isArray<T>(arg: T) {
   return Array.isArray ? Array.isArray(arg) : Object.prototype.toString.call(arg) === "[object Array]"
 }
 
-/** 判断是否为字符串 */
+/** Check whether it is a string */
 export function isString(str: unknown) {
   return typeof str === "string" || str instanceof String
 }
 
-/** 判断是否为外链 */
+/** Check whether it is an external link */
 export function isExternal(path: string) {
   const reg = /^(https?:|mailto:|tel:)/
   return reg.test(path)

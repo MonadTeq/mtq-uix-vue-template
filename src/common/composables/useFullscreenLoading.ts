@@ -13,15 +13,15 @@ interface LoadingInstance {
 
 const DEFAULT_OPTIONS = {
   lock: true,
-  text: "加载中..."
+  text: "Loading..."
 }
 
 /**
- * @name 全屏加载 Composable
- * @description 传入一个函数 fn，在它执行周期内，加上「全屏」Loading
- * @param fn 要执行的函数
+ * @name Fullscreen loading composable
+ * @description Pass in a function fn; add a "fullscreen" Loading during its execution
+ * @param fn The function to execute
  * @param options LoadingOptions
- * @returns 返回一个新的函数，该函数返回一个 Promise
+ * @returns Returns a new function that returns a Promise
  */
 export const useFullscreenLoading: UseFullscreenLoading = (fn, options = {}) => {
   let loadingInstance: LoadingInstance

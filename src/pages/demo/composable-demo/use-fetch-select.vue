@@ -10,18 +10,18 @@ const { loading, options, value } = useFetchSelect({
 <template>
   <div class="app-container">
     <el-alert
-      title="示例说明"
+      title="Example description"
       type="primary"
-      description="通过 composable 自动调用 api 后拿到 Select 组件需要的数据并传递给 Select 组件"
+      description="Automatically call the api via the composable to get the data the Select component needs and pass it to the Select component"
       show-icon
     />
-    <el-card header="Select 示例" shadow="never" v-loading="loading">
+    <el-card header="Select example" shadow="never" v-loading="loading">
       <el-select v-model="value" filterable>
-        <el-option v-for="(item, index) in options" v-bind="item" :key="index" placeholder="请选择" />
+        <el-option v-for="(item, index) in options" v-bind="item" :key="index" placeholder="Please select" />
       </el-select>
     </el-card>
-    <el-card header="Select V2 示例（如果数据量过多，可以选择该组件）" shadow="never" v-loading="loading">
-      <el-select-v2 v-model="value" :options="options" filterable placeholder="请选择" />
+    <el-card header="Select V2 example (choose this component if the data volume is too large)" shadow="never" v-loading="loading">
+      <el-select-v2 v-model="value" :options="options" filterable placeholder="Please select" />
     </el-card>
   </div>
 </template>

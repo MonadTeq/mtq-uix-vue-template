@@ -19,35 +19,35 @@ const permissionStore = usePermissionStore()
 
 const { listenerRouteChange } = useRouteListener()
 
-/** 标签页组件元素的引用数组 */
+/** Array of references to tag page component elements */
 const tagRefs = useTemplateRef<InstanceType<typeof RouterLink>[]>("tagRefs")
 
-/** 右键菜单的状态 */
+/** Right-click menu state */
 const visible = ref(false)
 
-/** 右键菜单的 top 位置 */
+/** Top position of the right-click menu */
 const top = ref(0)
 
-/** 右键菜单的 left 位置 */
+/** Left position of the right-click menu */
 const left = ref(0)
 
-/** 当前正在右键操作的标签页 */
+/** The tag page currently being right-clicked */
 const selectedTag = ref<TagView>({})
 
-/** 固定的标签页 */
+/** Affixed tag pages */
 let affixTags: TagView[] = []
 
-/** 判断标签页是否激活 */
+/** Determine whether a tag page is active */
 function isActive(tag: TagView) {
   return tag.path === route.path
 }
 
-/** 判断标签页是否固定 */
+/** Determine whether a tag page is affixed */
 function isAffix(tag: TagView) {
   return tag.meta?.affix
 }
 
-/** 筛选出固定标签页 */
+/** Filter out the affixed tag pages */
 function filterAffixTags(routes: RouteRecordRaw[], basePath = "/") {
   const tags: TagView[] = []
   routes.forEach((route) => {
@@ -68,16 +68,16 @@ function filterAffixTags(routes: RouteRecordRaw[], basePath = "/") {
   return tags
 }
 
-/** 初始化标签页 */
+/** Initialize the tag pages */
 function initTags() {
   affixTags = filterAffixTags(permissionStore.routes)
   for (const tag of affixTags) {
-    // 必须含有 name 属性
+    // Must have a name property
     tag.name && tagsViewStore.addVisitedView(tag)
   }
 }
 
-/** 添加标签页 */
+/** Add a tag page */
 function addTags(route: RouteLocationNormalizedGeneric) {
   if (route.name) {
     tagsViewStore.addVisitedView(route)
@@ -85,20 +85,20 @@ function addTags(route: RouteLocationNormalizedGeneric) {
   }
 }
 
-/** 刷新当前正在右键操作的标签页 */
+/** Refresh the tag page currently being right-clicked */
 function refreshSelectedTag(view: TagView) {
   tagsViewStore.delCachedView(view)
   router.replace({ path: `${REDIRECT_PATH}${view.path}`, query: view.query })
 }
 
-/** 关闭当前正在右键操作的标签页 */
+/** Close the tag page currently being right-clicked */
 function closeSelectedTag(view: TagView) {
   tagsViewStore.delVisitedView(view)
   tagsViewStore.delCachedView(view)
   isActive(view) && toLastView(tagsViewStore.visitedViews, view)
 }
 
-/** 关闭其他标签页 */
+/** Close other tag pages */
 function closeOthersTags() {
   const fullPath = selectedTag.value.fullPath
   if (fullPath !== route.path && fullPath !== undefined) {
@@ -108,7 +108,7 @@ function closeOthersTags() {
   tagsViewStore.delOthersCachedViews(selectedTag.value)
 }
 
-/** 关闭所有标签页 */
+/** Close all tag pages */
 function closeAllTags(view: TagView) {
   tagsViewStore.delAllVisitedViews()
   tagsViewStore.delAllCachedViews()
@@ -116,16 +116,16 @@ function closeAllTags(view: TagView) {
   toLastView(tagsViewStore.visitedViews, view)
 }
 
-/** 跳转到最后一个标签页 */
+/** Jump to the last tag page */
 function toLastView(visitedViews: TagView[], view: TagView) {
   const latestView = visitedViews.slice(-1)[0]
   const fullPath = latestView?.fullPath
   if (fullPath !== undefined) {
     router.push(fullPath)
   } else {
-    // 如果 TagsView 全部被关闭了，则默认重定向到主页
+    // If all TagsView are closed, redirect to the home page by default
     if (view.path === DASHBOARD_PATH) {
-      // 重新加载主页
+      // Reload the home page
       router.push({ path: `${REDIRECT_PATH}${view.path}`, query: view.query })
     } else {
       router.push("/")
@@ -133,24 +133,24 @@ function toLastView(visitedViews: TagView[], view: TagView) {
   }
 }
 
-/** 打开右键菜单面板 */
+/** Open the right-click menu panel */
 function openMenu(tag: TagView, e: MouseEvent) {
   const menuMinWidth = 100
-  // 当前页面宽度
+  // Current page width
   const offsetWidth = document.body.offsetWidth
-  // 面板的最大左边距
+  // Maximum left margin of the panel
   const maxLeft = offsetWidth - menuMinWidth
-  // 面板距离鼠标指针的距离
+  // Distance of the panel from the mouse pointer
   const left15 = e.clientX + 10
   left.value = left15 > maxLeft ? maxLeft : left15
   top.value = e.clientY
-  // 显示面板
+  // Show the panel
   visible.value = true
-  // 更新当前正在右键操作的标签页
+  // Update the tag page currently being right-clicked
   selectedTag.value = tag
 }
 
-/** 关闭右键菜单面板 */
+/** Close the right-click menu panel */
 function closeMenu() {
   visible.value = false
 }
@@ -161,7 +161,7 @@ watch(visible, (value) => {
 
 initTags()
 
-// 监听路由变化
+// Listen to route changes
 listenerRouteChange((route) => {
   addTags(route)
 }, true)
@@ -189,16 +189,16 @@ listenerRouteChange((route) => {
     </ScrollPane>
     <ul v-show="visible" class="contextmenu" :style="{ left: `${left}px`, top: `${top}px` }">
       <li @click="refreshSelectedTag(selectedTag)">
-        刷新
+        Refresh
       </li>
       <li v-if="!isAffix(selectedTag)" @click="closeSelectedTag(selectedTag)">
-        关闭
+        Close
       </li>
       <li @click="closeOthersTags">
-        关闭其它
+        Close others
       </li>
       <li @click="closeAllTags(selectedTag)">
-        关闭所有
+        Close all
       </li>
     </ul>
   </div>

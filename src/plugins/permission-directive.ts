@@ -3,8 +3,8 @@ import { isArray } from "@@/utils/validate"
 import { useUserStore } from "@/pinia/stores/user"
 
 /**
- * @name 权限指令
- * @description 和权限判断函数 checkPermission 功能类似
+ * @name Permission directive
+ * @description Similar in functionality to the permission check function checkPermission
  */
 const permission: Directive = {
   mounted(el, binding) {
@@ -14,7 +14,7 @@ const permission: Directive = {
       const hasPermission = roles.some(role => rolesOrPermissions.includes(role)) || permissions.some(permission => rolesOrPermissions.includes(permission))
       hasPermission || el.parentNode?.removeChild(el)
     } else {
-      throw new Error(`参数必须是一个数组且长度大于 0，参考：v-permission="['admin', 'permission:button-level']"`)
+      throw new Error(`The parameter must be an array with length greater than 0, e.g. v-permission="['admin', 'permission:button-level']"`)
     }
   }
 }

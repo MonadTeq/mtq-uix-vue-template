@@ -7,8 +7,8 @@ import { flatMultiLevelRoutes } from "./helper"
 const Layouts = () => import("@/layouts/index.vue")
 
 /**
- * @name 常驻路由
- * @description 除了 redirect/403/404/login 等隐藏页面，其他页面建议设置唯一的 Name 属性
+ * @name Constant routes
+ * @description Except for hidden pages such as redirect/403/404/login, other pages should set a unique Name property
  */
 export const constantRoutes: RouteRecordRaw[] = [
   {
@@ -56,7 +56,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         component: () => import("@/pages/dashboard/index.vue"),
         name: "Dashboard",
         meta: {
-          title: "首页",
+          title: "Home",
           svgIcon: "dashboard",
           affix: true
         }
@@ -69,7 +69,7 @@ export const constantRoutes: RouteRecordRaw[] = [
     redirect: "/demo/unocss",
     name: "Demo",
     meta: {
-      title: "示例集合",
+      title: "Demos",
       elIcon: "DataBoard"
     },
     children: [
@@ -105,7 +105,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         redirect: "/demo/level2/level3",
         name: "Level2",
         meta: {
-          title: "二级路由",
+          title: "Second-level Route",
           alwaysShow: true
         },
         children: [
@@ -114,7 +114,7 @@ export const constantRoutes: RouteRecordRaw[] = [
             component: () => import("@/pages/demo/level2/level3/index.vue"),
             name: "Level3",
             meta: {
-              title: "三级路由",
+              title: "Third-level Route",
               keepAlive: true
             }
           }
@@ -125,7 +125,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         redirect: "/demo/composable-demo/use-fetch-select",
         name: "ComposableDemo",
         meta: {
-          title: "组合式函数"
+          title: "Composables"
         },
         children: [
           {
@@ -159,7 +159,7 @@ export const constantRoutes: RouteRecordRaw[] = [
   {
     path: "/link",
     meta: {
-      title: "文档链接",
+      title: "Docs Links",
       elIcon: "Link"
     },
     children: [
@@ -168,7 +168,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         component: () => {},
         name: "Link1",
         meta: {
-          title: "中文文档"
+          title: "Chinese Docs"
         }
       },
       {
@@ -176,7 +176,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         component: () => {},
         name: "Link2",
         meta: {
-          title: "新手教程"
+          title: "Beginner Tutorial"
         }
       },
       {
@@ -184,7 +184,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         component: () => {},
         name: "Link3",
         meta: {
-          title: "周边资讯"
+          title: "Related News"
         }
       }
     ]
@@ -192,9 +192,9 @@ export const constantRoutes: RouteRecordRaw[] = [
 ]
 
 /**
- * @name 动态路由
- * @description 用来放置有权限 (roles / permissions 属性) 的路由
- * @description 必须带有唯一的 Name 属性
+ * @name Dynamic routes
+ * @description Used to hold routes that have permissions (roles / permissions properties)
+ * @description Must have a unique Name property
  */
 export const dynamicRoutes: RouteRecordRaw[] = [
   {
@@ -203,7 +203,7 @@ export const dynamicRoutes: RouteRecordRaw[] = [
     redirect: "/permission/page-level",
     name: "Permission",
     meta: {
-      title: "权限演示",
+      title: "Permission Demo",
       elIcon: "Lock",
       alwaysShow: true
     },
@@ -213,10 +213,10 @@ export const dynamicRoutes: RouteRecordRaw[] = [
         component: () => import("@/pages/demo/permission/page-level.vue"),
         name: "PermissionPageLevel",
         meta: {
-          title: "页面级",
-          // 在路由中设置角色来控制访问
+          title: "Page Level",
+          // Set roles in the route to control access
           roles: ["admin"],
-          // 在路由中设置权限标识字符来控制访问
+          // Set permission identifiers in the route to control access
           permissions: ["permission:page-level"]
         }
       },
@@ -225,10 +225,10 @@ export const dynamicRoutes: RouteRecordRaw[] = [
         component: () => import("@/pages/demo/permission/button-level.vue"),
         name: "PermissionButtonLevel",
         meta: {
-          title: "按钮级",
-          // 如果未设置，则不限制该页面的访问
+          title: "Button Level",
+          // If not set, access to the page is unrestricted
           roles: undefined,
-          // 在路由中设置权限标识字符来控制访问
+          // Set permission identifiers in the route to control access
           permissions: ["permission:button-level"]
         }
       }
@@ -236,16 +236,16 @@ export const dynamicRoutes: RouteRecordRaw[] = [
   }
 ]
 
-/** 路由实例 */
+/** Router instance */
 export const router = createRouter({
   history: routerConfig.history,
   routes: routerConfig.thirdLevelRouteCache ? flatMultiLevelRoutes(constantRoutes) : constantRoutes
 })
 
-/** 重置路由 */
+/** Reset the router */
 export function resetRouter() {
   try {
-    // 注意：所有动态路由路由必须带有 Name 属性，否则可能会不能完全重置干净
+    // Note: all dynamic routes must have a Name property, otherwise they may not be fully reset cleanly
     router.getRoutes().forEach((route) => {
       const { name, meta } = route
       if (name && (meta.roles?.length || meta.permissions?.length)) {
@@ -253,10 +253,10 @@ export function resetRouter() {
       }
     })
   } catch {
-    // 强制刷新浏览器也行，只是交互体验不是很好
+    // Forcing a browser refresh also works, but the interaction experience is not great
     location.reload()
   }
 }
 
-// 注册路由导航守卫
+// Register the route navigation guard
 registerNavigationGuard(router)

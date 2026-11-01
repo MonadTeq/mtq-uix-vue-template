@@ -20,41 +20,41 @@ export const useUserStore = defineStore("user", () => {
 
   const settingsStore = useSettingsStore()
 
-  // 设置 Token
+  // Set the Token
   const setToken = (value: string) => {
     _setToken(value)
     token.value = value
   }
 
-  // 获取用户详情
+  // Get user details
   const getInfo = async () => {
     const { data } = await getCurrentUserApi()
     username.value = data.username
     roles.value = data.roles ?? []
     permissions.value = data.permissions ?? []
-    // 防止路由守卫逻辑进入无限循环
+    // Prevent the route guard logic from entering an infinite loop
     isGotUserInfo.value = true
   }
 
-  // 模拟用户变化
+  // Simulate user changes
   const changeUser = (value: string) => {
     const newToken = `token-${value}`
     token.value = newToken
     _setToken(newToken)
-    // 用刷新页面代替重新登录
+    // Use a page refresh instead of re-logging in
     location.reload()
   }
 
-  // 登出
+  // Log out
   const logout = () => {
     resetToken()
     resetRouter()
     resetTagsView()
-    // 重定向到登录页
+    // Redirect to the login page
     router.replace("/login")
   }
 
-  // 重置 Token
+  // Reset the Token
   const resetToken = () => {
     removeToken()
     token.value = ""
@@ -63,7 +63,7 @@ export const useUserStore = defineStore("user", () => {
     isGotUserInfo.value = false
   }
 
-  // 重置 Visited Views 和 Cached Views
+  // Reset Visited Views and Cached Views
   const resetTagsView = () => {
     if (!settingsStore.cacheTagsView) {
       tagsViewStore.delAllVisitedViews()
@@ -75,8 +75,8 @@ export const useUserStore = defineStore("user", () => {
 })
 
 /**
- * @description 在 SPA 应用中可用于在 pinia 实例被激活前使用 store
- * @description 在 SSR 应用中可用于在 setup 外使用 store
+ * @description In an SPA app, this can be used to access the store before the pinia instance is activated
+ * @description In an SSR app, this can be used to access the store outside of setup
  */
 export function useUserStoreOutside() {
   return useUserStore(pinia)

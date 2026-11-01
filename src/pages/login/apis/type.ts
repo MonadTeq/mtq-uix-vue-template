@@ -1,9 +1,9 @@
 export interface LoginRequestData {
-  /** admin 或 editor */
+  /** admin or editor */
   username: "admin" | "editor"
-  /** 密码 */
+  /** Password */
   password: string
-  /** 验证码 */
+  /** Captcha */
   code: string
 }
 

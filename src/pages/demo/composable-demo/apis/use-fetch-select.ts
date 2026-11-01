@@ -1,36 +1,36 @@
-/** 模拟接口响应数据 */
+/** Mock API response data */
 const SELECT_RESPONSE_DATA = {
   code: 0,
   data: [
     {
-      label: "苹果",
+      label: "Apple",
       value: 1
     },
     {
-      label: "香蕉",
+      label: "Banana",
       value: 2
     },
     {
-      label: "橘子",
+      label: "Orange",
       value: 3,
       disabled: true
     }
   ],
-  message: "获取 Select 数据成功"
+  message: "Select data fetched successfully"
 }
 
-const ERROR_MESSAGE = "接口发生错误"
+const ERROR_MESSAGE = "API error occurred"
 
-/** 模拟接口 */
+/** Mock API */
 export function getSelectDataApi() {
   return new Promise<typeof SELECT_RESPONSE_DATA>((resolve, reject) => {
-    // 模拟接口响应时间 2s
+    // Simulate API response time of 2s
     setTimeout(() => {
       if (Math.random() < 0.8) {
-        // 模拟接口调用成功
+        // Simulate successful API call
         resolve(SELECT_RESPONSE_DATA)
       } else {
-        // 模拟接口调用出错
+        // Simulate API call error
         reject(new Error(ERROR_MESSAGE))
         ElMessage.error(ERROR_MESSAGE)
       }

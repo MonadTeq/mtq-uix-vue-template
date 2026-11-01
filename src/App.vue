@@ -2,7 +2,7 @@
 import { useGreyAndColorWeakness } from "@@/composables/useGreyAndColorWeakness"
 import { usePany } from "@@/composables/usePany"
 import { useTheme } from "@@/composables/useTheme"
-import zhCn from "element-plus/es/locale/lang/zh-cn" // Element Plus 中文包
+import zhCn from "element-plus/es/locale/lang/zh-cn" // Element Plus Chinese language pack
 
 const { initTheme } = useTheme()
 
@@ -10,13 +10,13 @@ const { initGreyAndColorWeakness } = useGreyAndColorWeakness()
 
 const { initStarNotification, initStoreNotification, initMobileNotification } = usePany()
 
-// 初始化主题
+// Initialize the theme
 initTheme()
 
-// 初始化灰色模式和色弱模式
+// Initialize gray mode and color weakness mode
 initGreyAndColorWeakness()
 
-// #region 初始化通知
+// #region Initialize notifications
 initStarNotification()
 
 initStoreNotification()

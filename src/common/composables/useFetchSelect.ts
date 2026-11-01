@@ -1,21 +1,21 @@
 type OptionValue = string | number
 
-/** Select 需要的数据格式 */
+/** Data format required by Select */
 interface SelectOption {
   value: OptionValue
   label: string
   disabled?: boolean
 }
 
-/** 接口响应格式 */
+/** API response format */
 type ApiData = ApiResponseData<SelectOption[]>
 
-/** 入参格式，暂时只需要传递 api 函数即可 */
+/** Input parameter format; for now you only need to pass the api function */
 interface FetchSelectProps {
   api: () => Promise<ApiData>
 }
 
-/** 下拉选择器 Composable */
+/** Dropdown select composable */
 export function useFetchSelect(props: FetchSelectProps) {
   const { api } = props
 
@@ -25,7 +25,7 @@ export function useFetchSelect(props: FetchSelectProps) {
 
   const value = ref<OptionValue>("")
 
-  // 调用接口获取数据
+  // Call the API to fetch data
   const loadData = () => {
     loading.value = true
     options.value = []

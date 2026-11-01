@@ -2,7 +2,7 @@
   <div class="app-container">
     <h4>
       <span>
-        三级及其以上路由缓存功能默认关闭，需要请前往此配置文件中打开：
+        The caching feature for third-level and above routes is disabled by default; open it in this config file if needed:
       </span>
       <el-link
         type="primary"
@@ -12,7 +12,7 @@
         src/router/config.ts
       </el-link>
     </h4>
-    <el-card header="二级路由">
+    <el-card header="Second-level Route">
       <router-view />
     </el-card>
   </div>

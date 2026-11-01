@@ -2,7 +2,7 @@ import type { Directive } from "vue"
 
 export {}
 
-// 由 app.directive 全局注册的自定义指令需要在这里声明 TS 类型才能获得类型提示
+// Custom directives registered globally via app.directive need their TS types declared here to get type hints
 declare module "vue" {
   export interface ComponentCustomProperties {
     vPermission: Directive<Element, string[]>

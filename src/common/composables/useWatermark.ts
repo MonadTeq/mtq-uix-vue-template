@@ -1,23 +1,23 @@
 import type { Ref } from "vue"
 import { debounce } from "lodash-es"
 
-/** 默认配置 */
+/** Default configuration */
 const DEFAULT_CONFIG = {
-  /** 防御（默认开启，能防御水印被删除或隐藏，但可能会有性能损耗） */
+  /** Defense (enabled by default; can prevent the watermark from being deleted or hidden, but may cause performance loss) */
   defense: true,
-  /** 文本颜色 */
+  /** Text color */
   color: "#c0c4cc",
-  /** 文本透明度 */
+  /** Text opacity */
   opacity: 0.5,
-  /** 文本字体大小 */
+  /** Text font size */
   size: 16,
-  /** 文本字体 */
+  /** Text font */
   family: "serif",
-  /** 文本倾斜角度 */
+  /** Text tilt angle */
   angle: -20,
-  /** 一处水印所占宽度（数值越大水印密度越低） */
+  /** Width occupied by one watermark (larger value means lower watermark density) */
   width: 300,
-  /** 一处水印所占高度（数值越大水印密度越低） */
+  /** Height occupied by one watermark (larger value means lower watermark density) */
   height: 200
 }
 
@@ -29,45 +29,45 @@ interface Observer {
   parentElResizeObserver?: ResizeObserver
 }
 
-/** body 元素 */
+/** body element */
 const bodyEl = ref<HTMLElement>(document.body)
 
 /**
- * @name 水印 Composable
- * @description 1. 可以选择传入挂载水印的容器元素，默认是 body
- * @description 2. 做了水印防御，能有效防御别人打开控制台删除或隐藏水印
+ * @name Watermark composable
+ * @description 1. You can optionally pass in a container element to mount the watermark; default is body
+ * @description 2. Watermark defense is implemented to effectively prevent others from opening the console to delete or hide the watermark
  */
 export function useWatermark(parentEl: Ref<HTMLElement | null> = bodyEl) {
-  // 备份文本
+  // Backup text
   let backupText: string
 
-  // 最终配置
+  // Final configuration
   let mergeConfig: DefaultConfig
 
-  // 水印元素
+  // Watermark element
   let watermarkEl: HTMLElement | null = null
 
-  // 观察器
+  // Observer
   const observer: Observer = {
     watermarkElMutationObserver: undefined,
     parentElMutationObserver: undefined,
     parentElResizeObserver: undefined
   }
 
-  // 设置水印
+  // Set the watermark
   const setWatermark = (text: string, config: Partial<DefaultConfig> = {}) => {
-    if (!parentEl.value) return console.warn("请在 DOM 挂载完成后再调用 setWatermark 方法设置水印")
-    // 备份文本
+    if (!parentEl.value) return console.warn("Please call the setWatermark method after the DOM is mounted")
+    // Backup text
     backupText = text
-    // 合并配置
+    // Merge configuration
     mergeConfig = { ...DEFAULT_CONFIG, ...config }
-    // 创建或更新水印元素
+    // Create or update the watermark element
     watermarkEl ? updateWatermarkEl() : createWatermarkEl()
-    // 监听水印元素和容器元素的变化
+    // Listen to changes of the watermark element and the container element
     addElListener(parentEl.value)
   }
 
-  // 创建水印元素
+  // Create the watermark element
   const createWatermarkEl = () => {
     const isBody = parentEl.value!.tagName.toLowerCase() === bodyEl.value.tagName.toLowerCase()
     const watermarkElPosition = isBody ? "fixed" : "absolute"
@@ -80,13 +80,13 @@ export function useWatermark(parentEl: Ref<HTMLElement | null> = bodyEl) {
     watermarkEl.style.zIndex = "99999"
     const { clientWidth, clientHeight } = parentEl.value!
     updateWatermarkEl({ width: clientWidth, height: clientHeight })
-    // 设置水印容器为相对定位
+    // Set the watermark container to relative positioning
     parentEl.value!.style.position = parentElPosition
-    // 将水印元素添加到水印容器中
+    // Append the watermark element to the watermark container
     parentEl.value!.appendChild(watermarkEl)
   }
 
-  // 更新水印元素
+  // Update the watermark element
   const updateWatermarkEl = (
     options: Partial<{
       width: number
@@ -99,7 +99,7 @@ export function useWatermark(parentEl: Ref<HTMLElement | null> = bodyEl) {
     options.height && (watermarkEl.style.height = `${options.height}px`)
   }
 
-  // 创建 base64 图片
+  // Create the base64 image
   const createBase64 = () => {
     const { color, opacity, size, family, angle, width, height } = mergeConfig
     const canvasEl = document.createElement("canvas")
@@ -116,70 +116,70 @@ export function useWatermark(parentEl: Ref<HTMLElement | null> = bodyEl) {
     return canvasEl.toDataURL()
   }
 
-  // 清除水印
+  // Clear the watermark
   const clearWatermark = () => {
     if (!parentEl.value || !watermarkEl) return
-    // 移除对水印元素和容器元素的监听
+    // Remove listeners on the watermark element and the container element
     removeListener()
-    // 移除水印元素
+    // Remove the watermark element
     try {
       parentEl.value.removeChild(watermarkEl)
     } catch {
-      // 比如在无防御情况下，用户打开控制台删除了这个元素
-      console.warn("水印元素已不存在，请重新创建")
+      // For example, when defense is disabled, the user opens the console and deletes this element
+      console.warn("The watermark element no longer exists; please create it again")
     } finally {
       watermarkEl = null
     }
   }
 
-  // 刷新水印（防御时调用）
+  // Refresh the watermark (called when defense is enabled)
   const updateWatermark = debounce(() => {
     clearWatermark()
     createWatermarkEl()
     addElListener(parentEl.value!)
   }, 100)
 
-  // 监听水印元素和容器元素的变化（DOM 变化 & DOM 大小变化）
+  // Listen to changes of the watermark element and the container element (DOM changes & DOM size changes)
   const addElListener = (targetNode: HTMLElement) => {
-    // 判断是否开启防御
+    // Determine whether defense is enabled
     if (mergeConfig.defense) {
-      // 防止重复添加监听
+      // Prevent adding listeners repeatedly
       if (!observer.watermarkElMutationObserver && !observer.parentElMutationObserver) {
-        // 监听 DOM 变化
+        // Listen to DOM changes
         addMutationListener(targetNode)
       }
     } else {
-      // 无防御时不需要 mutation 监听
+      // No mutation listening is needed when defense is disabled
       removeListener("mutation")
     }
-    // 防止重复添加监听
+    // Prevent adding listeners repeatedly
     if (!observer.parentElResizeObserver) {
-      // 监听 DOM 大小变化
+      // Listen to DOM size changes
       addResizeListener(targetNode)
     }
   }
 
-  // 移除对水印元素和容器元素的监听，传参可指定要移除哪个监听，不传默认移除全部监听
+  // Remove listeners on the watermark element and the container element; the argument can specify which listener to remove, and omitting it removes all listeners by default
   const removeListener = (kind: "mutation" | "resize" | "all" = "all") => {
-    // 移除 mutation 监听
+    // Remove the mutation listener
     if (kind === "mutation" || kind === "all") {
       observer.watermarkElMutationObserver?.disconnect()
       observer.watermarkElMutationObserver = undefined
       observer.parentElMutationObserver?.disconnect()
       observer.parentElMutationObserver = undefined
     }
-    // 移除 resize 监听
+    // Remove the resize listener
     if (kind === "resize" || kind === "all") {
       observer.parentElResizeObserver?.disconnect()
       observer.parentElResizeObserver = undefined
     }
   }
 
-  // 监听 DOM 变化
+  // Listen to DOM changes
   const addMutationListener = (targetNode: HTMLElement) => {
-    // 当观察到变动时执行的回调
+    // Callback executed when a mutation is observed
     const mutationCallback = debounce((mutationList: MutationRecord[]) => {
-      // 水印的防御（防止用户手动删除水印元素或通过 CSS 隐藏水印）
+      // Watermark defense (prevents users from manually deleting the watermark element or hiding the watermark via CSS)
       mutationList.forEach(
         debounce((mutation: MutationRecord) => {
           switch (mutation.type) {
@@ -195,16 +195,16 @@ export function useWatermark(parentEl: Ref<HTMLElement | null> = bodyEl) {
         }, 100)
       )
     }, 100)
-    // 创建观察器实例并传入回调
+    // Create an observer instance and pass in the callback
     observer.watermarkElMutationObserver = new MutationObserver(mutationCallback)
     observer.parentElMutationObserver = new MutationObserver(mutationCallback)
-    // 以上述配置开始观察目标节点
+    // Start observing the target node with the above configuration
     observer.watermarkElMutationObserver.observe(watermarkEl!, {
-      // 观察目标节点属性是否变动，默认为 true
+      // Observe whether the target node's attributes change; defaults to true
       attributes: true,
-      // 观察目标子节点是否有添加或者删除，默认为 false
+      // Observe whether the target node's child nodes are added or removed; defaults to false
       childList: false,
-      // 是否拓展到观察所有后代节点，默认为 false
+      // Whether to extend observation to all descendant nodes; defaults to false
       subtree: false
     })
     observer.parentElMutationObserver.observe(targetNode, {
@@ -214,20 +214,20 @@ export function useWatermark(parentEl: Ref<HTMLElement | null> = bodyEl) {
     })
   }
 
-  // 监听 DOM 大小变化
+  // Listen to DOM size changes
   const addResizeListener = (targetNode: HTMLElement) => {
-    // 当 targetNode 元素大小变化时去更新整个水印的大小
+    // Update the whole watermark's size when the targetNode element's size changes
     const resizeCallback = debounce(() => {
       const { clientWidth, clientHeight } = targetNode
       updateWatermarkEl({ width: clientWidth, height: clientHeight })
     }, 500)
-    // 创建一个观察器实例并传入回调
+    // Create an observer instance and pass in the callback
     observer.parentElResizeObserver = new ResizeObserver(resizeCallback)
-    // 开始观察目标节点
+    // Start observing the target node
     observer.parentElResizeObserver.observe(targetNode)
   }
 
-  // 在组件卸载前移除水印以及各种监听
+  // Remove the watermark and various listeners before the component unmounts
   onBeforeUnmount(() => {
     clearWatermark()
   })

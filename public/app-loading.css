@@ -1,4 +1,4 @@
-/* 白屏阶段会执行的 CSS 加载动画 */
+/* CSS loading animation executed during the white screen phase */
 
 #app-loading {
   position: relative;

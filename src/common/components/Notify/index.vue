@@ -4,7 +4,7 @@ import { Bell } from "@element-plus/icons-vue"
 import { messageData, notifyData, todoData } from "./data"
 import List from "./List.vue"
 
-type TabName = "通知" | "消息" | "待办"
+type TabName = "Notifications" | "Messages" | "Todos"
 
 interface DataItem {
   name: TabName
@@ -12,42 +12,42 @@ interface DataItem {
   list: NotifyItem[]
 }
 
-/** 角标当前值 */
+/** Current badge value */
 const badgeValue = computed(() => data.value.reduce((sum, item) => sum + item.list.length, 0))
 
-/** 角标最大值 */
+/** Maximum badge value */
 const badgeMax = 99
 
-/** 面板宽度 */
+/** Panel width */
 const popoverWidth = 350
 
-/** 当前 Tab */
-const activeName = ref<TabName>("通知")
+/** Current Tab */
+const activeName = ref<TabName>("Notifications")
 
-/** 所有数据 */
+/** All data */
 const data = ref<DataItem[]>([
-  // 通知数据
+  // Notification data
   {
-    name: "通知",
+    name: "Notifications",
     type: "primary",
     list: notifyData
   },
-  // 消息数据
+  // Message data
   {
-    name: "消息",
+    name: "Messages",
     type: "danger",
     list: messageData
   },
-  // 待办数据
+  // Todo data
   {
-    name: "待办",
+    name: "Todos",
     type: "warning",
     list: todoData
   }
 ])
 
 function handleHistory() {
-  ElMessage.success(`跳转到${activeName.value}历史页面`)
+  ElMessage.success(`Jump to the ${activeName.value} history page`)
 }
 </script>
 
@@ -56,7 +56,7 @@ function handleHistory() {
     <el-popover placement="bottom" :width="popoverWidth" trigger="click">
       <template #reference>
         <el-badge :value="badgeValue" :max="badgeMax" :hidden="badgeValue === 0">
-          <el-tooltip effect="dark" content="消息通知" placement="bottom">
+          <el-tooltip effect="dark" content="Notifications" placement="bottom">
             <el-icon :size="20">
               <Bell />
             </el-icon>
@@ -77,7 +77,7 @@ function handleHistory() {
         </el-tabs>
         <div class="notify-history">
           <el-button link @click="handleHistory">
-            查看{{ activeName }}历史
+            View {{ activeName }} history
           </el-button>
         </div>
       </template>

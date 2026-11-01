@@ -1,23 +1,23 @@
 import type { RouterHistory } from "vue-router"
 import { createWebHashHistory, createWebHistory } from "vue-router"
 
-/** 路由配置 */
+/** Router configuration */
 interface RouterConfig {
   /**
-   * @name 路由模式
-   * @description hash 模式和 html5 模式
+   * @name Route mode
+   * @description hash mode and html5 mode
    */
   history: RouterHistory
   /**
-   * @name 是否开启动态路由功能
-   * @description 1. 开启后需要后端配合，在查询用户详情接口返回当前用户可以用来判断并加载动态路由的字段（roles / permissions）
-   * @description 2. 假如项目不需要根据不同的用户来显示不同的页面，则应该将 dynamic: false
+   * @name Whether to enable the dynamic route feature
+   * @description 1. Once enabled, it requires backend cooperation: the query user details API returns the fields (roles / permissions) the current user can use to determine and load dynamic routes
+   * @description 2. If the project doesn't need to show different pages based on different users, dynamic should be false
    */
   dynamic: boolean
   /**
-   * @name 是否开启三级及其以上路由缓存功能
-   * @description 1. 开启后会进行路由降级（把三级及其以上的路由转化为二级路由）
-   * @description 2. 由于都会转成二级路由，所以二级及其以上路由有内嵌子路由将会失效
+   * @name Whether to enable caching for routes of three levels and above
+   * @description 1. When enabled, route downgrading is performed (routes of three levels and above are converted to second-level routes)
+   * @description 2. Since they are all converted to second-level routes, second-level and above routes with embedded child routes will become invalid
    */
   thirdLevelRouteCache: boolean
 }

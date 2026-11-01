@@ -1,24 +1,24 @@
-# 配置项文档：https://editorconfig.org（修改配置后重启编辑器）
+# Documentation: https://editorconfig.org (restart the editor after modifying the configuration)
 
-## 告知 EditorConfig 插件，当前即是根文件
+## Tell the EditorConfig plugin that this is the root file
 root = true
 
-## 适用全部文件
+## Applies to all files
 [*]
-### 设置字符集
+### Set the charset
 charset = utf-8
-### 缩进风格 space | tab，建议 space
+### Indent style space | tab, space is recommended
 indent_style = space
-### 缩进的空格数
+### Number of spaces to indent
 indent_size = 2
-### 换行符类型 lf | cr | crlf，一般都是设置为 lf
+### Line ending type lf | cr | crlf, usually set to lf
 end_of_line = lf
-### 是否在文件末尾插入空白行
+### Whether to insert a blank line at the end of the file
 insert_final_newline = true
-### 是否删除一行中的前后空格
+### Whether to trim leading and trailing spaces in a line
 trim_trailing_whitespace = true
 
-## 适用 .md 文件
+## Applies to .md files
 [*.md]
 insert_final_newline = false
 trim_trailing_whitespace = false

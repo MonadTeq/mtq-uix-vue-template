@@ -11,16 +11,16 @@ interface Props {
 
 const { item, basePath = "" } = defineProps<Props>()
 
-/** 是否始终显示根菜单 */
+/** Whether to always show the root menu */
 const alwaysShowRootMenu = computed(() => item.meta?.alwaysShow)
 
-/** 显示的子菜单 */
+/** Child menus to show */
 const showingChildren = computed(() => item.children?.filter(child => !child.meta?.hidden) ?? [])
 
-/** 显示的子菜单数量 */
+/** Number of child menus to show */
 const showingChildNumber = computed(() => showingChildren.value.length)
 
-/** 唯一的子菜单项 */
+/** The only child menu item */
 const theOnlyOneChild = computed(() => {
   const number = showingChildNumber.value
   switch (true) {
@@ -33,7 +33,7 @@ const theOnlyOneChild = computed(() => {
   }
 })
 
-/** 解析路径 */
+/** Resolve the path */
 function resolvePath(routePath: string) {
   switch (true) {
     case isExternal(routePath):

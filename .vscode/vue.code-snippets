@@ -1,5 +1,5 @@
 {
-  "Vue3 SFC 代码结构一键生成": {
+  "Vue3 SFC code structure one-click generation": {
     "prefix": "Vue3 SFC",
     "body": [
       "<script lang=\"ts\" setup></script>\n",

@@ -7,7 +7,7 @@ import { CirclePlus, Delete, Download, Refresh, RefreshRight, Search } from "@el
 import { cloneDeep } from "lodash-es"
 
 defineOptions({
-  // 命名当前组件
+  // Name the current component
   name: "ElementPlus"
 })
 
@@ -17,7 +17,7 @@ const { paginationData, resetCurrentPage, watchPagination } = usePagination({
   callback: getTableData
 })
 
-// #region 增
+// #region Create
 const DEFAULT_FORM_DATA: CreateOrUpdateTableRequestData = {
   id: undefined,
   username: "",
@@ -31,20 +31,20 @@ const formRef = useTemplateRef("formRef")
 const formData = ref<CreateOrUpdateTableRequestData>(cloneDeep(DEFAULT_FORM_DATA))
 
 const formRules: FormRules<CreateOrUpdateTableRequestData> = {
-  username: [{ required: true, trigger: "blur", message: "请输入用户名" }],
-  password: [{ required: true, trigger: "blur", message: "请输入密码" }]
+  username: [{ required: true, trigger: "blur", message: "Please enter username" }],
+  password: [{ required: true, trigger: "blur", message: "Please enter password" }]
 }
 
 function handleCreateOrUpdate() {
   formRef.value?.validate((valid) => {
     if (!valid) {
-      ElMessage.error("表单校验不通过")
+      ElMessage.error("Form validation failed")
       return
     }
     loading.value = true
     const api = formData.value.id === undefined ? createTableDataApi : updateTableDataApi
     api(formData.value).then(() => {
-      ElMessage.success("操作成功")
+      ElMessage.success("Operation successful")
       dialogVisible.value = false
     }).finally(() => {
       loading.value = false
@@ -59,16 +59,16 @@ function resetForm() {
 }
 // #endregion
 
-// #region 删
+// #region Delete
 function handleDelete(row: TableData) {
-  ElMessageBox.confirm(`正在删除用户：${row.username}，确认删除？`, "提示", {
-    confirmButtonText: "确定",
-    cancelButtonText: "取消",
+  ElMessageBox.confirm(`Deleting user: ${row.username}, confirm deletion?`, "Prompt", {
+    confirmButtonText: "Confirm",
+    cancelButtonText: "Cancel",
     type: "warning"
   }).then(() => {
     loading.value = true
     deleteTableDataApi(row.id).then(() => {
-      ElMessage.success("删除成功")
+      ElMessage.success("Deleted successfully")
     }).finally(() => {
       loading.value = false
       getTableData()
@@ -77,14 +77,14 @@ function handleDelete(row: TableData) {
 }
 // #endregion
 
-// #region 改
+// #region Update
 function handleUpdate(row: TableData) {
   dialogVisible.value = true
   formData.value = cloneDeep(row)
 }
 // #endregion
 
-// #region 查
+// #region Read
 const tableData = ref<TableData[]>([])
 
 const searchFormRef = useTemplateRef("searchFormRef")
@@ -120,32 +120,32 @@ function resetSearch() {
 }
 // #endregion
 
-// 监听分页参数的变化
+// Watch pagination parameter changes
 watchPagination()
 </script>
 
 <template>
   <div class="app-container">
     <el-alert
-      title="数据来源"
+      title="Data source"
       type="success"
-      description="由 Apifox 提供在线 Mock，数据不具备真实性，仅供简单的 CRUD 操作演示"
+      description="Online Mock provided by Apifox; the data is not real and is only for simple CRUD operation demonstration"
       show-icon
     />
     <el-card v-loading="loading" shadow="never" class="search-wrapper">
       <el-form ref="searchFormRef" :inline="true" :model="searchData">
-        <el-form-item prop="username" label="用户名">
-          <el-input v-model="searchData.username" placeholder="请输入" />
+        <el-form-item prop="username" label="Username">
+          <el-input v-model="searchData.username" placeholder="Please enter" />
         </el-form-item>
-        <el-form-item prop="phone" label="手机号">
-          <el-input v-model="searchData.phone" placeholder="请输入" />
+        <el-form-item prop="phone" label="Phone">
+          <el-input v-model="searchData.phone" placeholder="Please enter" />
         </el-form-item>
         <el-form-item>
           <el-button type="primary" :icon="Search" @click="handleSearch">
-            查询
+            Search
           </el-button>
           <el-button :icon="Refresh" @click="resetSearch">
-            重置
+            Reset
           </el-button>
         </el-form-item>
       </el-form>
@@ -154,17 +154,17 @@ watchPagination()
       <div class="toolbar-wrapper">
         <div>
           <el-button type="primary" :icon="CirclePlus" @click="dialogVisible = true">
-            新增用户
+            Add user
           </el-button>
           <el-button type="danger" :icon="Delete">
-            批量删除
+            Batch delete
           </el-button>
         </div>
         <div>
-          <el-tooltip content="下载">
+          <el-tooltip content="Download">
             <el-button type="primary" :icon="Download" circle />
           </el-tooltip>
-          <el-tooltip content="刷新当前页">
+          <el-tooltip content="Refresh current page">
             <el-button type="primary" :icon="RefreshRight" circle @click="getTableData" />
           </el-tooltip>
         </div>
@@ -172,8 +172,8 @@ watchPagination()
       <div class="table-wrapper">
         <el-table :data="tableData">
           <el-table-column type="selection" width="50" align="center" />
-          <el-table-column prop="username" label="用户名" align="center" />
-          <el-table-column prop="roles" label="角色" align="center">
+          <el-table-column prop="username" label="Username" align="center" />
+          <el-table-column prop="roles" label="Role" align="center">
             <template #default="scope">
               <el-tag v-if="scope.row.roles === 'admin'" type="primary" effect="plain" disable-transitions>
                 admin
@@ -183,26 +183,26 @@ watchPagination()
               </el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="phone" label="手机号" align="center" />
-          <el-table-column prop="email" label="邮箱" align="center" />
-          <el-table-column prop="status" label="状态" align="center">
+          <el-table-column prop="phone" label="Phone" align="center" />
+          <el-table-column prop="email" label="Email" align="center" />
+          <el-table-column prop="status" label="Status" align="center">
             <template #default="scope">
               <el-tag v-if="scope.row.status" type="success" effect="plain" disable-transitions>
-                启用
+                Enabled
               </el-tag>
               <el-tag v-else type="danger" effect="plain" disable-transitions>
-                禁用
+                Disabled
               </el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="createTime" label="创建时间" align="center" />
-          <el-table-column fixed="right" label="操作" width="150" align="center">
+          <el-table-column prop="createTime" label="Created time" align="center" />
+          <el-table-column fixed="right" label="Actions" width="150" align="center">
             <template #default="scope">
               <el-button type="primary" text bg size="small" @click="handleUpdate(scope.row as TableData)">
-                修改
+                Edit
               </el-button>
               <el-button type="danger" text bg size="small" @click="handleDelete(scope.row as TableData)">
-                删除
+                Delete
               </el-button>
             </template>
           </el-table-column>
@@ -219,27 +219,27 @@ watchPagination()
         />
       </div>
     </el-card>
-    <!-- 新增/修改 -->
+    <!-- Create/Update -->
     <el-dialog
       v-model="dialogVisible"
-      :title="formData.id === undefined ? '新增用户' : '修改用户'"
+      :title="formData.id === undefined ? 'Add user' : 'Edit user'"
       width="30%"
       @closed="resetForm"
     >
       <el-form ref="formRef" :model="formData" :rules="formRules" label-width="auto">
-        <el-form-item prop="username" label="用户名">
-          <el-input v-model="formData.username" placeholder="请输入" />
+        <el-form-item prop="username" label="Username">
+          <el-input v-model="formData.username" placeholder="Please enter" />
         </el-form-item>
-        <el-form-item v-if="formData.id === undefined" prop="password" label="密码">
-          <el-input v-model="formData.password" placeholder="请输入" />
+        <el-form-item v-if="formData.id === undefined" prop="password" label="Password">
+          <el-input v-model="formData.password" placeholder="Please enter" />
         </el-form-item>
       </el-form>
       <template #footer>
         <el-button @click="dialogVisible = false">
-          取消
+          Cancel
         </el-button>
         <el-button type="primary" :loading="loading" @click="handleCreateOrUpdate">
-          确认
+          Confirm
         </el-button>
       </template>
     </el-dialog>

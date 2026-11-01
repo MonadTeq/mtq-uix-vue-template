@@ -22,12 +22,12 @@ const author2 = {
   url: "https://github.com/pany-ang"
 }
 
-describe("这里填写作用域名称", () => {
-  it("测试基础数据类型", () => {
+describe("Fill in the scope name here", () => {
+  it("Test primitive data types", () => {
     expect(1 + 1).toBe(2)
   })
 
-  it("测试引用类型", () => {
+  it("Test reference types", () => {
     expect(author1).toEqual(author2)
   })
 })

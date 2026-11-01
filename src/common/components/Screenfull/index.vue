@@ -2,17 +2,17 @@
 import screenfull from "screenfull"
 
 interface Props {
-  /** 全屏的元素，默认是 html */
+  /** The element to fullscreen; defaults to html */
   element?: string
-  /** 打开全屏提示语 */
+  /** Tip shown to open fullscreen */
   openTips?: string
-  /** 关闭全屏提示语 */
+  /** Tip shown to exit fullscreen */
   exitTips?: string
-  /** 是否只针对内容区 */
+  /** Whether to target only the content area */
   content?: boolean
 }
 
-const { element = "html", openTips = "全屏", exitTips = "退出全屏", content = false } = defineProps<Props>()
+const { element = "html", openTips = "Fullscreen", exitTips = "Exit Fullscreen", content = false } = defineProps<Props>()
 
 const CONTENT_LARGE = "content-large"
 
@@ -20,7 +20,7 @@ const CONTENT_FULL = "content-full"
 
 const classList = document.body.classList
 
-// #region 全屏
+// #region Fullscreen
 const isEnabled = screenfull.isEnabled
 
 const isFullscreen = ref<boolean>(false)
@@ -31,20 +31,20 @@ const fullscreenSvgName = computed(() => (isFullscreen.value ? "fullscreen-exit"
 
 function handleFullscreenClick() {
   const dom = document.querySelector(element) || undefined
-  isEnabled ? screenfull.toggle(dom) : ElMessage.warning("您的浏览器无法工作")
+  isEnabled ? screenfull.toggle(dom) : ElMessage.warning("Your browser doesn't support this")
 }
 
 function handleFullscreenChange() {
   isFullscreen.value = screenfull.isFullscreen
-  // 退出全屏时清除相关的 class
+  // Clear the relevant classes when exiting fullscreen
   isFullscreen.value || classList.remove(CONTENT_LARGE, CONTENT_FULL)
 }
 
 watchEffect(() => {
   if (isEnabled) {
-    // 挂载组件时自动执行
+    // Automatically run when the component mounts
     screenfull.on("change", handleFullscreenChange)
-    // 卸载组件时自动执行
+    // Automatically run when the component unmounts
     onWatcherCleanup(() => {
       screenfull.off("change", handleFullscreenChange)
     })
@@ -52,25 +52,25 @@ watchEffect(() => {
 })
 // #endregion
 
-// #region 内容区
+// #region Content area
 const isContentLarge = ref<boolean>(false)
 
-const contentLargeTips = computed(() => (isContentLarge.value ? "内容区复原" : "内容区放大"))
+const contentLargeTips = computed(() => (isContentLarge.value ? "Restore content area" : "Enlarge content area"))
 
 const contentLargeSvgName = computed(() => (isContentLarge.value ? "fullscreen-exit" : "fullscreen"))
 
 function handleContentLargeClick() {
   isContentLarge.value = !isContentLarge.value
-  // 内容区放大时，将不需要的组件隐藏
+  // Hide the unnecessary components when the content area is enlarged
   classList.toggle(CONTENT_LARGE, isContentLarge.value)
 }
 
 function handleContentFullClick() {
-  // 取消内容区放大
+  // Cancel content area enlargement
   isContentLarge.value && handleContentLargeClick()
-  // 内容区全屏时，将不需要的组件隐藏
+  // Hide the unnecessary components when the content area is fullscreen
   classList.add(CONTENT_FULL)
-  // 开启全屏
+  // Enable fullscreen
   handleFullscreenClick()
 }
 // #endregion
@@ -78,22 +78,22 @@ function handleContentFullClick() {
 
 <template>
   <div>
-    <!-- 全屏 -->
+    <!-- Fullscreen -->
     <el-tooltip v-if="!content" effect="dark" :content="fullscreenTips" placement="bottom">
       <SvgIcon :name="fullscreenSvgName" @click="handleFullscreenClick" class="svg-icon" />
     </el-tooltip>
-    <!-- 内容区 -->
+    <!-- Content area -->
     <el-dropdown v-else :disabled="isFullscreen">
       <SvgIcon :name="contentLargeSvgName" class="svg-icon" />
       <template #dropdown>
         <el-dropdown-menu>
-          <!-- 内容区放大 -->
+          <!-- Enlarge content area -->
           <el-dropdown-item @click="handleContentLargeClick">
             {{ contentLargeTips }}
           </el-dropdown-item>
-          <!-- 内容区全屏 -->
+          <!-- Fullscreen content area -->
           <el-dropdown-item @click="handleContentFullClick">
-            内容区全屏
+            Fullscreen content area
           </el-dropdown-item>
         </el-dropdown-menu>
       </template>

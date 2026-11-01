@@ -6,7 +6,7 @@ import SwitchUser from "./components/SwitchUser.vue"
   <div class="app-container">
     <SwitchUser />
     <el-card shadow="never" class="content">
-      当前页面只有「admin」角色或「permission:page-level」权限可见，切换用户后将不能进入该页面
+      This page is only visible to the admin role or the permission:page-level permission; after switching users, you will not be able to enter this page
     </el-card>
   </div>
 </template>

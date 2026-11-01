@@ -9,7 +9,7 @@ const { isLeft } = useLayoutMode()
 
 const settingsStore = useSettingsStore()
 
-// 使用 storeToRefs 将提取的属性保持其响应性
+// Use storeToRefs to keep the extracted properties reactive
 const {
   showTagsView,
   showLogo,
@@ -25,28 +25,28 @@ const {
   showColorWeakness
 } = storeToRefs(settingsStore)
 
-/** 定义 switch 设置项 */
+/** Define the switch settings */
 const switchSettings = {
-  "显示标签栏": showTagsView,
-  "显示 Logo": showLogo,
-  "固定 Header": fixedHeader,
-  "显示页脚": showFooter,
-  "显示消息通知": showNotify,
-  "显示切换主题按钮": showThemeSwitch,
-  "显示全屏按钮": showScreenfull,
-  "显示搜索按钮": showSearchMenu,
-  "是否缓存标签栏": cacheTagsView,
-  "开启系统水印": showWatermark,
-  "显示灰色模式": showGreyMode,
-  "显示色弱模式": showColorWeakness
+  "Show tags bar": showTagsView,
+  "Show Logo": showLogo,
+  "Fix Header": fixedHeader,
+  "Show footer": showFooter,
+  "Show notifications": showNotify,
+  "Show theme switch": showThemeSwitch,
+  "Show fullscreen": showScreenfull,
+  "Show search": showSearchMenu,
+  "Cache tags bar": cacheTagsView,
+  "Enable watermark": showWatermark,
+  "Show gray mode": showGreyMode,
+  "Show color weakness": showColorWeakness
 }
 
-// 非左侧模式时，Header 都是 fixed 布局
+// In non-left modes, the Header is always a fixed layout
 watchEffect(() => {
   !isLeft.value && (fixedHeader.value = true)
 })
 
-/** 重置项目配置 */
+/** Reset the project configuration */
 function resetLayoutsConfig() {
   removeLayoutsConfig()
   location.reload()
@@ -55,16 +55,16 @@ function resetLayoutsConfig() {
 
 <template>
   <div class="setting-container">
-    <h4>布局配置</h4>
+    <h4>Layout configuration</h4>
     <SelectLayoutMode />
     <el-divider />
-    <h4>功能配置</h4>
+    <h4>Feature configuration</h4>
     <div v-for="(settingValue, settingName, index) in switchSettings" :key="index" class="setting-item">
       <span class="setting-name">{{ settingName }}</span>
-      <el-switch v-model="settingValue.value" :disabled="!isLeft && settingName === '固定 Header'" />
+      <el-switch v-model="settingValue.value" :disabled="!isLeft && settingName === 'Fix Header'" />
     </div>
     <el-button type="danger" :icon="Refresh" @click="resetLayoutsConfig">
-      重 置
+      Reset
     </el-button>
   </div>
 </template>

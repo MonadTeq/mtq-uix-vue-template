@@ -14,18 +14,18 @@ const svg = `
 `
 
 const options = {
-  text: "即将发生错误...",
+  text: "An error is about to occur...",
   background: "#F56C6C20",
   svg,
   svgViewBox: "-10, -10, 50, 50"
 }
 
 async function querySuccess() {
-  // 注意：
-  // 1. getSuccessApi 是一个函数而非函数调用
-  // 2. 如需给 getSuccessApi 函数传递参数，请在后面的括号中进行（真正的 getSuccessApi 调用）
+  // Note:
+  // 1. getSuccessApi is a function rather than a function call
+  // 2. To pass arguments to the getSuccessApi function, do so in the parentheses that follow (the actual getSuccessApi call)
   const res = await useFullscreenLoading(getSuccessApi)([1, 2, 3])
-  ElMessage.success(`${res.message}，传参为 ${res.data.list.toString()}`)
+  ElMessage.success(`${res.message}, parameters: ${res.data.list.toString()}`)
 }
 
 async function queryError() {
@@ -40,17 +40,17 @@ async function queryError() {
 <template>
   <div class="app-container">
     <el-alert
-      title="示例说明"
+      title="Example description"
       type="primary"
-      description="通过将要执行的函数传递给 composable，让 composable 自动开启全屏 loading，函数执行结束后自动关闭 loading"
+      description="Pass the function to be executed to the composable so that the composable automatically turns on fullscreen loading, and automatically turns off loading after the function finishes executing"
       show-icon
     />
-    <el-card header="示例" shadow="never">
+    <el-card header="Example" shadow="never">
       <el-button type="primary" @click="querySuccess">
-        查询成功
+        Query success
       </el-button>
       <el-button type="danger" @click="queryError">
-        查询失败
+        Query failure
       </el-button>
     </el-card>
   </div>

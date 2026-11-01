@@ -3,56 +3,56 @@ import type { NotifyItem } from "./type"
 export const notifyData: NotifyItem[] = [
   {
     avatar: "https://gw.alipayobjects.com/zos/rmsportal/OKJXDXrmkNshAMvwtvhu.png",
-    title: "V3 Admin Vite 上线啦",
-    datetime: "四年前",
-    description: "一个 AI 友好的后台管理系统模板，基于 Vue3、Vite、TypeScript、Element Plus 等主流技术"
+    title: "V3 Admin Vite is live",
+    datetime: "4 years ago",
+    description: "An AI-friendly admin dashboard template based on mainstream technologies such as Vue3, Vite, TypeScript, and Element Plus"
   },
   {
     avatar: "https://gw.alipayobjects.com/zos/rmsportal/OKJXDXrmkNshAMvwtvhu.png",
-    title: "V3 Admin 上线啦",
-    datetime: "五年前",
-    description: "一个中后台管理系统基础解决方案，基于 Vue3、TypeScript、Element Plus、Pinia 和 Vue CLI 5.x"
+    title: "V3 Admin is live",
+    datetime: "5 years ago",
+    description: "A basic admin system solution based on Vue3, TypeScript, Element Plus, Pinia, and Vue CLI 5.x"
   }
 ]
 
 export const messageData: NotifyItem[] = [
   {
     avatar: "https://gw.alipayobjects.com/zos/rmsportal/ThXAXghbEsBCCSDihZxY.png",
-    title: "来自楚门的世界",
-    description: "如果再也不能见到你，祝你早安、午安和晚安",
+    title: "From The Truman Show",
+    description: "In case I don't see you, good afternoon, good evening, and good night",
     datetime: "1998-06-05"
   },
   {
     avatar: "https://gw.alipayobjects.com/zos/rmsportal/ThXAXghbEsBCCSDihZxY.png",
-    title: "来自大话西游",
-    description: "如果非要在这份爱上加上一个期限，我希望是一万年",
+    title: "From A Chinese Odyssey",
+    description: "If I have to put a time limit on this love, I wish it would be ten thousand years",
     datetime: "1995-02-04"
   },
   {
     avatar: "https://gw.alipayobjects.com/zos/rmsportal/ThXAXghbEsBCCSDihZxY.png",
-    title: "来自龙猫",
-    description: "心存善意，定能途遇天使",
+    title: "From My Neighbor Totoro",
+    description: "With a kind heart, you will surely meet angels along the way",
     datetime: "1988-04-16"
   }
 ]
 
 export const todoData: NotifyItem[] = [
   {
-    title: "任务名称",
-    description: "这家伙很懒，什么都没留下",
-    extra: "未开始",
+    title: "Task name",
+    description: "This guy is lazy and left nothing behind",
+    extra: "Not started",
     status: "info"
   },
   {
-    title: "任务名称",
-    description: "这家伙很懒，什么都没留下",
-    extra: "进行中",
+    title: "Task name",
+    description: "This guy is lazy and left nothing behind",
+    extra: "In progress",
     status: "primary"
   },
   {
-    title: "任务名称",
-    description: "这家伙很懒，什么都没留下",
-    extra: "已超时",
+    title: "Task name",
+    description: "This guy is lazy and left nothing behind",
+    extra: "Timed out",
     status: "danger"
   }
 ]

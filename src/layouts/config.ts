@@ -1,39 +1,39 @@
 import { LayoutModeEnum } from "@@/constants/app-key"
 import { getLayoutsConfig } from "@@/utils/local-storage"
 
-/** 项目配置类型 */
+/** Project configuration type */
 export interface LayoutsConfig {
-  /** 是否显示设置按钮和面板 */
+  /** Whether to show the settings button and panel */
   showSettings: boolean
-  /** 布局模式 */
+  /** Layout mode */
   layoutMode: LayoutModeEnum
-  /** 是否显示标签栏 */
+  /** Whether to show the tags bar */
   showTagsView: boolean
-  /** 是否显示 Logo */
+  /** Whether to show the Logo */
   showLogo: boolean
-  /** 是否固定 Header */
+  /** Whether to fix the Header */
   fixedHeader: boolean
-  /** 是否显示页脚 */
+  /** Whether to show the footer */
   showFooter: boolean
-  /** 是否显示消息通知 */
+  /** Whether to show message notifications */
   showNotify: boolean
-  /** 是否显示切换主题按钮 */
+  /** Whether to show the theme switch button */
   showThemeSwitch: boolean
-  /** 是否显示全屏按钮 */
+  /** Whether to show the fullscreen button */
   showScreenfull: boolean
-  /** 是否显示搜索按钮 */
+  /** Whether to show the search button */
   showSearchMenu: boolean
-  /** 是否缓存标签栏 */
+  /** Whether to cache the tags bar */
   cacheTagsView: boolean
-  /** 开启系统水印 */
+  /** Enable the system watermark */
   showWatermark: boolean
-  /** 是否显示灰色模式 */
+  /** Whether to show gray mode */
   showGreyMode: boolean
-  /** 是否显示色弱模式 */
+  /** Whether to show color weakness mode */
   showColorWeakness: boolean
 }
 
-/** 默认配置 */
+/** Default configuration */
 const DEFAULT_CONFIG: LayoutsConfig = {
   showSettings: true,
   layoutMode: LayoutModeEnum.Left,
@@ -51,7 +51,7 @@ const DEFAULT_CONFIG: LayoutsConfig = {
   showColorWeakness: false
 }
 
-/** 项目配置 */
+/** Project configuration */
 export const layoutsConfig: LayoutsConfig = {
   ...DEFAULT_CONFIG,
   ...getLayoutsConfig(),

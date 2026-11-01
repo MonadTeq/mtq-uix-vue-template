@@ -14,16 +14,16 @@ import "vxe-table/lib/style.css"
 import "@@/assets/styles/index.scss"
 import "virtual:uno.css"
 
-// 创建应用实例
+// Create the app instance
 const app = createApp(App)
 
-// 安装插件（全局组件、自定义指令等）
+// Install plugins (global components, custom directives, etc.)
 installPlugins(app)
 
-// 安装 pinia 和 router
+// Install pinia and router
 app.use(pinia).use(router)
 
-// router 准备就绪后挂载应用
+// Mount the app once the router is ready
 router.isReady().then(() => {
   app.mount("#app")
 })

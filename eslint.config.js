@@ -1,24 +1,24 @@
 import antfu from "@antfu/eslint-config"
 
-// 更多自定义配置可查阅仓库：https://github.com/antfu/eslint-config
+// For more custom configuration, see the repository: https://github.com/antfu/eslint-config
 export default antfu(
   {
-    // 使用外部格式化程序格式化 css、html、markdown 等文件
+    // Use external formatters to format css, html, markdown and other files
     formatters: true,
-    // 启用样式规则
+    // Enable style rules
     stylistic: {
-      // 缩进级别
+      // Indent level
       indent: 2,
-      // 引号风格 'single' | 'double'
+      // Quote style 'single' | 'double'
       quotes: "double",
-      // 是否启用分号
+      // Whether to enable semicolons
       semi: false
     },
-    // 忽略文件
+    // Files to ignore
     ignores: ["*/skills"]
   },
   {
-    // 对所有文件都生效的规则
+    // Rules that apply to all files
     rules: {
       // vue
       "vue/block-order": ["error", { order: ["script", "template", "style"] }],

@@ -1,4 +1,4 @@
-// 清除浮动
+// Clear floats
 %clearfix {
   &::after {
     content: "";
@@ -7,14 +7,14 @@
   }
 }
 
-// 美化原生滚动条
+// Beautify the native scrollbar
 %scrollbar {
-  // 整个滚动条
+  // The whole scrollbar
   &::-webkit-scrollbar {
     width: 8px;
     height: 8px;
   }
-  // 滚动条上的滚动滑块
+  // The scroll thumb on the scrollbar
   &::-webkit-scrollbar-thumb {
     border-radius: 4px;
     background-color: #90939955;
@@ -25,18 +25,18 @@
   &::-webkit-scrollbar-thumb:active {
     background-color: #90939999;
   }
-  // 当同时有垂直滚动条和水平滚动条时交汇的部分
+  // The corner where vertical and horizontal scrollbars meet
   &::-webkit-scrollbar-corner {
     background-color: transparent;
   }
 }
 
-// 文本溢出时显示省略号
+// Show ellipsis when text overflows
 %ellipsis {
-  // 隐藏溢出的文本
+  // Hide overflowing text
   overflow: hidden;
-  // 防止文本换行
+  // Prevent text wrapping
   white-space: nowrap;
-  // 文本内容溢出容器时，文本末尾显示省略号
+  // Show ellipsis at the end of text when it overflows the container
   text-overflow: ellipsis;
 }

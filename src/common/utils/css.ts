@@ -1,17 +1,17 @@
-/** 获取指定元素（默认全局）上的 CSS 变量的值 */
+/** Get the value of a CSS variable on the specified element (global by default) */
 export function getCssVar(varName: string, element: HTMLElement = document.documentElement) {
   if (!varName?.startsWith("--")) {
-    console.error("CSS 变量名应以 '--' 开头")
+    console.error("CSS variable name should start with '--'")
     return ""
   }
-  // 没有拿到值时，会返回空串
+  // Returns an empty string when no value is obtained
   return getComputedStyle(element).getPropertyValue(varName)
 }
 
-/** 设置指定元素（默认全局）上的 CSS 变量的值 */
+/** Set the value of a CSS variable on the specified element (global by default) */
 export function setCssVar(varName: string, value: string, element: HTMLElement = document.documentElement) {
   if (!varName?.startsWith("--")) {
-    console.error("CSS 变量名应以 '--' 开头")
+    console.error("CSS variable name should start with '--'")
     return
   }
   element.style.setProperty(varName, value)

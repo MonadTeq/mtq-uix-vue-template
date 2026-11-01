@@ -23,7 +23,7 @@ const settingsStore = useSettingsStore()
 
 const { showNotify, showThemeSwitch, showScreenfull, showSearchMenu } = storeToRefs(settingsStore)
 
-/** 切换侧边栏 */
+/** Toggle the sidebar */
 function toggleSidebar() {
   appStore.toggleSidebar(false)
 }
@@ -61,7 +61,7 @@ function toggleSidebar() {
               <el-dropdown-item>AtomGit</el-dropdown-item>
             </a>
             <el-dropdown-item divided @click="userStore.logout">
-              退出登录
+              Log out
             </el-dropdown-item>
           </el-dropdown-menu>
         </template>
@@ -86,14 +86,14 @@ function toggleSidebar() {
   }
   .breadcrumb {
     flex: 1;
-    // 参考 Bootstrap 的响应式设计将宽度设置为 576
+    // Following Bootstrap's responsive design, set the width to 576
     @media screen and (max-width: 576px) {
       display: none;
     }
   }
   .sidebar {
     flex: 1;
-    // 设置 min-width 是为了让 Sidebar 里的 el-menu 宽度自适应
+    // Setting min-width is to make the el-menu width in the Sidebar adaptive
     min-width: 0px;
     :deep(.el-menu) {
       background-color: transparent;
