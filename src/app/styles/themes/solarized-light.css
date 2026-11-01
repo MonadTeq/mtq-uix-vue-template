@@ -1,0 +1,72 @@
+/* Semantic alias tokens — Solarized Light scheme. */
+
+[data-theme="solarized-light"] {
+  /* Action */
+  --color-action-primary: var(--solar-blue);
+  --color-action-secondary: var(--solar-base1);
+  --color-action-danger: var(--solar-red);
+  --color-action-ghost: transparent;
+  /* Status */
+  --color-status-success: var(--solar-green);
+  --color-status-warning: var(--solar-yellow);
+  --color-status-info: var(--solar-cyan);
+  /* Surfaces */
+  --color-surface-default: var(--solar-base3);
+  --color-surface-hover: var(--solar-base2);
+  --color-surface-overlay: var(--solar-base3);
+  --color-surface-page: var(--solar-base2);
+  /* Text */
+  --color-text-primary: var(--solar-base00);
+  --color-text-regular: var(--solar-base01);
+  --color-text-secondary: var(--solar-base0);
+  --color-text-placeholder: var(--solar-base1);
+  --color-text-disabled: var(--solar-base1);
+  /* Borders */
+  --color-border-default: var(--solar-base1);
+  --color-border-strong: var(--solar-base0);
+  --color-focus-ring: var(--solar-blue);
+
+  /* Element Plus palette */
+  --el-color-primary: var(--solar-blue);
+  --el-color-primary-light-3: color-mix(in srgb, var(--solar-blue) 70%, white 30%);
+  --el-color-primary-light-5: color-mix(in srgb, var(--solar-blue) 50%, white 50%);
+  --el-color-primary-light-7: color-mix(in srgb, var(--solar-blue) 30%, white 70%);
+  --el-color-primary-light-8: color-mix(in srgb, var(--solar-blue) 20%, white 80%);
+  --el-color-primary-light-9: color-mix(in srgb, var(--solar-blue) 10%, white 90%);
+  --el-color-primary-dark-2: color-mix(in srgb, var(--solar-blue) 80%, black 20%);
+  --el-color-success: var(--solar-green);
+  --el-color-success-light-3: color-mix(in srgb, var(--solar-green) 70%, white 30%);
+  --el-color-success-light-5: color-mix(in srgb, var(--solar-green) 50%, white 50%);
+  --el-color-success-light-7: color-mix(in srgb, var(--solar-green) 30%, white 70%);
+  --el-color-success-light-8: color-mix(in srgb, var(--solar-green) 20%, white 80%);
+  --el-color-success-light-9: color-mix(in srgb, var(--solar-green) 10%, white 90%);
+  --el-color-success-dark-2: color-mix(in srgb, var(--solar-green) 80%, black 20%);
+  --el-color-warning: var(--solar-yellow);
+  --el-color-warning-light-3: color-mix(in srgb, var(--solar-yellow) 70%, white 30%);
+  --el-color-warning-light-5: color-mix(in srgb, var(--solar-yellow) 50%, white 50%);
+  --el-color-warning-light-7: color-mix(in srgb, var(--solar-yellow) 30%, white 70%);
+  --el-color-warning-light-8: color-mix(in srgb, var(--solar-yellow) 20%, white 80%);
+  --el-color-warning-light-9: color-mix(in srgb, var(--solar-yellow) 10%, white 90%);
+  --el-color-warning-dark-2: color-mix(in srgb, var(--solar-yellow) 80%, black 20%);
+  --el-color-danger: var(--solar-red);
+  --el-color-danger-light-3: color-mix(in srgb, var(--solar-red) 70%, white 30%);
+  --el-color-danger-light-5: color-mix(in srgb, var(--solar-red) 50%, white 50%);
+  --el-color-danger-light-7: color-mix(in srgb, var(--solar-red) 30%, white 70%);
+  --el-color-danger-light-8: color-mix(in srgb, var(--solar-red) 20%, white 80%);
+  --el-color-danger-light-9: color-mix(in srgb, var(--solar-red) 10%, white 90%);
+  --el-color-danger-dark-2: color-mix(in srgb, var(--solar-red) 80%, black 20%);
+  --el-color-error: var(--solar-red);
+  --el-color-error-light-3: color-mix(in srgb, var(--solar-red) 70%, white 30%);
+  --el-color-error-light-5: color-mix(in srgb, var(--solar-red) 50%, white 50%);
+  --el-color-error-light-7: color-mix(in srgb, var(--solar-red) 30%, white 70%);
+  --el-color-error-light-8: color-mix(in srgb, var(--solar-red) 20%, white 80%);
+  --el-color-error-light-9: color-mix(in srgb, var(--solar-red) 10%, white 90%);
+  --el-color-error-dark-2: color-mix(in srgb, var(--solar-red) 80%, black 20%);
+  --el-color-info: var(--solar-cyan);
+  --el-color-info-light-3: color-mix(in srgb, var(--solar-cyan) 70%, white 30%);
+  --el-color-info-light-5: color-mix(in srgb, var(--solar-cyan) 50%, white 50%);
+  --el-color-info-light-7: color-mix(in srgb, var(--solar-cyan) 30%, white 70%);
+  --el-color-info-light-8: color-mix(in srgb, var(--solar-cyan) 20%, white 80%);
+  --el-color-info-light-9: color-mix(in srgb, var(--solar-cyan) 10%, white 90%);
+  --el-color-info-dark-2: color-mix(in srgb, var(--solar-cyan) 80%, black 20%);
+}

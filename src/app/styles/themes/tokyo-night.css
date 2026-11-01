@@ -1,0 +1,102 @@
+/* Semantic alias tokens + Element Plus overrides — Tokyo Night scheme. */
+
+[data-theme="tokyo-night"] {
+  color-scheme: dark;
+  /* Action */
+  --color-action-primary: var(--tokyo-blue);
+  --color-action-secondary: var(--tokyo-blue7);
+  --color-action-danger: var(--tokyo-red);
+  --color-action-ghost: transparent;
+  /* Status */
+  --color-status-success: var(--tokyo-green);
+  --color-status-warning: var(--tokyo-yellow);
+  --color-status-info: var(--tokyo-cyan);
+  /* Surfaces */
+  --color-surface-default: var(--tokyo-bg);
+  --color-surface-hover: var(--tokyo-bg-highlight);
+  --color-surface-overlay: var(--tokyo-bg-highlight);
+  --color-surface-page: var(--tokyo-bg-dark);
+  /* Text */
+  --color-text-primary: var(--tokyo-fg);
+  --color-text-regular: var(--tokyo-fg-dark);
+  --color-text-secondary: var(--tokyo-comment);
+  --color-text-placeholder: var(--tokyo-dark5);
+  --color-text-disabled: var(--tokyo-fg-gutter);
+  /* Borders */
+  --color-border-default: var(--tokyo-fg-gutter);
+  --color-border-strong: var(--tokyo-terminal-black);
+  --color-focus-ring: var(--tokyo-cyan);
+
+  /* Element Plus palette */
+  --el-color-primary: var(--tokyo-blue);
+  --el-color-primary-light-3: color-mix(in srgb, var(--tokyo-blue) 70%, var(--tokyo-bg) 30%);
+  --el-color-primary-light-5: color-mix(in srgb, var(--tokyo-blue) 50%, var(--tokyo-bg) 50%);
+  --el-color-primary-light-7: color-mix(in srgb, var(--tokyo-blue) 30%, var(--tokyo-bg) 70%);
+  --el-color-primary-light-8: color-mix(in srgb, var(--tokyo-blue) 20%, var(--tokyo-bg) 80%);
+  --el-color-primary-light-9: color-mix(in srgb, var(--tokyo-blue) 10%, var(--tokyo-bg) 90%);
+  --el-color-primary-dark-2: color-mix(in srgb, var(--tokyo-blue) 80%, white 20%);
+  --el-color-success: var(--tokyo-green);
+  --el-color-success-light-3: color-mix(in srgb, var(--tokyo-green) 70%, var(--tokyo-bg) 30%);
+  --el-color-success-light-5: color-mix(in srgb, var(--tokyo-green) 50%, var(--tokyo-bg) 50%);
+  --el-color-success-light-7: color-mix(in srgb, var(--tokyo-green) 30%, var(--tokyo-bg) 70%);
+  --el-color-success-light-8: color-mix(in srgb, var(--tokyo-green) 20%, var(--tokyo-bg) 80%);
+  --el-color-success-light-9: color-mix(in srgb, var(--tokyo-green) 10%, var(--tokyo-bg) 90%);
+  --el-color-success-dark-2: color-mix(in srgb, var(--tokyo-green) 80%, white 20%);
+  --el-color-warning: var(--tokyo-yellow);
+  --el-color-warning-light-3: color-mix(in srgb, var(--tokyo-yellow) 70%, var(--tokyo-bg) 30%);
+  --el-color-warning-light-5: color-mix(in srgb, var(--tokyo-yellow) 50%, var(--tokyo-bg) 50%);
+  --el-color-warning-light-7: color-mix(in srgb, var(--tokyo-yellow) 30%, var(--tokyo-bg) 70%);
+  --el-color-warning-light-8: color-mix(in srgb, var(--tokyo-yellow) 20%, var(--tokyo-bg) 80%);
+  --el-color-warning-light-9: color-mix(in srgb, var(--tokyo-yellow) 10%, var(--tokyo-bg) 90%);
+  --el-color-warning-dark-2: color-mix(in srgb, var(--tokyo-yellow) 80%, white 20%);
+  --el-color-danger: var(--tokyo-red);
+  --el-color-danger-light-3: color-mix(in srgb, var(--tokyo-red) 70%, var(--tokyo-bg) 30%);
+  --el-color-danger-light-5: color-mix(in srgb, var(--tokyo-red) 50%, var(--tokyo-bg) 50%);
+  --el-color-danger-light-7: color-mix(in srgb, var(--tokyo-red) 30%, var(--tokyo-bg) 70%);
+  --el-color-danger-light-8: color-mix(in srgb, var(--tokyo-red) 20%, var(--tokyo-bg) 80%);
+  --el-color-danger-light-9: color-mix(in srgb, var(--tokyo-red) 10%, var(--tokyo-bg) 90%);
+  --el-color-danger-dark-2: color-mix(in srgb, var(--tokyo-red) 80%, white 20%);
+  --el-color-error: var(--tokyo-red);
+  --el-color-error-light-3: color-mix(in srgb, var(--tokyo-red) 70%, var(--tokyo-bg) 30%);
+  --el-color-error-light-5: color-mix(in srgb, var(--tokyo-red) 50%, var(--tokyo-bg) 50%);
+  --el-color-error-light-7: color-mix(in srgb, var(--tokyo-red) 30%, var(--tokyo-bg) 70%);
+  --el-color-error-light-8: color-mix(in srgb, var(--tokyo-red) 20%, var(--tokyo-bg) 80%);
+  --el-color-error-light-9: color-mix(in srgb, var(--tokyo-red) 10%, var(--tokyo-bg) 90%);
+  --el-color-error-dark-2: color-mix(in srgb, var(--tokyo-red) 80%, white 20%);
+  --el-color-info: var(--tokyo-cyan);
+  --el-color-info-light-3: color-mix(in srgb, var(--tokyo-cyan) 70%, var(--tokyo-bg) 30%);
+  --el-color-info-light-5: color-mix(in srgb, var(--tokyo-cyan) 50%, var(--tokyo-bg) 50%);
+  --el-color-info-light-7: color-mix(in srgb, var(--tokyo-cyan) 30%, var(--tokyo-bg) 70%);
+  --el-color-info-light-8: color-mix(in srgb, var(--tokyo-cyan) 20%, var(--tokyo-bg) 80%);
+  --el-color-info-light-9: color-mix(in srgb, var(--tokyo-cyan) 10%, var(--tokyo-bg) 90%);
+  --el-color-info-dark-2: color-mix(in srgb, var(--tokyo-cyan) 80%, white 20%);
+
+  /* Element Plus layout */
+  --el-box-shadow: 0px 12px 32px 4px color-mix(in srgb, black 36%, transparent), 0px 8px 20px color-mix(in srgb, black 72%, transparent);
+  --el-box-shadow-light: 0px 0px 12px color-mix(in srgb, black 72%, transparent);
+  --el-box-shadow-lighter: 0px 0px 6px color-mix(in srgb, black 72%, transparent);
+  --el-box-shadow-dark: 0px 16px 48px 16px color-mix(in srgb, black 72%, transparent), 0px 12px 32px black, 0px 8px 16px -8px black;
+  --el-bg-color-page: var(--tokyo-bg-dark);
+  --el-bg-color: var(--tokyo-bg);
+  --el-bg-color-overlay: var(--tokyo-bg-highlight);
+  --el-text-color-primary: var(--tokyo-fg);
+  --el-text-color-regular: var(--tokyo-fg-dark);
+  --el-text-color-secondary: var(--tokyo-comment);
+  --el-text-color-placeholder: var(--tokyo-dark5);
+  --el-text-color-disabled: var(--tokyo-fg-gutter);
+  --el-border-color-darker: var(--tokyo-terminal-black);
+  --el-border-color-dark: color-mix(in srgb, var(--tokyo-terminal-black) 50%, var(--tokyo-fg-gutter) 50%);
+  --el-border-color: var(--tokyo-fg-gutter);
+  --el-border-color-light: color-mix(in srgb, var(--tokyo-fg-gutter) 50%, var(--tokyo-bg) 50%);
+  --el-border-color-lighter: color-mix(in srgb, var(--tokyo-fg-gutter) 30%, var(--tokyo-bg) 70%);
+  --el-border-color-extra-light: color-mix(in srgb, var(--tokyo-fg-gutter) 15%, var(--tokyo-bg) 85%);
+  --el-fill-color-darker: var(--tokyo-terminal-black);
+  --el-fill-color-dark: var(--tokyo-fg-gutter);
+  --el-fill-color: var(--tokyo-bg-highlight);
+  --el-fill-color-light: color-mix(in srgb, var(--tokyo-bg-highlight) 50%, var(--tokyo-bg) 50%);
+  --el-fill-color-lighter: color-mix(in srgb, var(--tokyo-bg-highlight) 30%, var(--tokyo-bg) 70%);
+  --el-fill-color-extra-light: color-mix(in srgb, var(--tokyo-bg-highlight) 15%, var(--tokyo-bg) 85%);
+  --el-fill-color-blank: var(--tokyo-bg);
+  --el-mask-color: color-mix(in srgb, black 80%, transparent);
+  --el-mask-color-extra-light: color-mix(in srgb, black 30%, transparent);
+}

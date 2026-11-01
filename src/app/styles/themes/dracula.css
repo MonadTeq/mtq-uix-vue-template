@@ -1,0 +1,102 @@
+/* Semantic alias tokens + Element Plus overrides — Dracula scheme. */
+
+[data-theme="dracula"] {
+  color-scheme: dark;
+  /* Action */
+  --color-action-primary: var(--dracula-purple);
+  --color-action-secondary: var(--dracula-comment);
+  --color-action-danger: var(--dracula-red);
+  --color-action-ghost: transparent;
+  /* Status */
+  --color-status-success: var(--dracula-green);
+  --color-status-warning: var(--dracula-yellow);
+  --color-status-info: var(--dracula-cyan);
+  /* Surfaces */
+  --color-surface-default: var(--dracula-bg);
+  --color-surface-hover: var(--dracula-current-line);
+  --color-surface-overlay: var(--dracula-bg-dark);
+  --color-surface-page: var(--dracula-bg-dark);
+  /* Text */
+  --color-text-primary: var(--dracula-foreground);
+  --color-text-regular: var(--dracula-foreground);
+  --color-text-secondary: var(--dracula-comment);
+  --color-text-placeholder: var(--dracula-comment);
+  --color-text-disabled: var(--dracula-current-line);
+  /* Borders */
+  --color-border-default: var(--dracula-current-line);
+  --color-border-strong: var(--dracula-comment);
+  --color-focus-ring: var(--dracula-cyan);
+
+  /* Element Plus palette */
+  --el-color-primary: var(--dracula-purple);
+  --el-color-primary-light-3: color-mix(in srgb, var(--dracula-purple) 70%, var(--dracula-bg) 30%);
+  --el-color-primary-light-5: color-mix(in srgb, var(--dracula-purple) 50%, var(--dracula-bg) 50%);
+  --el-color-primary-light-7: color-mix(in srgb, var(--dracula-purple) 30%, var(--dracula-bg) 70%);
+  --el-color-primary-light-8: color-mix(in srgb, var(--dracula-purple) 20%, var(--dracula-bg) 80%);
+  --el-color-primary-light-9: color-mix(in srgb, var(--dracula-purple) 10%, var(--dracula-bg) 90%);
+  --el-color-primary-dark-2: color-mix(in srgb, var(--dracula-purple) 80%, white 20%);
+  --el-color-success: var(--dracula-green);
+  --el-color-success-light-3: color-mix(in srgb, var(--dracula-green) 70%, var(--dracula-bg) 30%);
+  --el-color-success-light-5: color-mix(in srgb, var(--dracula-green) 50%, var(--dracula-bg) 50%);
+  --el-color-success-light-7: color-mix(in srgb, var(--dracula-green) 30%, var(--dracula-bg) 70%);
+  --el-color-success-light-8: color-mix(in srgb, var(--dracula-green) 20%, var(--dracula-bg) 80%);
+  --el-color-success-light-9: color-mix(in srgb, var(--dracula-green) 10%, var(--dracula-bg) 90%);
+  --el-color-success-dark-2: color-mix(in srgb, var(--dracula-green) 80%, white 20%);
+  --el-color-warning: var(--dracula-yellow);
+  --el-color-warning-light-3: color-mix(in srgb, var(--dracula-yellow) 70%, var(--dracula-bg) 30%);
+  --el-color-warning-light-5: color-mix(in srgb, var(--dracula-yellow) 50%, var(--dracula-bg) 50%);
+  --el-color-warning-light-7: color-mix(in srgb, var(--dracula-yellow) 30%, var(--dracula-bg) 70%);
+  --el-color-warning-light-8: color-mix(in srgb, var(--dracula-yellow) 20%, var(--dracula-bg) 80%);
+  --el-color-warning-light-9: color-mix(in srgb, var(--dracula-yellow) 10%, var(--dracula-bg) 90%);
+  --el-color-warning-dark-2: color-mix(in srgb, var(--dracula-yellow) 80%, white 20%);
+  --el-color-danger: var(--dracula-red);
+  --el-color-danger-light-3: color-mix(in srgb, var(--dracula-red) 70%, var(--dracula-bg) 30%);
+  --el-color-danger-light-5: color-mix(in srgb, var(--dracula-red) 50%, var(--dracula-bg) 50%);
+  --el-color-danger-light-7: color-mix(in srgb, var(--dracula-red) 30%, var(--dracula-bg) 70%);
+  --el-color-danger-light-8: color-mix(in srgb, var(--dracula-red) 20%, var(--dracula-bg) 80%);
+  --el-color-danger-light-9: color-mix(in srgb, var(--dracula-red) 10%, var(--dracula-bg) 90%);
+  --el-color-danger-dark-2: color-mix(in srgb, var(--dracula-red) 80%, white 20%);
+  --el-color-error: var(--dracula-red);
+  --el-color-error-light-3: color-mix(in srgb, var(--dracula-red) 70%, var(--dracula-bg) 30%);
+  --el-color-error-light-5: color-mix(in srgb, var(--dracula-red) 50%, var(--dracula-bg) 50%);
+  --el-color-error-light-7: color-mix(in srgb, var(--dracula-red) 30%, var(--dracula-bg) 70%);
+  --el-color-error-light-8: color-mix(in srgb, var(--dracula-red) 20%, var(--dracula-bg) 80%);
+  --el-color-error-light-9: color-mix(in srgb, var(--dracula-red) 10%, var(--dracula-bg) 90%);
+  --el-color-error-dark-2: color-mix(in srgb, var(--dracula-red) 80%, white 20%);
+  --el-color-info: var(--dracula-cyan);
+  --el-color-info-light-3: color-mix(in srgb, var(--dracula-cyan) 70%, var(--dracula-bg) 30%);
+  --el-color-info-light-5: color-mix(in srgb, var(--dracula-cyan) 50%, var(--dracula-bg) 50%);
+  --el-color-info-light-7: color-mix(in srgb, var(--dracula-cyan) 30%, var(--dracula-bg) 70%);
+  --el-color-info-light-8: color-mix(in srgb, var(--dracula-cyan) 20%, var(--dracula-bg) 80%);
+  --el-color-info-light-9: color-mix(in srgb, var(--dracula-cyan) 10%, var(--dracula-bg) 90%);
+  --el-color-info-dark-2: color-mix(in srgb, var(--dracula-cyan) 80%, white 20%);
+
+  /* Element Plus layout */
+  --el-box-shadow: 0px 12px 32px 4px color-mix(in srgb, black 36%, transparent), 0px 8px 20px color-mix(in srgb, black 72%, transparent);
+  --el-box-shadow-light: 0px 0px 12px color-mix(in srgb, black 72%, transparent);
+  --el-box-shadow-lighter: 0px 0px 6px color-mix(in srgb, black 72%, transparent);
+  --el-box-shadow-dark: 0px 16px 48px 16px color-mix(in srgb, black 72%, transparent), 0px 12px 32px black, 0px 8px 16px -8px black;
+  --el-bg-color-page: var(--dracula-bg-dark);
+  --el-bg-color: var(--dracula-bg);
+  --el-bg-color-overlay: var(--dracula-bg-dark);
+  --el-text-color-primary: var(--dracula-foreground);
+  --el-text-color-regular: var(--dracula-foreground);
+  --el-text-color-secondary: var(--dracula-comment);
+  --el-text-color-placeholder: var(--dracula-comment);
+  --el-text-color-disabled: var(--dracula-current-line);
+  --el-border-color-darker: var(--dracula-comment);
+  --el-border-color-dark: color-mix(in srgb, var(--dracula-comment) 50%, var(--dracula-current-line) 50%);
+  --el-border-color: var(--dracula-current-line);
+  --el-border-color-light: color-mix(in srgb, var(--dracula-current-line) 50%, var(--dracula-bg) 50%);
+  --el-border-color-lighter: color-mix(in srgb, var(--dracula-current-line) 30%, var(--dracula-bg) 70%);
+  --el-border-color-extra-light: color-mix(in srgb, var(--dracula-current-line) 15%, var(--dracula-bg) 85%);
+  --el-fill-color-darker: var(--dracula-comment);
+  --el-fill-color-dark: var(--dracula-current-line);
+  --el-fill-color: var(--dracula-current-line);
+  --el-fill-color-light: color-mix(in srgb, var(--dracula-current-line) 50%, var(--dracula-bg) 50%);
+  --el-fill-color-lighter: color-mix(in srgb, var(--dracula-current-line) 30%, var(--dracula-bg) 70%);
+  --el-fill-color-extra-light: color-mix(in srgb, var(--dracula-current-line) 15%, var(--dracula-bg) 85%);
+  --el-fill-color-blank: var(--dracula-bg);
+  --el-mask-color: color-mix(in srgb, black 80%, transparent);
+  --el-mask-color-extra-light: color-mix(in srgb, black 30%, transparent);
+}

@@ -1,0 +1,102 @@
+/* Semantic alias tokens + Element Plus overrides — Solarized Dark scheme. */
+
+[data-theme="solarized-dark"] {
+  color-scheme: dark;
+  /* Action */
+  --color-action-primary: var(--solar-blue);
+  --color-action-secondary: var(--solar-base01);
+  --color-action-danger: var(--solar-red);
+  --color-action-ghost: transparent;
+  /* Status */
+  --color-status-success: var(--solar-green);
+  --color-status-warning: var(--solar-yellow);
+  --color-status-info: var(--solar-cyan);
+  /* Surfaces */
+  --color-surface-default: var(--solar-base03);
+  --color-surface-hover: var(--solar-base02);
+  --color-surface-overlay: var(--solar-base02);
+  --color-surface-page: var(--solar-base03);
+  /* Text */
+  --color-text-primary: var(--solar-base1);
+  --color-text-regular: var(--solar-base0);
+  --color-text-secondary: var(--solar-base01);
+  --color-text-placeholder: var(--solar-base00);
+  --color-text-disabled: var(--solar-base01);
+  /* Borders */
+  --color-border-default: var(--solar-base01);
+  --color-border-strong: var(--solar-base00);
+  --color-focus-ring: var(--solar-cyan);
+
+  /* Element Plus palette */
+  --el-color-primary: var(--solar-blue);
+  --el-color-primary-light-3: color-mix(in srgb, var(--solar-blue) 70%, var(--solar-base03) 30%);
+  --el-color-primary-light-5: color-mix(in srgb, var(--solar-blue) 50%, var(--solar-base03) 50%);
+  --el-color-primary-light-7: color-mix(in srgb, var(--solar-blue) 30%, var(--solar-base03) 70%);
+  --el-color-primary-light-8: color-mix(in srgb, var(--solar-blue) 20%, var(--solar-base03) 80%);
+  --el-color-primary-light-9: color-mix(in srgb, var(--solar-blue) 10%, var(--solar-base03) 90%);
+  --el-color-primary-dark-2: color-mix(in srgb, var(--solar-blue) 80%, white 20%);
+  --el-color-success: var(--solar-green);
+  --el-color-success-light-3: color-mix(in srgb, var(--solar-green) 70%, var(--solar-base03) 30%);
+  --el-color-success-light-5: color-mix(in srgb, var(--solar-green) 50%, var(--solar-base03) 50%);
+  --el-color-success-light-7: color-mix(in srgb, var(--solar-green) 30%, var(--solar-base03) 70%);
+  --el-color-success-light-8: color-mix(in srgb, var(--solar-green) 20%, var(--solar-base03) 80%);
+  --el-color-success-light-9: color-mix(in srgb, var(--solar-green) 10%, var(--solar-base03) 90%);
+  --el-color-success-dark-2: color-mix(in srgb, var(--solar-green) 80%, white 20%);
+  --el-color-warning: var(--solar-yellow);
+  --el-color-warning-light-3: color-mix(in srgb, var(--solar-yellow) 70%, var(--solar-base03) 30%);
+  --el-color-warning-light-5: color-mix(in srgb, var(--solar-yellow) 50%, var(--solar-base03) 50%);
+  --el-color-warning-light-7: color-mix(in srgb, var(--solar-yellow) 30%, var(--solar-base03) 70%);
+  --el-color-warning-light-8: color-mix(in srgb, var(--solar-yellow) 20%, var(--solar-base03) 80%);
+  --el-color-warning-light-9: color-mix(in srgb, var(--solar-yellow) 10%, var(--solar-base03) 90%);
+  --el-color-warning-dark-2: color-mix(in srgb, var(--solar-yellow) 80%, white 20%);
+  --el-color-danger: var(--solar-red);
+  --el-color-danger-light-3: color-mix(in srgb, var(--solar-red) 70%, var(--solar-base03) 30%);
+  --el-color-danger-light-5: color-mix(in srgb, var(--solar-red) 50%, var(--solar-base03) 50%);
+  --el-color-danger-light-7: color-mix(in srgb, var(--solar-red) 30%, var(--solar-base03) 70%);
+  --el-color-danger-light-8: color-mix(in srgb, var(--solar-red) 20%, var(--solar-base03) 80%);
+  --el-color-danger-light-9: color-mix(in srgb, var(--solar-red) 10%, var(--solar-base03) 90%);
+  --el-color-danger-dark-2: color-mix(in srgb, var(--solar-red) 80%, white 20%);
+  --el-color-error: var(--solar-red);
+  --el-color-error-light-3: color-mix(in srgb, var(--solar-red) 70%, var(--solar-base03) 30%);
+  --el-color-error-light-5: color-mix(in srgb, var(--solar-red) 50%, var(--solar-base03) 50%);
+  --el-color-error-light-7: color-mix(in srgb, var(--solar-red) 30%, var(--solar-base03) 70%);
+  --el-color-error-light-8: color-mix(in srgb, var(--solar-red) 20%, var(--solar-base03) 80%);
+  --el-color-error-light-9: color-mix(in srgb, var(--solar-red) 10%, var(--solar-base03) 90%);
+  --el-color-error-dark-2: color-mix(in srgb, var(--solar-red) 80%, white 20%);
+  --el-color-info: var(--solar-cyan);
+  --el-color-info-light-3: color-mix(in srgb, var(--solar-cyan) 70%, var(--solar-base03) 30%);
+  --el-color-info-light-5: color-mix(in srgb, var(--solar-cyan) 50%, var(--solar-base03) 50%);
+  --el-color-info-light-7: color-mix(in srgb, var(--solar-cyan) 30%, var(--solar-base03) 70%);
+  --el-color-info-light-8: color-mix(in srgb, var(--solar-cyan) 20%, var(--solar-base03) 80%);
+  --el-color-info-light-9: color-mix(in srgb, var(--solar-cyan) 10%, var(--solar-base03) 90%);
+  --el-color-info-dark-2: color-mix(in srgb, var(--solar-cyan) 80%, white 20%);
+
+  /* Element Plus layout */
+  --el-box-shadow: 0px 12px 32px 4px color-mix(in srgb, black 36%, transparent), 0px 8px 20px color-mix(in srgb, black 72%, transparent);
+  --el-box-shadow-light: 0px 0px 12px color-mix(in srgb, black 72%, transparent);
+  --el-box-shadow-lighter: 0px 0px 6px color-mix(in srgb, black 72%, transparent);
+  --el-box-shadow-dark: 0px 16px 48px 16px color-mix(in srgb, black 72%, transparent), 0px 12px 32px black, 0px 8px 16px -8px black;
+  --el-bg-color-page: var(--solar-base03);
+  --el-bg-color: var(--solar-base03);
+  --el-bg-color-overlay: var(--solar-base02);
+  --el-text-color-primary: var(--solar-base1);
+  --el-text-color-regular: var(--solar-base0);
+  --el-text-color-secondary: var(--solar-base01);
+  --el-text-color-placeholder: var(--solar-base00);
+  --el-text-color-disabled: var(--solar-base01);
+  --el-border-color-darker: var(--solar-base00);
+  --el-border-color-dark: color-mix(in srgb, var(--solar-base00) 50%, var(--solar-base01) 50%);
+  --el-border-color: var(--solar-base01);
+  --el-border-color-light: color-mix(in srgb, var(--solar-base01) 50%, var(--solar-base03) 50%);
+  --el-border-color-lighter: color-mix(in srgb, var(--solar-base01) 30%, var(--solar-base03) 70%);
+  --el-border-color-extra-light: color-mix(in srgb, var(--solar-base01) 15%, var(--solar-base03) 85%);
+  --el-fill-color-darker: var(--solar-base00);
+  --el-fill-color-dark: var(--solar-base01);
+  --el-fill-color: var(--solar-base02);
+  --el-fill-color-light: color-mix(in srgb, var(--solar-base02) 50%, var(--solar-base03) 50%);
+  --el-fill-color-lighter: color-mix(in srgb, var(--solar-base02) 30%, var(--solar-base03) 70%);
+  --el-fill-color-extra-light: color-mix(in srgb, var(--solar-base02) 15%, var(--solar-base03) 85%);
+  --el-fill-color-blank: var(--solar-base03);
+  --el-mask-color: color-mix(in srgb, black 80%, transparent);
+  --el-mask-color-extra-light: color-mix(in srgb, black 30%, transparent);
+}

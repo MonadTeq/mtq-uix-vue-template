@@ -22,6 +22,42 @@ const themeList: ThemeList[] = [
   {
     title: "Deep Blue",
     name: "dark-blue"
+  },
+  {
+    title: "Dracula",
+    name: "dracula"
+  },
+  {
+    title: "Nord",
+    name: "nord"
+  },
+  {
+    title: "Solarized Dark",
+    name: "solarized-dark"
+  },
+  {
+    title: "Solarized Light",
+    name: "solarized-light"
+  },
+  {
+    title: "One Dark",
+    name: "one-dark"
+  },
+  {
+    title: "Gruvbox",
+    name: "gruvbox"
+  },
+  {
+    title: "Catppuccin Mocha",
+    name: "catppuccin-mocha"
+  },
+  {
+    title: "Catppuccin Latte",
+    name: "catppuccin-latte"
+  },
+  {
+    title: "Tokyo Night",
+    name: "tokyo-night"
   }
 ]
 

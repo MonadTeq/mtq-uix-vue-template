@@ -19,6 +19,51 @@ const schemes = [
     name: "dark-blue",
     title: "Deep Blue",
     description: "Navy scheme — teal primary on deep-blue surfaces."
+  },
+  {
+    name: "dracula",
+    title: "Dracula",
+    description: "Deep violet-gray with neon pink/green/cyan accents."
+  },
+  {
+    name: "nord",
+    title: "Nord",
+    description: "Arctic, muted blue-gray palette."
+  },
+  {
+    name: "solarized-dark",
+    title: "Solarized Dark",
+    description: "Dark teal background with warm/cool dual accents."
+  },
+  {
+    name: "solarized-light",
+    title: "Solarized Light",
+    description: "Cream background with the Solarized accent set."
+  },
+  {
+    name: "one-dark",
+    title: "One Dark",
+    description: "Balanced, muted cool-gray with soft accents."
+  },
+  {
+    name: "gruvbox",
+    title: "Gruvbox",
+    description: "Warm, earthy retro palette."
+  },
+  {
+    name: "catppuccin-mocha",
+    title: "Catppuccin Mocha",
+    description: "Pastel, cozy dark scheme."
+  },
+  {
+    name: "catppuccin-latte",
+    title: "Catppuccin Latte",
+    description: "Pastel, cozy light scheme."
+  },
+  {
+    name: "tokyo-night",
+    title: "Tokyo Night",
+    description: "Deep indigo background with bright, harmonious accents."
   }
 ]
 </script>
