@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import type { CreateOrUpdateTableRequestData, TableData } from "@/entities/table"
+import type { CreateOrUpdateTableRequestData, TableData } from "@/shared/api"
 import type { FormRules } from "element-plus"
-import { createTableDataApi, deleteTableDataApi, getTableDataApi, updateTableDataApi } from "@/entities/table"
+import { getTablesService } from "@/shared/api"
 import { usePagination } from "@/shared/lib"
 import { CirclePlus, Delete, Download, Refresh, RefreshRight, Search } from "@element-plus/icons-vue"
 import { cloneDeep } from "lodash-es"
@@ -10,6 +10,8 @@ defineOptions({
   // Name the current component
   name: "ElementPlus"
 })
+
+const tablesService = getTablesService()
 
 const loading = ref<boolean>(false)
 
@@ -42,7 +44,7 @@ function handleCreateOrUpdate() {
       return
     }
     loading.value = true
-    const api = formData.value.id === undefined ? createTableDataApi : updateTableDataApi
+    const api = formData.value.id === undefined ? tablesService.createTable : tablesService.updateTable
     api(formData.value).then(() => {
       ElMessage.success("Operation successful")
       dialogVisible.value = false
@@ -67,7 +69,7 @@ function handleDelete(row: TableData) {
     type: "warning"
   }).then(() => {
     loading.value = true
-    deleteTableDataApi(row.id).then(() => {
+    tablesService.deleteTable(row.id).then(() => {
       ElMessage.success("Deleted successfully")
     }).finally(() => {
       loading.value = false
@@ -96,7 +98,7 @@ const searchData = reactive({
 
 function getTableData() {
   loading.value = true
-  getTableDataApi({
+  tablesService.getTables({
     currentPage: paginationData.currentPage,
     size: paginationData.pageSize,
     ...searchData

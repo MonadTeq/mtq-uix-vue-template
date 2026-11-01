@@ -1,13 +1,15 @@
 <script lang="ts" setup>
-import type { TableResponseData } from "@/entities/table"
+import type { TableResponseData } from "@/shared/api"
 import type { ElMessageBoxOptions } from "element-plus"
 import type { VxeFormInstance, VxeFormProps, VxeGridInstance, VxeGridProps, VxeModalInstance, VxeModalProps } from "vxe-table"
-import { deleteTableDataApi, getTableDataApi } from "@/entities/table"
+import { getTablesService } from "@/shared/api"
 
 defineOptions({
   // Name the current component
   name: "VxeTable"
 })
+
+const tablesService = getTablesService()
 
 // #region vxe-grid
 interface RowMeta {
@@ -171,7 +173,7 @@ const xGridOpt: VxeGridProps = reactive({
             currentPage: page.currentPage
           }
           // Call the API
-          getTableDataApi(params).then(callback).catch(callback)
+          tablesService.getTables(params).then(callback).catch(callback)
         })
       }
     }
@@ -362,7 +364,7 @@ const crudStore = reactive({
       dangerouslyUseHTMLString: true
     }
     ElMessageBox.confirm(tip, "Prompt", config).then(() => {
-      deleteTableDataApi(row.id).then(() => {
+      tablesService.deleteTable(row.id).then(() => {
         ElMessage.success("Deleted successfully")
         crudStore.afterDelete()
         crudStore.commitQuery()

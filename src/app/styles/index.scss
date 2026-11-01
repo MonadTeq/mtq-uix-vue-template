@@ -1,15 +1,18 @@
-// Global CSS variables
+// Primitive tokens (raw palette, spacing, radius)
+@import "@/shared/styles/tokens/primitives.css";
+// Semantic schemes (one file per scheme, data-theme scoped)
+@import "./themes/normal.css";
+@import "./themes/dark.css";
+@import "./themes/dark-blue.css";
+// Global layout variables
 @import "./variables.css";
 // Transition
 @import "./transition.scss";
 // Element Plus
-@import "./element-plus.css";
 @import "./element-plus.scss";
 // Vxe Table
 @import "./vxe-table.css";
 @import "./vxe-table.scss";
-// Register multiple themes
-@import "./theme/register.scss";
 // Mixins
 @import "@/shared/styles/mixins.scss";
 // View Transition

@@ -1,0 +1,156 @@
+openapi: 3.0.3
+info:
+  title: Tables Service
+  version: 1.0.0
+  description: Demo CRUD table endpoints (mock data).
+paths:
+  /tables:
+    get:
+      operationId: getTables
+      summary: List table rows
+      parameters:
+        - name: currentPage
+          in: query
+          required: true
+          schema:
+            type: number
+        - name: size
+          in: query
+          required: true
+          schema:
+            type: number
+        - name: username
+          in: query
+          schema:
+            type: string
+        - name: phone
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TableResponseData"
+    post:
+      operationId: createTable
+      summary: Create a table row
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateOrUpdateTableRequestData"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse"
+    put:
+      operationId: updateTable
+      summary: Update a table row
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateOrUpdateTableRequestData"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse"
+  /tables/{id}:
+    delete:
+      operationId: deleteTable
+      summary: Delete a table row
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: number
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse"
+components:
+  schemas:
+    CreateOrUpdateTableRequestData:
+      type: object
+      required:
+        - username
+      properties:
+        id:
+          type: number
+        username:
+          type: string
+        password:
+          type: string
+    TableData:
+      type: object
+      required:
+        - createTime
+        - email
+        - id
+        - phone
+        - roles
+        - status
+        - username
+      properties:
+        createTime:
+          type: string
+        email:
+          type: string
+        id:
+          type: number
+        phone:
+          type: string
+        roles:
+          type: string
+        status:
+          type: boolean
+        username:
+          type: string
+    TableResponseData:
+      type: object
+      required:
+        - code
+        - data
+        - message
+      properties:
+        code:
+          type: number
+        data:
+          type: object
+          required:
+            - list
+            - total
+          properties:
+            list:
+              type: array
+              items:
+                $ref: "#/components/schemas/TableData"
+            total:
+              type: number
+        message:
+          type: string
+    ApiResponse:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: number
+        message:
+          type: string

@@ -4,6 +4,9 @@ import fsd from "@feature-sliced/steiger-plugin"
 export default defineConfig([
   ...fsd.configs.recommended,
   {
+    ignores: ["src/shared/api/generated/**"]
+  },
+  {
     files: ["./src/**"],
     rules: {
       // Opinionated rules outside the required FSD enforcement scope.

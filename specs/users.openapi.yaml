@@ -1,0 +1,48 @@
+openapi: 3.0.3
+info:
+  title: Users Service
+  version: 1.0.0
+  description: Current-user session endpoint.
+paths:
+  /users/me:
+    get:
+      operationId: getCurrentUser
+      summary: Get the current logged-in user
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CurrentUserResponseData"
+components:
+  schemas:
+    CurrentUser:
+      type: object
+      required:
+        - username
+        - roles
+      properties:
+        username:
+          type: string
+        roles:
+          type: array
+          items:
+            type: string
+        permissions:
+          type: array
+          items:
+            type: string
+    CurrentUserResponseData:
+      type: object
+      required:
+        - code
+        - data
+        - message
+      properties:
+        code:
+          type: number
+        data:
+          $ref: "#/components/schemas/CurrentUser"
+        message:
+          type: string

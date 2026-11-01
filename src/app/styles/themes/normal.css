@@ -1,0 +1,21 @@
+/* Semantic alias tokens — default (light) scheme. */
+
+[data-theme="normal"] {
+  /* Action */
+  --color-action-primary: var(--blue-500);
+
+  /* Surfaces */
+  --color-surface-default: var(--white);
+  --color-surface-page: #f2f3f5;
+
+  /* Text */
+  --color-text-primary: #303133;
+  --color-text-regular: #606266;
+  --color-text-secondary: #909399;
+  --color-text-placeholder: #a8abb2;
+  --color-text-disabled: #c0c4cc;
+
+  /* Borders */
+  --color-border-default: #dcdfe6;
+  --color-border-lighter: #e4e7ed;
+}

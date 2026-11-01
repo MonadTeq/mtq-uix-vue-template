@@ -43,15 +43,9 @@ function setTheme({ clientX, clientY }: MouseEvent, value: ThemeName, doc: Docum
   doc.startViewTransition ? doc.startViewTransition(handler) : handler()
 }
 
-/** Mount a class on the html root element */
-function addHtmlClass(value: ThemeName, doc: Document = document) {
-  doc.documentElement.classList.add(value)
-}
-
-/** Remove other theme classes from the html root element */
-function removeHtmlClass(value: ThemeName, doc: Document = document) {
-  const otherThemeNameList = themeList.map(item => item.name).filter(name => name !== value)
-  doc.documentElement.classList.remove(...otherThemeNameList)
+/** Apply the scheme via the data-theme attribute */
+function applyTheme(value: ThemeName, doc: Document = document) {
+  doc.documentElement.setAttribute("data-theme", value)
 }
 
 /** Initialize */
@@ -59,8 +53,7 @@ function initTheme(doc: Document = document) {
   // Use watchEffect to collect side effects
   watchEffect(() => {
     const value = activeThemeName.value
-    removeHtmlClass(value, doc)
-    addHtmlClass(value, doc)
+    applyTheme(value, doc)
     setActiveThemeName(value)
   })
 }

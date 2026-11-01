@@ -2,7 +2,7 @@
 import { useSettingsStore } from "@/entities/settings"
 import { AppMain } from "@/widgets/app-main"
 import { Logo, NavigationBar } from "@/widgets/navigation"
-import { TagsView } from "@/widgets/tags-view"
+import { TagsView } from "@/widgets/tag-bar"
 
 const settingsStore = useSettingsStore()
 

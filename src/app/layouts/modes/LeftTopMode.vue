@@ -3,7 +3,7 @@ import { useAppStore } from "@/entities/app-ui"
 import { useSettingsStore } from "@/entities/settings"
 import { AppMain } from "@/widgets/app-main"
 import { Logo, NavigationBar, Sidebar } from "@/widgets/navigation"
-import { TagsView } from "@/widgets/tags-view"
+import { TagsView } from "@/widgets/tag-bar"
 
 const appStore = useAppStore()
 

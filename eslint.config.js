@@ -15,7 +15,7 @@ export default antfu(
       semi: false
     },
     // Files to ignore
-    ignores: ["*/skills"]
+    ignores: ["*/skills", "specs/**", "src/shared/api/generated/**"]
   },
   {
     // Rules that apply to all files
