@@ -54,6 +54,8 @@ function dismissNotification(id: number) {
   if (index >= 0) state.notifications.splice(index, 1)
 }
 
+export { dismissNotification }
+
 function pushMessage(type: FeedbackType, text: string) {
   const item = { id: ++seed, type, text }
   state.messages.push(item)

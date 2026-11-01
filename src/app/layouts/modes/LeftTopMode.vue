@@ -60,7 +60,6 @@ $transition-time: 0.35s;
   }
   .content {
     flex: 1;
-    overflow: hidden;
   }
 }
 

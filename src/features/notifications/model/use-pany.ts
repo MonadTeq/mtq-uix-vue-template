@@ -6,7 +6,7 @@ function initStarNotification() {
       title: "Powered by love!",
       type: "success",
       message: "All source code is free and open source. If it helps you, please give it a Star!",
-      duration: 0
+      duration: 5000
     })
   }, 0)
 }
@@ -17,7 +17,7 @@ function initStoreNotification() {
       title: "Lazy service?",
       type: "warning",
       message: "Don't want to do it yourself but want to remove TS or other modules? There's a lazy package too!",
-      duration: 0
+      duration: 5000
     })
   }, 500)
 }
@@ -28,7 +28,7 @@ function initMobileNotification() {
       title: "Mobile",
       type: "info",
       message: "If you have mobile H5 requirements, try the new open-source template MobVue",
-      duration: 0
+      duration: 5000
     })
   }, 1000)
 }

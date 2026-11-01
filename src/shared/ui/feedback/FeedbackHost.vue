@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { resolveConfirm, useFeedbackState } from "@/shared/lib/feedback"
+import { dismissNotification, resolveConfirm, useFeedbackState } from "@/shared/lib/feedback"
 
 const state = useFeedbackState()
 </script>
@@ -19,7 +19,10 @@ const state = useFeedbackState()
     <div class="feedback-notifications">
       <TransitionGroup name="feedback-notification">
         <div v-for="item in state.notifications" :key="item.id" class="feedback-notification" :class="`feedback-notification--${item.type}`">
-          <div class="feedback-notification__title">{{ item.title }}</div>
+          <div class="feedback-notification__header">
+            <div class="feedback-notification__title">{{ item.title }}</div>
+            <button class="feedback-notification__close" aria-label="Close" @click="dismissNotification(item.id)">×</button>
+          </div>
           <div v-if="item.message" class="feedback-notification__message">{{ item.message }}</div>
         </div>
       </TransitionGroup>
@@ -98,7 +101,22 @@ const state = useFeedbackState()
 .feedback-notification__title {
   color: var(--color-text-primary);
   font-weight: 500;
-  margin-bottom: var(--space-1);
+}
+
+.feedback-notification__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.feedback-notification__close {
+  border: none;
+  background: transparent;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-lg);
+  line-height: 1;
+  cursor: pointer;
 }
 
 .feedback-notification__message {
