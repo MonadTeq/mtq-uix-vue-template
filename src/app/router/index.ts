@@ -165,6 +165,50 @@ export const constantRoutes: RouteRecordRaw[] = [
     ]
   },
   {
+    path: "/docs",
+    component: Layouts,
+    redirect: "/docs/architecture",
+    name: "Docs",
+    meta: {
+      title: "Documentation",
+      elIcon: "Reading"
+    },
+    children: [
+      {
+        path: "architecture",
+        component: () => import("@/pages/docs/architecture.vue"),
+        name: "DocsArchitecture",
+        meta: {
+          title: "Architecture"
+        }
+      },
+      {
+        path: "design-tokens",
+        component: () => import("@/pages/docs/design-tokens.vue"),
+        name: "DocsDesignTokens",
+        meta: {
+          title: "Design Tokens"
+        }
+      },
+      {
+        path: "style-schemes",
+        component: () => import("@/pages/docs/style-schemes.vue"),
+        name: "DocsStyleSchemes",
+        meta: {
+          title: "Style Schemes"
+        }
+      },
+      {
+        path: "api-codegen",
+        component: () => import("@/pages/docs/api-codegen.vue"),
+        name: "DocsApiCodegen",
+        meta: {
+          title: "API & Codegen"
+        }
+      }
+    ]
+  },
+  {
     path: "/link",
     meta: {
       title: "Docs Links",
