@@ -42,7 +42,7 @@ src
 │  └─ styles                # global styles and themes
 ├─ pages
 │  ├─ dashboard             # dashboard (role-based)
-│  ├─ demo                  # demos (element-plus, vxe-table, composables, permission)
+│  ├─ demo                  # demos (ui-primitives, element-plus, vxe-table, composables, permission)
 │  ├─ error                 # 403 / 404
 │  ├─ login                 # login
 │  └─ redirect              # redirect helper
@@ -69,7 +69,7 @@ src
    ├─ lib                   # utils and pure composables
    ├─ constants             # enums, cache keys, route paths
    ├─ types                 # data contracts and ambient declarations
-   ├─ ui                    # neutral UI primitives (screenfull, hamburger)
+   ├─ ui                    # base UI primitives (button, badge, tabs, form, …)
    ├─ assets                # icons and images
    └─ styles
       └─ tokens             # primitive design tokens (palette, spacing, radius)
@@ -89,7 +89,7 @@ pnpm codegen:api
 ## Documentation
 
 - [Architecture](ARCHITECTURE.md) — FSD layers, dependency rules, slice structure, API specs, style scheme.
-- [Development](DEVELOPMENT.md) — environment setup, commands, workflows, conventions.
+- [Development](DEVELOPMENT.md) — environment setup, commands, workflows, conventions, and how-to-use for every base UI primitive.
 
 ## Requirements
 
@@ -177,6 +177,8 @@ pnpm preview
 **Consistency**: Unified code style, naming conventions, and comment style
 
 ## Built-in Features
+
+**Base UI Library**: A set of headless, themeable primitives (button, badge, tabs, modal, form controls, and more) in `shared/ui`, styled with semantic tokens — see [DEVELOPMENT.md](DEVELOPMENT.md) for usage.
 
 **User Management**: Login, logout demonstration
 
