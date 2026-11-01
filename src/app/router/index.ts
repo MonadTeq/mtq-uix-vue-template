@@ -69,7 +69,8 @@ export const constantRoutes: RouteRecordRaw[] = [
     redirect: "/demo/ui-primitives",
     name: "Demo",
     meta: {
-      title: "Demos"
+      title: "Demos",
+      svgIcon: "grid"
     },
     children: [
       {
@@ -143,7 +144,8 @@ export const constantRoutes: RouteRecordRaw[] = [
     redirect: "/docs/architecture",
     name: "Docs",
     meta: {
-      title: "Documentation"
+      title: "Documentation",
+      svgIcon: "book"
     },
     children: [
       {
