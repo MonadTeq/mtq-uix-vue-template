@@ -3,16 +3,7 @@
   <h1>MTQ UiX Vue - AI Friendly</h1>
 </div>
 
-[![github release](https://img.shields.io/github/v/release/un-pany/v3-admin-vite?style=flat)](https://github.com/un-pany/v3-admin-vite/releases)
-[![github stars](https://img.shields.io/github/stars/un-pany/v3-admin-vite?style=flat)](https://github.com/un-pany/v3-admin-vite/stargazers)
-[![gitee stars](https://gitee.com/un-pany/v3-admin-vite/badge/star.svg)](https://gitee.com/un-pany/v3-admin-vite/stargazers)
-[![atomgit stars](https://atomgit.com/un-pany/v3-admin-vite/star/badge.svg)](https://atomgit.com/un-pany/v3-admin-vite/stargazers)
-
-## Introduction <a href="https://juejin.cn/post/7660780385584316454"><img src="https://img.shields.io/badge/AI-Coding-black" alt="AI Coding"></a>
-
 MTQ UiX Vue is an AI-friendly admin dashboard template built on mainstream technologies such as Vue3, Vite, TypeScript, and Element Plus, organized with a strict Feature-Sliced Design (FSD) architecture.
-
-_Supports mainstream AI coding tools such as Claude Code, CodeX, Cursor, Trae, and Antigravity_
 
 ## Architecture
 
@@ -90,10 +81,10 @@ src
 
 ```bash
 # Clone the project
-git clone https://github.com/un-pany/v3-admin-vite.git
+git clone git@github.com:MonadTeq/mtq-uix-vue-template.git
 
 # Enter the project directory
-cd mtq-uix-vue
+cd mtq-uix-vue-template
 
 # Install dependencies
 pnpm i
@@ -212,4 +203,4 @@ pnpm preview
 
 ## License
 
-[MIT](./LICENSE) License © 2022-PRESENT [pany](https://github.com/pany-ang)
+[MIT](./LICENSE) License
