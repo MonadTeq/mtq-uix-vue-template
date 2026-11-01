@@ -13,10 +13,15 @@
 
   /* Palette — status */
   --green-500: #67c23a;
+  --green-600: #4e8e2f;
   --yellow-500: #e6a23c;
+  --yellow-600: #a77730;
+  --red-400: #f78989;
   --red-500: #f56c6c;
+  --red-600: #b25252;
 
   /* Palette — neutrals */
+  --gray-300: #c0c4cc;
   --gray-400: #909399;
   --gray-500: #6c6e72;
   --gray-600: #8d9095;
@@ -48,4 +53,9 @@
   --radius-md: 4px;
   --radius-lg: 6px;
   --radius-full: 9999px;
+
+  /* Typography */
+  --font-size-sm: 12px;
+  --font-size-md: 14px;
+  --font-size-lg: 16px;
 }

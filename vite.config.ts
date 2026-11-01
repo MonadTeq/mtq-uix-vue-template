@@ -142,7 +142,7 @@ export default defineConfig(({ mode }) => {
     ],
     // Configuring Vitest: https://cn.vitest.dev/config
     test: {
-      include: ["tests/**/*.test.{ts,js}"],
+      include: ["tests/**/*.test.{ts,js}", "src/**/*.test.{ts,js}"],
       environment: "happy-dom",
       server: {
         deps: {

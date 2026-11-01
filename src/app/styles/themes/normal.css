@@ -3,9 +3,19 @@
 [data-theme="normal"] {
   /* Action */
   --color-action-primary: var(--blue-500);
+  --color-action-secondary: var(--gray-400);
+  --color-action-danger: var(--red-500);
+  --color-action-ghost: transparent;
+
+  /* Status */
+  --color-status-success: var(--green-500);
+  --color-status-warning: var(--yellow-500);
+  --color-status-info: var(--gray-400);
 
   /* Surfaces */
   --color-surface-default: var(--white);
+  --color-surface-hover: #f5f7fa;
+  --color-surface-overlay: var(--white);
   --color-surface-page: #f2f3f5;
 
   /* Text */
@@ -17,5 +27,6 @@
 
   /* Borders */
   --color-border-default: #dcdfe6;
-  --color-border-lighter: #e4e7ed;
+  --color-border-strong: var(--gray-300);
+  --color-focus-ring: var(--blue-500);
 }

@@ -5,13 +5,28 @@
 
   /* Semantic — action */
   --color-action-primary: var(--blue-500);
+  --color-action-secondary: var(--gray-400);
+  --color-action-danger: var(--red-500);
+  --color-action-ghost: transparent;
+  /* Semantic — status */
+  --color-status-success: var(--green-500);
+  --color-status-warning: var(--yellow-500);
+  --color-status-info: var(--gray-400);
   /* Semantic — surfaces */
   --color-surface-default: var(--dark-900);
+  --color-surface-hover: #262727;
+  --color-surface-overlay: var(--dark-800);
   --color-surface-page: #0a0a0a;
   /* Semantic — text */
   --color-text-primary: var(--gray-900);
   --color-text-regular: var(--gray-800);
   --color-text-secondary: var(--gray-700);
+  --color-text-placeholder: var(--gray-600);
+  --color-text-disabled: var(--gray-500);
+  /* Semantic — borders */
+  --color-border-default: #4c4d4f;
+  --color-border-strong: #636466;
+  --color-focus-ring: var(--blue-500);
 
   /* Element Plus palette */
   --el-color-primary: #409eff;

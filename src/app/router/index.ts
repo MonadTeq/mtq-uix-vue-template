@@ -82,6 +82,14 @@ export const constantRoutes: RouteRecordRaw[] = [
         }
       },
       {
+        path: "ui-primitives",
+        component: () => import("@/pages/demo/ui-primitives/index.vue"),
+        name: "UIPrimitives",
+        meta: {
+          title: "UI Primitives"
+        }
+      },
+      {
         path: "element-plus",
         component: () => import("@/pages/demo/element-plus/index.vue"),
         name: "ElementPlus",

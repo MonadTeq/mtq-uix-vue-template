@@ -3,13 +3,28 @@
 [data-theme="dark-blue"] {
   /* Semantic — action */
   --color-action-primary: var(--teal-500);
+  --color-action-secondary: var(--gray-400);
+  --color-action-danger: var(--red-500);
+  --color-action-ghost: transparent;
+  /* Semantic — status */
+  --color-status-success: var(--green-500);
+  --color-status-warning: var(--yellow-500);
+  --color-status-info: var(--gray-400);
   /* Semantic — surfaces */
   --color-surface-default: var(--navy-800);
+  --color-surface-hover: var(--navy-700);
+  --color-surface-overlay: var(--navy-700);
   --color-surface-page: var(--navy-900);
   /* Semantic — text */
   --color-text-primary: var(--gray-900);
   --color-text-regular: var(--gray-800);
   --color-text-secondary: var(--gray-700);
+  --color-text-placeholder: var(--gray-600);
+  --color-text-disabled: var(--gray-500);
+  /* Semantic — borders */
+  --color-border-default: #003380;
+  --color-border-strong: #003380;
+  --color-focus-ring: var(--teal-500);
 
   /* Element Plus palette */
   --el-color-primary: #00bb99;
