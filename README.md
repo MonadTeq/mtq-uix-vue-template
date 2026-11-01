@@ -11,20 +11,21 @@ The codebase follows Feature-Sliced Design. The `src` directory is split into si
 
 | Layer | Responsibility | Example |
 |---|---|---|
-| `app` | Entry point, router, plugins, providers, global styles | `main.ts`, `router`, `providers/pinia` |
+| `app` | Entry point, router, plugins, providers, layout shell, global styles | `main.ts`, `layouts`, `router`, `providers/pinia` |
 | `pages` | Full pages: documentation, demos | `login`, `dashboard`, `demo` |
-| `widgets` | Composite blocks composed of entities/features | `layout` (nav shell), `search-menu`, `notify` |
-| `features` | User scenarios / business logic | `theme`, `permission`, `layout-mode` |
-| `entities` | Domain state and reusable UI entities | `user`, `settings`, `screenfull`, `hamburger` |
-| `shared` | Primitives: API client, utils, tokens, types, assets | `api`, `lib`, `constants`, `types` |
+| `widgets` | Composite blocks composed of entities/features | `navigation`, `tags-view`, `settings-panel`, `app-main` |
+| `features` | User scenarios / business logic | `theme`, `access-control`, `search`, `notifications` |
+| `entities` | Domain state (stores) and data entities | `user`, `settings`, `permission`, `table` |
+| `shared` | Primitives: API transport, utils, tokens, types, neutral UI, assets | `api`, `lib`, `constants`, `types`, `ui` |
 
 ### Dependency rules
 
 - A layer may import **only strictly lower layers** (e.g. `widgets → features → entities → shared`).
 - No upward imports, no sibling imports within a layer.
 - `shared` imports only external packages — it contains no business logic.
+- `shared/api` is transport-only (client + interceptors); concrete endpoints live in `entities/*/api`.
 - Path aliases are used everywhere (`@/shared`, `@/entities`, `@/features`, `@/widgets`, `@/pages`, `@/app`); no `../../../` chains.
-- Boundaries are enforced with `no-restricted-imports` in `eslint.config.js`.
+- Boundaries are enforced with ESLint `no-restricted-imports` and Steiger (`npx steiger ./src`).
 
 ### Directory structure
 
@@ -32,9 +33,11 @@ The codebase follows Feature-Sliced Design. The `src` directory is split into si
 src
 ├─ app
 │  ├─ App.vue               # root component
-│  ├─ main.ts               # entry point
-│  ├─ providers             # pinia instance
+│  ├─ main.ts               # entry point (wires session + unauthorized handlers)
+│  ├─ layouts               # layout shell and modes (composes widgets)
+│  ├─ lib                   # document title
 │  ├─ plugins               # global components, custom directives
+│  ├─ providers             # pinia instance
 │  ├─ router                # routes, guards, helpers
 │  └─ styles                # global styles and themes
 ├─ pages
@@ -44,30 +47,30 @@ src
 │  ├─ login                 # login
 │  └─ redirect              # redirect helper
 ├─ widgets
-│  ├─ layout                # nav shell (sidebar, navbar, tags-view, breadcrumb, settings)
-│  ├─ notify                # notification panel
-│  └─ search-menu           # global search
+│  ├─ navigation            # sidebar, navbar, breadcrumb, logo
+│  ├─ tags-view             # tab navigation
+│  ├─ settings-panel        # settings drawer + layout-mode switcher
+│  └─ app-main              # main content area + footer
 ├─ features
 │  ├─ theme                 # theme switcher
 │  ├─ color-mode            # gray / color-weakness mode
 │  ├─ layout-mode           # left / top / hybrid layout
-│  ├─ permission            # permission check + v-permission directive
-│  ├─ notifications         # notification popups
-│  ├─ title                 # dynamic document title
-│  └─ device                # device detection
+│  ├─ access-control        # permission check + v-permission directive
+│  ├─ notifications         # notification panel + popups
+│  └─ search                # global menu search
 ├─ entities
-│  ├─ user                  # session store (token, roles, permissions)
+│  ├─ user                  # session store + current-user API
 │  ├─ settings              # layout settings store
 │  ├─ app-ui                # device / sidebar state store
 │  ├─ permission            # accessible routes store
 │  ├─ tags-view             # tags bar store
-│  ├─ screenfull            # fullscreen toggle
-│  └─ hamburger             # sidebar collapse toggle
+│  └─ table                 # table demo API + types
 └─ shared
-   ├─ api                   # axios client and API endpoints
+   ├─ api                   # axios client + interceptors (transport only)
    ├─ lib                   # utils and pure composables
    ├─ constants             # enums, cache keys, route paths
    ├─ types                 # data contracts and ambient declarations
+   ├─ ui                    # neutral UI primitives (screenfull, hamburger)
    ├─ assets                # icons and images
    └─ styles                # shared SCSS mixins
 ```
@@ -104,6 +107,9 @@ pnpm test
 
 # Type checking (vue-tsc)
 pnpm exec vue-tsc --noEmit
+
+# Architecture boundary check (Feature-Sliced Design)
+npx steiger ./src
 ```
 
 ## Build

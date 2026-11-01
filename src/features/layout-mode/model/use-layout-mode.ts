@@ -1,4 +1,4 @@
-import { LayoutModeEnum } from "@/shared/constants/app-key"
+import { LayoutModeEnum } from "@/shared/constants"
 import { useSettingsStore } from "@/entities/settings"
 
 const settingsStore = useSettingsStore()

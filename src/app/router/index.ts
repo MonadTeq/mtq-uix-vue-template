@@ -4,7 +4,7 @@ import { DASHBOARD_PATH, REDIRECT_PATH, routerConfig } from "@/app/router/config
 import { registerNavigationGuard } from "@/app/router/guard"
 import { flatMultiLevelRoutes } from "./helper"
 
-const Layouts = () => import("@/widgets/layout/index.vue")
+const Layouts = () => import("@/app/layouts/index.vue")
 
 /**
  * @name Constant routes

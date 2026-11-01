@@ -1,9 +1,8 @@
-import type { TagView } from "@/shared/types/tag-view"
-import { getCachedViews, getVisitedViews, setCachedViews, setVisitedViews } from "@/shared/lib/local-storage"
-import { useSettingsStore } from "@/entities/settings"
+import type { TagView } from "@/shared/types"
+import { getCachedViews, getVisitedViews, setCachedViews, setVisitedViews, getLayoutsConfig } from "@/shared/lib"
 
 export const useTagsViewStore = defineStore("tags-view", () => {
-  const { cacheTagsView } = useSettingsStore()
+  const cacheTagsView = getLayoutsConfig()?.cacheTagsView ?? false
 
   const visitedViews = ref<TagView[]>(cacheTagsView ? getVisitedViews() : [])
 

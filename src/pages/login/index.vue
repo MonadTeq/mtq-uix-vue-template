@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { FormRules } from "element-plus"
 import type { LoginRequestData } from "./apis/type"
-import ThemeSwitch from "@/features/theme/ui/ThemeSwitch.vue"
+import ThemeSwitch from "@/features/theme"
 import { Key, Loading, Lock, Picture, User } from "@element-plus/icons-vue"
 import { useSettingsStore } from "@/entities/settings"
 import { useUserStore } from "@/entities/user"

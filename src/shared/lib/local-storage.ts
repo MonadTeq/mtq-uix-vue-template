@@ -1,10 +1,10 @@
 // Unified handling of localStorage
 
-import type { ThemeName } from "@/shared/types/theme"
-import type { SidebarClosed, SidebarOpened } from "@/shared/constants/app-key"
-import type { LayoutsConfig } from "@/shared/types/layouts"
-import type { TagView } from "@/shared/types/tag-view"
-import { CacheKey } from "@/shared/constants/cache-key"
+import type { ThemeName } from "@/shared/types"
+import type { SidebarClosed, SidebarOpened } from "@/shared/constants"
+import type { LayoutsConfig } from "@/shared/types"
+import type { TagView } from "@/shared/types"
+import { CacheKey } from "@/shared/constants"
 
 // #region Token
 export function getToken() {

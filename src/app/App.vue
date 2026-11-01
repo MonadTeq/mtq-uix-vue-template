@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import { useGreyAndColorWeakness } from "@/features/color-mode/model/use-grey-and-color-weakness"
-import { usePany } from "@/features/notifications/model/use-pany"
-import { useTheme } from "@/features/theme/model/use-theme"
+import { useGreyAndColorWeakness } from "@/features/color-mode"
+import { usePany } from "@/features/notifications"
+import { useTheme } from "@/features/theme"
 import zhCn from "element-plus/es/locale/lang/zh-cn" // Element Plus Chinese language pack
 
 const { initTheme } = useTheme()

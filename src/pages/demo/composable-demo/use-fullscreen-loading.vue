@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { useFullscreenLoading } from "@/shared/lib/use-fullscreen-loading"
+import { useFullscreenLoading } from "@/shared/lib"
 import { getErrorApi, getSuccessApi } from "./apis/use-fullscreen-loading"
 
 const svg = `

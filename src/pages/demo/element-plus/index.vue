@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import type { CreateOrUpdateTableRequestData, TableData } from "@/shared/api/table-type"
+import type { CreateOrUpdateTableRequestData, TableData } from "@/entities/table"
 import type { FormRules } from "element-plus"
-import { createTableDataApi, deleteTableDataApi, getTableDataApi, updateTableDataApi } from "@/shared/api/table"
-import { usePagination } from "@/shared/lib/use-pagination"
+import { createTableDataApi, deleteTableDataApi, getTableDataApi, updateTableDataApi } from "@/entities/table"
+import { usePagination } from "@/shared/lib"
 import { CirclePlus, Delete, Download, Refresh, RefreshRight, Search } from "@element-plus/icons-vue"
 import { cloneDeep } from "lodash-es"
 

@@ -1,6 +1,6 @@
 import type { RouterHistory } from "vue-router"
 import { createWebHashHistory, createWebHistory } from "vue-router"
-import { DASHBOARD_PATH, REDIRECT_PATH } from "@/shared/constants/paths"
+import { DASHBOARD_PATH, REDIRECT_PATH } from "@/shared/constants"
 
 export { DASHBOARD_PATH, REDIRECT_PATH }
 

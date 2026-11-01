@@ -1,5 +1,5 @@
 import type * as Auth from "./type"
-import { request } from "@/shared/api/axios"
+import { request } from "@/shared/api"
 
 /** Get the login captcha */
 export function getCaptchaApi() {

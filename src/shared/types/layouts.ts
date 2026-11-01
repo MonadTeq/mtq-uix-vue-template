@@ -1,4 +1,4 @@
-import type { LayoutModeEnum } from "@/shared/constants/app-key"
+import type { LayoutModeEnum } from "@/shared/constants"
 
 /** Project configuration type */
 export interface LayoutsConfig {

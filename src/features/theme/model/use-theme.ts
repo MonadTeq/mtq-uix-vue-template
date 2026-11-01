@@ -1,6 +1,6 @@
-import type { ThemeName } from "@/shared/types/theme"
-import { setCssVar } from "@/shared/lib/css"
-import { getActiveThemeName, setActiveThemeName } from "@/shared/lib/local-storage"
+import type { ThemeName } from "@/shared/types"
+import { setCssVar } from "@/shared/lib"
+import { getActiveThemeName, setActiveThemeName } from "@/shared/lib"
 
 const DEFAULT_THEME_NAME = "normal"
 

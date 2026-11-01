@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import type { TableResponseData } from "@/shared/api/table-type"
+import type { TableResponseData } from "@/entities/table"
 import type { ElMessageBoxOptions } from "element-plus"
 import type { VxeFormInstance, VxeFormProps, VxeGridInstance, VxeGridProps, VxeModalInstance, VxeModalProps } from "vxe-table"
-import { deleteTableDataApi, getTableDataApi } from "@/shared/api/table"
+import { deleteTableDataApi, getTableDataApi } from "@/entities/table"
 
 defineOptions({
   // Name the current component

@@ -1,5 +1,5 @@
-import Notify from "@/widgets/notify/index.vue"
-import List from "@/widgets/notify/List.vue"
+import Notify from "@/features/notifications"
+import List from "@/features/notifications/ui/List.vue"
 import { shallowMount } from "@vue/test-utils"
 import { describe, expect, it } from "vitest"
 

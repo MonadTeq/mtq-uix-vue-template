@@ -1,7 +1,7 @@
 import type { Ref } from "vue"
-import type { LayoutsConfig } from "@/shared/types/layouts"
-import { LayoutModeEnum } from "@/shared/constants/app-key"
-import { setLayoutsConfig, getLayoutsConfig } from "@/shared/lib/local-storage"
+import type { LayoutsConfig } from "@/shared/types"
+import { LayoutModeEnum } from "@/shared/constants"
+import { setLayoutsConfig, getLayoutsConfig } from "@/shared/lib"
 
 /** Default configuration */
 const DEFAULT_CONFIG: LayoutsConfig = {

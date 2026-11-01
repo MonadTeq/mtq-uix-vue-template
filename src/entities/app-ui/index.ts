@@ -1,5 +1,5 @@
-import { DeviceEnum, SIDEBAR_CLOSED, SIDEBAR_OPENED } from "@/shared/constants/app-key"
-import { getSidebarStatus, setSidebarStatus } from "@/shared/lib/local-storage"
+import { DeviceEnum, SIDEBAR_CLOSED, SIDEBAR_OPENED } from "@/shared/constants"
+import { getSidebarStatus, setSidebarStatus } from "@/shared/lib"
 
 interface Sidebar {
   opened: boolean

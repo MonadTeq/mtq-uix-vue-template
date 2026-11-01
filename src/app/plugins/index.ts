@@ -1,6 +1,6 @@
 import type { App } from "vue"
 import { installElementPlusIcons } from "./element-plus-icons"
-import { installPermissionDirective } from "@/features/permission/lib/permission-directive"
+import { installPermissionDirective } from "@/features/access-control"
 import { installSvgIcon } from "./svg-icon"
 import { installVxeTable } from "./vxe-table"
 

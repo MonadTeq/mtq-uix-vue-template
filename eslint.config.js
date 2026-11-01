@@ -78,7 +78,7 @@ export default antfu(
   },
   {
     name: "fsd/entities-router-coupled",
-    files: ["src/entities/user/**", "src/entities/permission/**"],
+    files: ["src/entities/permission/**"],
     rules: {
       "no-restricted-imports": [
         "error",

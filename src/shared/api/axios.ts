@@ -1,5 +1,5 @@
 import type { AxiosInstance, AxiosRequestConfig } from "axios"
-import { getToken } from "@/shared/lib/local-storage"
+import { getToken } from "@/shared/lib"
 import axios from "axios"
 import { get, merge } from "lodash-es"
 

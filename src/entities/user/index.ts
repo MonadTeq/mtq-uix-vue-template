@@ -1,8 +1,13 @@
-import { getCurrentUserApi } from "@/shared/api/user"
-import { setToken as _setToken, getToken, removeToken } from "@/shared/lib/local-storage"
-import { resetRouter, router } from "@/app/router"
-import { useSettingsStore } from "@/entities/settings"
-import { useTagsViewStore } from "@/entities/tags-view"
+import { getCurrentUserApi } from "./api/user"
+import { setToken as _setToken, getToken, removeToken } from "@/shared/lib"
+
+/** Handler invoked when the user logs out. Registered by the app layer. */
+let logoutHandler: (() => void) | null = null
+
+/** Register the handler to run when the user logs out. */
+export function setLogoutHandler(handler: () => void) {
+  logoutHandler = handler
+}
 
 export const useUserStore = defineStore("user", () => {
   const token = ref<string>(getToken() || "")
@@ -14,10 +19,6 @@ export const useUserStore = defineStore("user", () => {
   const username = ref<string>("")
 
   const isGotUserInfo = ref<boolean>(false)
-
-  const tagsViewStore = useTagsViewStore()
-
-  const settingsStore = useSettingsStore()
 
   // Set the Token
   const setToken = (value: string) => {
@@ -47,10 +48,7 @@ export const useUserStore = defineStore("user", () => {
   // Log out
   const logout = () => {
     resetToken()
-    resetRouter()
-    resetTagsView()
-    // Redirect to the login page
-    router.replace("/login")
+    logoutHandler?.()
   }
 
   // Reset the Token
@@ -60,14 +58,6 @@ export const useUserStore = defineStore("user", () => {
     roles.value = []
     permissions.value = []
     isGotUserInfo.value = false
-  }
-
-  // Reset Visited Views and Cached Views
-  const resetTagsView = () => {
-    if (!settingsStore.cacheTagsView) {
-      tagsViewStore.delAllVisitedViews()
-      tagsViewStore.delAllCachedViews()
-    }
   }
 
   return { token, roles, permissions, username, isGotUserInfo, setToken, getInfo, changeUser, logout, resetToken }
