@@ -83,6 +83,323 @@ Primitive tokens live in `shared/styles/tokens/`; semantic schemes live in
 - Components reference semantic tokens only (`var(--color-action-primary)`),
   never primitives (`var(--blue-600)`).
 
+## Base UI components (`shared/ui`)
+
+The `shared/ui` directory is a library of headless, themeable base primitives.
+They wrap Element Plus behind a neutral API so the app never couples to
+Element Plus prop names, and they are styled exclusively with semantic tokens.
+
+Conventions:
+
+- **Neutral variants** — `primary | secondary | ghost | danger` (and status
+  variants `success | warning | info` where relevant). Never domain-specific
+  (`approve-order`).
+- **Sizes** — `sm | md | lg`. **States** — `disabled`, `loading`, `active` props,
+  not variant values.
+- **Zero business logic** — no routing, no fetching, no store access. A nav item
+  takes `href`; an action emits an event.
+- Import from the slice root only: `import { Button } from "@/shared/ui"`.
+
+### How-to-use
+
+#### Button
+
+```vue
+<script setup>
+import { Button } from "@/shared/ui"
+</script>
+
+<template>
+  <Button variant="primary">Save</Button>
+  <Button variant="secondary">Cancel</Button>
+  <Button variant="ghost">Reset</Button>
+  <Button variant="danger" :loading="saving" @click="save">Delete</Button>
+  <Button href="/docs" variant="ghost">Docs</Button>
+</template>
+```
+
+#### ButtonGroup
+
+```vue
+<ButtonGroup size="sm">
+  <Button variant="secondary">Left</Button>
+  <Button variant="secondary">Middle</Button>
+  <Button variant="secondary">Right</Button>
+</ButtonGroup>
+```
+
+#### Badge
+
+```vue
+<Badge variant="success">Active</Badge>
+<Badge variant="danger" shape="pill">3</Badge>
+```
+
+#### Breadcrumb
+
+```vue
+<Breadcrumb :items="[
+  { label: 'Home', href: '/' },
+  { label: 'Settings' }
+]" />
+```
+
+#### Card
+
+```vue
+<Card title="Profile">
+  <p>Content</p>
+  <template #footer>
+    <Button variant="primary">Save</Button>
+  </template>
+</Card>
+```
+
+#### Alert
+
+```vue
+<Alert variant="danger" title="Request failed" description="Please try again." />
+<Alert variant="success" title="Saved" closable />
+```
+
+#### Spinner
+
+```vue
+<Spinner size="sm" />
+<Spinner />
+<Spinner variant="grow" size="lg" />
+```
+
+#### Progress
+
+```vue
+<Progress :value="60" />
+<Progress :value="30" variant="warning" striped />
+<Progress :value="80" variant="success" animated />
+```
+
+#### Nav / NavLink
+
+```vue
+<Nav>
+  <NavLink href="/dashboard" active>Dashboard</NavLink>
+  <NavLink href="/settings">Settings</NavLink>
+  <NavLink disabled>Disabled</NavLink>
+</Nav>
+```
+
+#### Tabs
+
+```vue
+<script setup>
+import { ref } from "vue"
+import { Tabs } from "@/shared/ui"
+
+const active = ref("overview")
+</script>
+
+<template>
+  <Tabs v-model="active" :items="[{ label: 'Overview', name: 'overview' }]">
+    <template #overview>Overview content</template>
+  </Tabs>
+</template>
+```
+
+#### Pagination
+
+```vue
+<script setup>
+import { ref } from "vue"
+import { Pagination } from "@/shared/ui"
+
+const page = ref(1)
+</script>
+
+<template>
+  <Pagination v-model="page" :total="100" :page-size="10" />
+</template>
+```
+
+#### ListGroup / ListGroupItem
+
+```vue
+<ListGroup>
+  <ListGroupItem active>Item one</ListGroupItem>
+  <ListGroupItem>Item two</ListGroupItem>
+  <ListGroupItem disabled>Item three</ListGroupItem>
+</ListGroup>
+```
+
+#### Modal
+
+```vue
+<script setup>
+import { ref } from "vue"
+import { Modal } from "@/shared/ui"
+
+const open = ref(false)
+</script>
+
+<template>
+  <Modal v-model="open" title="Confirm" size="sm">
+    <p>Are you sure?</p>
+    <template #footer>
+      <Button variant="primary" @click="open = false">Confirm</Button>
+    </template>
+  </Modal>
+</template>
+```
+
+#### Dropdown
+
+```vue
+<script setup>
+import { Dropdown, Button } from "@/shared/ui"
+
+const items = [
+  { label: "Profile" },
+  { label: "Settings" },
+  { label: "Log out", divided: true }
+]
+</script>
+
+<template>
+  <Dropdown :items="items" @select="(item) => console.log(item.label)">
+    <Button variant="secondary">Menu</Button>
+  </Dropdown>
+</template>
+```
+
+#### Tooltip
+
+```vue
+<Tooltip content="Add an item" placement="top">
+  <Button variant="primary">+</Button>
+</Tooltip>
+```
+
+#### Popover
+
+```vue
+<Popover title="Help" trigger="hover">
+  <template #content>More details…</template>
+  <Button variant="ghost">?</Button>
+</Popover>
+```
+
+#### Accordion
+
+```vue
+<script setup>
+import { ref } from "vue"
+import { Accordion } from "@/shared/ui"
+
+const open = ref("one")
+</script>
+
+<template>
+  <Accordion
+    v-model="open"
+    :items="[{ title: 'One', name: 'one' }, { title: 'Two', name: 'two' }]"
+  >
+    <template #one>First panel</template>
+    <template #two>Second panel</template>
+  </Accordion>
+</template>
+```
+
+#### Collapse
+
+```vue
+<script setup>
+import { ref } from "vue"
+import { Collapse } from "@/shared/ui"
+
+const open = ref(["one"])
+</script>
+
+<template>
+  <Collapse v-model="open" :items="[{ title: 'One', name: 'one' }]">
+    <template #one>Panel content</template>
+  </Collapse>
+</template>
+```
+
+#### Toast
+
+```vue
+<script setup>
+import { ref } from "vue"
+import { Toast } from "@/shared/ui"
+
+const visible = ref(true)
+</script>
+
+<template>
+  <Toast :visible="visible" variant="success" @close="visible = false">
+    Changes saved.
+  </Toast>
+</template>
+```
+
+#### Carousel
+
+```vue
+<Carousel :items="[{ name: 'a' }, { name: 'b' }]" :interval="3000">
+  <template #default="{ item }">{{ item.name }}</template>
+</Carousel>
+```
+
+#### Chip
+
+```vue
+<Chip variant="danger" dismissible @close="remove">Tag</Chip>
+```
+
+#### Placeholder
+
+```vue
+<Placeholder width="100%" height="1rem" />
+<Placeholder width="50%" height="2rem" :animated="false" />
+```
+
+#### Form controls
+
+```vue
+<script setup>
+import { ref } from "vue"
+import { Checkbox, Input, InputGroup, Label, Radio, Range, Select, Textarea } from "@/shared/ui"
+
+const name = ref("")
+const bio = ref("")
+const agreed = ref(false)
+const plan = ref("pro")
+const option = ref("a")
+const volume = ref(50)
+</script>
+
+<template>
+  <Label for="name">Name</Label>
+  <Input id="name" v-model="name" placeholder="Your name" />
+
+  <Label>Bio</Label>
+  <Textarea v-model="bio" :rows="3" />
+
+  <Checkbox v-model="agreed" label="I agree" />
+
+  <Radio v-model="option" value="a" label="Option A" />
+
+  <Select v-model="plan" :options="[{ label: 'Pro', value: 'pro' }]" />
+
+  <Range v-model="volume" :min="0" :max="100" />
+
+  <InputGroup>
+    <template #prepend>@</template>
+    <Input v-model="name" />
+  </InputGroup>
+</template>
+```
+
 ## Feature-Sliced Design workflow
 
 When adding or moving code, respect the layer boundaries:
