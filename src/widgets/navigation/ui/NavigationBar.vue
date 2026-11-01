@@ -5,7 +5,7 @@ import SearchMenu from "@/features/search"
 import ThemeSwitch from "@/features/theme"
 import { useDevice } from "@/shared/lib"
 import { useLayoutMode } from "@/features/layout-mode"
-import { UserFilled } from "@element-plus/icons-vue"
+import { Dropdown } from "@/shared/ui"
 import { useAppStore } from "@/entities/app-ui"
 import { useSettingsStore } from "@/entities/settings"
 import { useUserStore } from "@/entities/user"
@@ -24,6 +24,27 @@ const userStore = useUserStore()
 const settingsStore = useSettingsStore()
 
 const { showNotify, showThemeSwitch, showScreenfull, showSearchMenu } = storeToRefs(settingsStore)
+
+const userMenuItems = [
+  { label: "GitHub" },
+  { label: "Gitee" },
+  { label: "AtomGit" },
+  { label: "Log out", divided: true }
+]
+
+const USER_LINKS = [
+  "https://github.com/un-pany/v3-admin-vite",
+  "https://gitee.com/un-pany/v3-admin-vite",
+  "https://atomgit.com/un-pany/v3-admin-vite"
+]
+
+function onUserSelect(_item: { label: string }, index: number) {
+  if (index < USER_LINKS.length) {
+    window.open(USER_LINKS[index], "_blank", "noopener,noreferrer")
+  } else {
+    userStore.logout()
+  }
+}
 
 /** Toggle the sidebar */
 function toggleSidebar() {
@@ -46,28 +67,12 @@ function toggleSidebar() {
       <Screenfull v-if="showScreenfull" class="right-menu-item" />
       <ThemeSwitch v-if="showThemeSwitch" class="right-menu-item" />
       <Notify v-if="showNotify" class="right-menu-item" />
-      <el-dropdown>
+      <Dropdown :items="userMenuItems" @select="onUserSelect">
         <div class="right-menu-item user">
-          <el-avatar :icon="UserFilled" :size="30" />
+          <span class="avatar">{{ userStore.username.charAt(0) }}</span>
           <span>{{ userStore.username }}</span>
         </div>
-        <template #dropdown>
-          <el-dropdown-menu>
-            <a target="_blank" href="https://github.com/un-pany/v3-admin-vite">
-              <el-dropdown-item>GitHub</el-dropdown-item>
-            </a>
-            <a target="_blank" href="https://gitee.com/un-pany/v3-admin-vite">
-              <el-dropdown-item>Gitee</el-dropdown-item>
-            </a>
-            <a target="_blank" href="https://atomgit.com/un-pany/v3-admin-vite">
-              <el-dropdown-item>AtomGit</el-dropdown-item>
-            </a>
-            <el-dropdown-item divided @click="userStore.logout">
-              Log out
-            </el-dropdown-item>
-          </el-dropdown-menu>
-        </template>
-      </el-dropdown>
+      </Dropdown>
     </div>
   </div>
 </template>
@@ -88,25 +93,13 @@ function toggleSidebar() {
   }
   .breadcrumb {
     flex: 1;
-    // Following Bootstrap's responsive design, set the width to 576
     @media screen and (max-width: 576px) {
       display: none;
     }
   }
   .sidebar {
     flex: 1;
-    // Setting min-width is to make the el-menu width in the Sidebar adaptive
     min-width: 0px;
-    :deep(.el-menu) {
-      background-color: transparent;
-    }
-    :deep(.el-sub-menu) {
-      &.is-active {
-        .el-sub-menu__title {
-          color: var(--el-color-primary);
-        }
-      }
-    }
   }
   .right-menu {
     margin-right: 10px;
@@ -124,8 +117,17 @@ function toggleSidebar() {
     .user {
       display: flex;
       align-items: center;
-      .el-avatar {
+      .avatar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px;
+        height: 30px;
         margin-right: 10px;
+        border-radius: 50%;
+        background-color: var(--color-action-primary);
+        color: var(--white);
+        font-size: 14px;
       }
       span {
         font-size: 16px;

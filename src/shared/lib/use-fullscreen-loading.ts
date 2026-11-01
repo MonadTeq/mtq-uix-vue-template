@@ -1,4 +1,9 @@
-import type { LoadingOptions } from "element-plus"
+import { loading } from "@/shared/lib/feedback"
+
+interface LoadingOptions {
+  lock?: boolean
+  text?: string
+}
 
 interface UseFullscreenLoading {
   <T extends (...args: Parameters<T>) => ReturnType<T>>(
@@ -27,7 +32,7 @@ export const useFullscreenLoading: UseFullscreenLoading = (fn, options = {}) => 
   let loadingInstance: LoadingInstance
   return async (...args) => {
     try {
-      loadingInstance = ElLoading.service({ ...DEFAULT_OPTIONS, ...options })
+      loadingInstance = loading.service({ ...DEFAULT_OPTIONS, ...options })
       return await fn(...args)
     } finally {
       loadingInstance.close()

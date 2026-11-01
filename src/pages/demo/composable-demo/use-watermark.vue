@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { useWatermark } from "@/shared/lib"
+import { Alert, Button, ButtonGroup, Card } from "@/shared/ui"
 
 const localRef = useTemplateRef("localRef")
 
@@ -10,57 +11,48 @@ const { setWatermark: setGlobalWatermark, clearWatermark: clearGlobalWatermark }
 
 <template>
   <div class="app-container">
-    <el-alert
+    <Alert
+      variant="primary"
       title="Example description"
-      type="primary"
-      description="Enable or disable the watermark by calling the composable, supporting local, global, and custom styles (color, opacity, font size, font, tilt angle, etc.), and built-in defense (against deletion and hiding) and adaptive features"
-      show-icon
+      description="Enable or disable the watermark by calling the composable, supporting local, global, and custom styles, and built-in defense and adaptive features"
     />
-    <el-card header="Example" shadow="never">
+    <Card title="Example" shadow="never">
       <div ref="localRef" class="local" />
       <template #footer>
-        <el-button-group>
-          <el-button type="primary" @click="setWatermark('Local watermark', { color: '#409eff' })">
+        <ButtonGroup class="group">
+          <Button variant="primary" @click="setWatermark('Local watermark', { color: '#409eff' })">
             Create local watermark
-          </el-button>
-          <el-button type="warning" @click="setWatermark('Local watermark without defense', { color: '#e6a23c', defense: false })">
+          </Button>
+          <Button variant="secondary" @click="setWatermark('Local watermark without defense', { color: '#e6a23c', defense: false })">
             Create local watermark without defense
-          </el-button>
-          <el-button type="danger" @click="clearWatermark">
+          </Button>
+          <Button variant="danger" @click="clearWatermark">
             Clear local watermark
-          </el-button>
-        </el-button-group>
-        <el-button-group>
-          <el-button type="primary" @click="setGlobalWatermark('Global watermark', { color: '#409eff' })">
+          </Button>
+        </ButtonGroup>
+        <ButtonGroup>
+          <Button variant="primary" @click="setGlobalWatermark('Global watermark', { color: '#409eff' })">
             Create global watermark
-          </el-button>
-          <el-button type="warning" @click="setGlobalWatermark('Global watermark without defense', { color: '#e6a23c', defense: false })">
+          </Button>
+          <Button variant="secondary" @click="setGlobalWatermark('Global watermark without defense', { color: '#e6a23c', defense: false })">
             Create global watermark without defense
-          </el-button>
-          <el-button type="danger" @click="clearGlobalWatermark">
+          </Button>
+          <Button variant="danger" @click="clearGlobalWatermark">
             Clear global watermark
-          </el-button>
-        </el-button-group>
+          </Button>
+        </ButtonGroup>
       </template>
-    </el-card>
+    </Card>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.el-alert {
-  margin-bottom: 20px;
-}
-
-.el-card {
-  margin-bottom: 20px;
-}
-
 .local {
   height: 35vh;
-  border: 2px dashed var(--el-color-primary);
+  border: 2px dashed var(--color-action-primary);
 }
 
-.el-button-group {
+.group {
   margin-right: 12px;
   margin-bottom: 5px;
 }

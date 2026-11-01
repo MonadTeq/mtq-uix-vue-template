@@ -39,27 +39,33 @@ listenerRouteChange((route) => {
 </script>
 
 <template>
-  <el-breadcrumb>
-    <el-breadcrumb-item v-for="(item, index) in breadcrumbs" :key="item.path">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <template v-for="(item, index) in breadcrumbs" :key="item.path">
       <span v-if="item.redirect === 'noRedirect' || index === breadcrumbs.length - 1" class="no-redirect">
         {{ item.meta.title }}
       </span>
       <a v-else @click.prevent="handleLink(item)">
         {{ item.meta.title }}
       </a>
-    </el-breadcrumb-item>
-  </el-breadcrumb>
+      <span v-if="index < breadcrumbs.length - 1" class="separator" aria-hidden="true">/</span>
+    </template>
+  </nav>
 </template>
 
 <style lang="scss" scoped>
-.el-breadcrumb {
+.breadcrumb {
   display: flex;
   align-items: center;
-  .no-redirect {
-    color: var(--el-text-color-placeholder);
-  }
   a {
     font-weight: normal;
+    cursor: pointer;
+  }
+  .no-redirect {
+    color: var(--color-text-placeholder);
+  }
+  .separator {
+    margin: 0 var(--space-2);
+    color: var(--color-text-placeholder);
   }
 }
 </style>

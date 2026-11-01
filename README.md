@@ -3,7 +3,7 @@
   <h1>MTQ UiX Vue - AI Friendly</h1>
 </div>
 
-MTQ UiX Vue is an AI-friendly admin dashboard template built on mainstream technologies such as Vue3, Vite, TypeScript, and Element Plus, organized with a strict Feature-Sliced Design (FSD) architecture.
+MTQ UiX Vue is an AI-friendly admin dashboard template built on mainstream technologies such as Vue3, Vite, and TypeScript, organized with a strict Feature-Sliced Design (FSD) architecture.
 
 ## Architecture
 
@@ -42,7 +42,7 @@ src
 │  └─ styles                # global styles and themes
 ├─ pages
 │  ├─ dashboard             # dashboard (role-based)
-│  ├─ demo                  # demos (ui-primitives, element-plus, vxe-table, composables, permission)
+│  ├─ demo                  # demos (ui-primitives, composables, permission)
 │  ├─ error                 # 403 / 404
 │  ├─ login                 # login
 │  └─ redirect              # redirect helper
@@ -202,8 +202,6 @@ pnpm preview
 
 **Vue3**: Vue3 + script setup with the latest Vue3 Composition API
 
-**Element Plus**: The Vue3 version of Element UI
-
 **Pinia**: The legendary Vuex5
 
 **Vite**: Really fast
@@ -214,15 +212,13 @@ pnpm preview
 
 **pnpm**: A faster, disk-space-saving package manager
 
-**Scss**: Consistent with Element Plus
+**Scss**: CSS preprocessing
 
 **CSS Variables**: Primarily controls layout and color in the project
 
 **ESLint**: Code linting and formatting
 
 **Axios**: Sends network requests
-
-**UnoCSS**: A high-performance, flexible atomic CSS engine
 
 ## Project Preview Image
 

@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { Expand, Fold } from "@element-plus/icons-vue"
-
 interface Props {
   isActive?: boolean
 }
@@ -17,15 +15,23 @@ function toggleClick() {
 </script>
 
 <template>
-  <div @click="toggleClick">
-    <el-icon :size="20" class="icon">
-      <Fold v-if="isActive" />
-      <Expand v-else />
-    </el-icon>
+  <div class="hamburger" @click="toggleClick">
+    <svg v-if="isActive" viewBox="0 0 24 24" width="20" height="20" class="icon" aria-hidden="true">
+      <path fill="currentColor" d="M15 4l-8 8 8 8V4z" />
+    </svg>
+    <svg v-else viewBox="0 0 24 24" width="20" height="20" class="icon" aria-hidden="true">
+      <path fill="currentColor" d="M9 4l8 8-8 8V4z" />
+    </svg>
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
+.hamburger {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
 .icon {
   color: var(--mtq-uix-hamburger-text-color);
 }

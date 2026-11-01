@@ -1,5 +1,6 @@
 export * from "./css"
 export * from "./datetime"
+export * from "./feedback"
 export * from "./local-storage"
 export * from "./use-device"
 export * from "./use-fetch-select"

@@ -15,6 +15,6 @@ const VITE_APP_TITLE = import.meta.env.VITE_APP_TITLE
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--el-text-color-placeholder);
+  color: var(--color-text-placeholder);
 }
 </style>

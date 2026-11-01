@@ -2,47 +2,47 @@
 
 :root {
   /* Body */
-  --mtq-uix-body-text-color: var(--el-text-color-primary);
-  --mtq-uix-body-bg-color: var(--el-bg-color-page);
+  --mtq-uix-body-text-color: var(--color-text-primary);
+  --mtq-uix-body-bg-color: var(--color-surface-page);
   /* Header area = NavigationBar component + TagsView component */
   --mtq-uix-header-height: calc(
     var(--mtq-uix-navigationbar-height) + var(--mtq-uix-tagsview-height) + var(--mtq-uix-header-border-bottom-width)
   );
-  --mtq-uix-header-bg-color: var(--el-bg-color);
-  --mtq-uix-header-box-shadow: var(--el-box-shadow-lighter);
+  --mtq-uix-header-bg-color: var(--color-surface-default);
+  --mtq-uix-header-box-shadow: 0 0 6px rgba(0, 0, 0, 0.12);
   --mtq-uix-header-border-bottom-width: 1px;
-  --mtq-uix-header-border-bottom: var(--mtq-uix-header-border-bottom-width) solid var(--el-fill-color);
+  --mtq-uix-header-border-bottom: var(--mtq-uix-header-border-bottom-width) solid var(--color-border-default);
   /* NavigationBar component */
   --mtq-uix-navigationbar-height: 50px;
-  --mtq-uix-navigationbar-text-color: var(--el-text-color-regular);
+  --mtq-uix-navigationbar-text-color: var(--color-text-regular);
   /* Sidebar component (fully effective in left mode, fully ineffective in top mode, and non-color parts effective in hybrid mode) */
   --mtq-uix-sidebar-width: 220px;
   --mtq-uix-sidebar-hide-width: 58px;
-  --mtq-uix-sidebar-border-right: 1px solid var(--el-fill-color);
+  --mtq-uix-sidebar-border-right: 1px solid var(--color-border-default);
   --mtq-uix-sidebar-menu-item-height: 60px;
-  --mtq-uix-sidebar-menu-tip-line-bg-color: var(--el-color-primary);
+  --mtq-uix-sidebar-menu-tip-line-bg-color: var(--color-action-primary);
   --mtq-uix-sidebar-menu-bg-color: var(--color-surface-default);
   --mtq-uix-sidebar-menu-hover-bg-color: var(--color-surface-hover);
   --mtq-uix-sidebar-menu-text-color: var(--color-text-regular);
   --mtq-uix-sidebar-menu-active-text-color: var(--color-text-primary);
   /* TagsView component */
   --mtq-uix-tagsview-height: 34px;
-  --mtq-uix-tagsview-text-color: var(--el-text-color-regular);
+  --mtq-uix-tagsview-text-color: var(--color-text-regular);
   --mtq-uix-tagsview-tag-active-text-color: var(--white);
-  --mtq-uix-tagsview-tag-bg-color: var(--el-bg-color);
-  --mtq-uix-tagsview-tag-active-bg-color: var(--el-color-primary);
+  --mtq-uix-tagsview-tag-bg-color: var(--color-surface-default);
+  --mtq-uix-tagsview-tag-active-bg-color: var(--color-action-primary);
   --mtq-uix-tagsview-tag-border-radius: 2px;
-  --mtq-uix-tagsview-tag-border-color: var(--el-border-color-lighter);
-  --mtq-uix-tagsview-tag-active-border-color: var(--el-color-primary);
+  --mtq-uix-tagsview-tag-border-color: var(--color-border-default);
+  --mtq-uix-tagsview-tag-active-border-color: var(--color-action-primary);
   --mtq-uix-tagsview-tag-icon-hover-bg-color: color-mix(in srgb, black 19%, transparent);
   --mtq-uix-tagsview-tag-icon-hover-color: var(--white);
-  --mtq-uix-tagsview-contextmenu-text-color: var(--el-text-color-regular);
-  --mtq-uix-tagsview-contextmenu-hover-text-color: var(--el-text-color-primary);
-  --mtq-uix-tagsview-contextmenu-bg-color: var(--el-bg-color-overlay);
-  --mtq-uix-tagsview-contextmenu-hover-bg-color: var(--el-fill-color);
-  --mtq-uix-tagsview-contextmenu-box-shadow: var(--el-box-shadow);
+  --mtq-uix-tagsview-contextmenu-text-color: var(--color-text-regular);
+  --mtq-uix-tagsview-contextmenu-hover-text-color: var(--color-text-primary);
+  --mtq-uix-tagsview-contextmenu-bg-color: var(--color-surface-overlay);
+  --mtq-uix-tagsview-contextmenu-hover-bg-color: var(--color-surface-hover);
+  --mtq-uix-tagsview-contextmenu-box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
   /* Hamburger component */
-  --mtq-uix-hamburger-text-color: var(--el-text-color-primary);
+  --mtq-uix-hamburger-text-color: var(--color-text-primary);
   /* RightPanel component */
   --mtq-uix-rightpanel-button-bg-color: var(--color-action-primary);
 }

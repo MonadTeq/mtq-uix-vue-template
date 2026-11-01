@@ -21,7 +21,7 @@
       "@/*": ["src/*"]
     },
     "resolveJsonModule": true,
-    "types": ["vite/client", "element-plus/global"],
+    "types": ["vite/client"],
     // Allow importing files with .ts .mts .tsx extensions
     "allowImportingTsExtensions": true,
     // Allow JS

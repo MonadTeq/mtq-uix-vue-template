@@ -17,7 +17,7 @@ describe("list", () => {
         data: []
       }
     })
-    expect(wrapper.find("el-empty-stub").exists()).toBe(true)
+    expect(wrapper.find(".empty").exists()).toBe(true)
   })
 
   it("list length is not 0", () => {
@@ -30,6 +30,6 @@ describe("list", () => {
         ]
       }
     })
-    expect(wrapper.find("el-empty-stub").exists()).toBe(false)
+    expect(wrapper.find(".empty").exists()).toBe(false)
   })
 })

@@ -12,14 +12,18 @@ function handleOpen() {
 
 <template>
   <div>
-    <el-tooltip effect="dark" content="Search menus" placement="bottom">
-      <SvgIcon name="search" @click="handleOpen" class="svg-icon" />
-    </el-tooltip>
+    <div class="search-trigger" title="Search menus" @click="handleOpen">
+      <SvgIcon name="search" class="svg-icon" />
+    </div>
     <Modal v-model="visible" />
   </div>
 </template>
 
 <style lang="scss" scoped>
+.search-trigger {
+  cursor: pointer;
+}
+
 .svg-icon {
   font-size: 20px;
   &:focus {

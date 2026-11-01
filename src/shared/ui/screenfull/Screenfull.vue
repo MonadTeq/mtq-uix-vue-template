@@ -1,5 +1,7 @@
 <script lang="ts" setup>
 import screenfull from "screenfull"
+import { Dropdown, Tooltip } from "@/shared/ui"
+import { message } from "@/shared/lib"
 
 interface Props {
   /** The element to fullscreen; defaults to html */
@@ -31,7 +33,7 @@ const fullscreenSvgName = computed(() => (isFullscreen.value ? "fullscreen-exit"
 
 function handleFullscreenClick() {
   const dom = document.querySelector(element) || undefined
-  isEnabled ? screenfull.toggle(dom) : ElMessage.warning("Your browser doesn't support this")
+  isEnabled ? screenfull.toggle(dom) : message.warning("Your browser doesn't support this")
 }
 
 function handleFullscreenChange() {
@@ -59,6 +61,11 @@ const contentLargeTips = computed(() => (isContentLarge.value ? "Restore content
 
 const contentLargeSvgName = computed(() => (isContentLarge.value ? "fullscreen-exit" : "fullscreen"))
 
+const dropdownItems = computed(() => [
+  { label: contentLargeTips.value },
+  { label: "Fullscreen content area" }
+])
+
 function handleContentLargeClick() {
   isContentLarge.value = !isContentLarge.value
   // Hide the unnecessary components when the content area is enlarged
@@ -73,31 +80,23 @@ function handleContentFullClick() {
   // Enable fullscreen
   handleFullscreenClick()
 }
+
+function onSelect(_item: { label: string }, index: number) {
+  index === 0 ? handleContentLargeClick() : handleContentFullClick()
+}
 // #endregion
 </script>
 
 <template>
   <div>
     <!-- Fullscreen -->
-    <el-tooltip v-if="!content" effect="dark" :content="fullscreenTips" placement="bottom">
+    <Tooltip v-if="!content" :content="fullscreenTips" placement="bottom">
       <SvgIcon :name="fullscreenSvgName" @click="handleFullscreenClick" class="svg-icon" />
-    </el-tooltip>
+    </Tooltip>
     <!-- Content area -->
-    <el-dropdown v-else :disabled="isFullscreen">
+    <Dropdown v-else :items="dropdownItems" @select="onSelect">
       <SvgIcon :name="contentLargeSvgName" class="svg-icon" />
-      <template #dropdown>
-        <el-dropdown-menu>
-          <!-- Enlarge content area -->
-          <el-dropdown-item @click="handleContentLargeClick">
-            {{ contentLargeTips }}
-          </el-dropdown-item>
-          <!-- Fullscreen content area -->
-          <el-dropdown-item @click="handleContentFullClick">
-            Fullscreen content area
-          </el-dropdown-item>
-        </el-dropdown-menu>
-      </template>
-    </el-dropdown>
+    </Dropdown>
   </div>
 </template>
 

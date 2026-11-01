@@ -2,11 +2,8 @@
 
 import { resolve } from "node:path"
 import vue from "@vitejs/plugin-vue"
-import UnoCSS from "unocss/vite"
 import AutoImport from "unplugin-auto-import/vite"
 import SvgComponent from "unplugin-svg-component/vite"
-import { ElementPlusResolver } from "unplugin-vue-components/resolvers"
-import Components from "unplugin-vue-components/vite"
 import { defineConfig, loadEnv } from "vite"
 import { ViteMcp } from "vite-plugin-mcp"
 import svgLoader from "vite-svg-loader"
@@ -65,9 +62,7 @@ export default defineConfig(({ mode }) => {
            * @description 2. If you don't want to customize the chunk splitting strategy, you can simply remove this configuration
            */
           manualChunks: {
-            vue: ["vue", "vue-router", "pinia"],
-            element: ["element-plus", "@element-plus/icons-vue"],
-            vxe: ["vxe-table"]
+            vue: ["vue", "vue-router", "pinia"]
           }
         }
       },
@@ -88,10 +83,6 @@ export default defineConfig(({ mode }) => {
             // Remove all comments during build
             legalComments: "none"
           },
-    // Dependency pre-bundling
-    optimizeDeps: {
-      include: ["element-plus/es/components/*/style/css"]
-    },
     // CSS-related configuration
     css: {
       // Run the CSS preprocessor in threads
@@ -124,18 +115,10 @@ export default defineConfig(({ mode }) => {
         dts: true,
         dtsDir: resolve(__dirname, "types/auto")
       }),
-      // Atomic CSS
-      UnoCSS(),
       // Auto-import APIs on demand
       AutoImport({
         imports: ["vue", "vue-router", "pinia"],
-        dts: "types/auto/auto-imports.d.ts",
-        resolvers: [ElementPlusResolver({ importStyle: false })]
-      }),
-      // Auto-import components on demand
-      Components({
-        dts: "types/auto/components.d.ts",
-        resolvers: [ElementPlusResolver({ importStyle: false })]
+        dts: "types/auto/auto-imports.d.ts"
       }),
       // Enable the MCP Server for the project
       ViteMcp()
@@ -143,12 +126,7 @@ export default defineConfig(({ mode }) => {
     // Configuring Vitest: https://cn.vitest.dev/config
     test: {
       include: ["tests/**/*.test.{ts,js}", "src/**/*.test.{ts,js}"],
-      environment: "happy-dom",
-      server: {
-        deps: {
-          inline: ["element-plus"]
-        }
-      }
+      environment: "happy-dom"
     }
   }
 })

@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { useFetchSelect } from "@/shared/lib"
+import { Alert, Card, Select } from "@/shared/ui"
 import { getSelectDataApi } from "./apis/use-fetch-select"
 
 const { loading, options, value } = useFetchSelect({
@@ -9,29 +10,23 @@ const { loading, options, value } = useFetchSelect({
 
 <template>
   <div class="app-container">
-    <el-alert
+    <Alert
+      variant="primary"
       title="Example description"
-      type="primary"
       description="Automatically call the api via the composable to get the data the Select component needs and pass it to the Select component"
-      show-icon
     />
-    <el-card header="Select example" shadow="never" v-loading="loading">
-      <el-select v-model="value" filterable>
-        <el-option v-for="(item, index) in options" v-bind="item" :key="index" placeholder="Please select" />
-      </el-select>
-    </el-card>
-    <el-card header="Select V2 example (choose this component if the data volume is too large)" shadow="never" v-loading="loading">
-      <el-select-v2 v-model="value" :options="options" filterable placeholder="Please select" />
-    </el-card>
+    <Card title="Select example" shadow="never" class="card">
+      <Select v-model="value" :options="options" :disabled="loading" />
+    </Card>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.el-alert {
+.alert {
   margin-bottom: 20px;
 }
 
-.el-card {
+.card {
   margin-bottom: 20px;
 }
 </style>

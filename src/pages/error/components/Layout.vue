@@ -1,12 +1,16 @@
+<script lang="ts" setup>
+import { Button } from "@/shared/ui"
+</script>
+
 <template>
   <div class="error">
     <div class="error-svg">
       <slot />
     </div>
     <router-link to="/">
-      <el-button type="primary">
+      <Button variant="primary">
         Back to home
-      </el-button>
+      </Button>
     </router-link>
   </div>
 </template>

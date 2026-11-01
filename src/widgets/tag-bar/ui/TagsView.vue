@@ -2,7 +2,6 @@
 import type { RouteLocationNormalizedGeneric, RouteRecordRaw, RouterLink } from "vue-router"
 import type { TagView } from "@/shared/types"
 import { useRouteListener } from "@/shared/lib"
-import { Close } from "@element-plus/icons-vue"
 import path from "path-browserify"
 import { usePermissionStore } from "@/entities/permission"
 import { useTagsViewStore } from "@/entities/tags-view"
@@ -136,17 +135,12 @@ function toLastView(visitedViews: TagView[], view: TagView) {
 /** Open the right-click menu panel */
 function openMenu(tag: TagView, e: MouseEvent) {
   const menuMinWidth = 100
-  // Current page width
   const offsetWidth = document.body.offsetWidth
-  // Maximum left margin of the panel
   const maxLeft = offsetWidth - menuMinWidth
-  // Distance of the panel from the mouse pointer
   const left15 = e.clientX + 10
   left.value = left15 > maxLeft ? maxLeft : left15
   top.value = e.clientY
-  // Show the panel
   visible.value = true
-  // Update the tag page currently being right-clicked
   selectedTag.value = tag
 }
 
@@ -161,7 +155,6 @@ watch(visible, (value) => {
 
 initTags()
 
-// Listen to route changes
 listenerRouteChange((route) => {
   addTags(route)
 }, true)
@@ -182,9 +175,11 @@ listenerRouteChange((route) => {
         @contextmenu.prevent="openMenu(tag, $event)"
       >
         {{ tag.meta?.title }}
-        <el-icon v-if="!isAffix(tag)" :size="12" @click.prevent.stop="closeSelectedTag(tag)">
-          <Close />
-        </el-icon>
+        <span v-if="!isAffix(tag)" class="close-icon" @click.prevent.stop="closeSelectedTag(tag)">
+          <svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true">
+            <path fill="currentColor" d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
+          </svg>
+        </span>
       </router-link>
     </ScrollPane>
     <ul v-show="visible" class="contextmenu" :style="{ left: `${left}px`, top: `${top}px` }">
@@ -235,7 +230,9 @@ listenerRouteChange((route) => {
         color: var(--mtq-uix-tagsview-tag-active-text-color);
         border-color: var(--mtq-uix-tagsview-tag-active-border-color);
       }
-      .el-icon {
+      .close-icon {
+        display: inline-flex;
+        align-items: center;
         margin-left: 5px;
         margin-right: 1px;
         border-radius: 50%;

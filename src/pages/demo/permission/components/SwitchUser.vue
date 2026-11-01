@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { useUserStore } from "@/entities/user"
+import { Badge, Card, Radio } from "@/shared/ui"
 
 const userStore = useUserStore()
 
@@ -11,27 +12,27 @@ watch(username, (value) => {
 </script>
 
 <template>
-  <el-card shadow="never">
+  <Card shadow="never">
     <div class="switch-user">
       <span>Switch user:</span>
-      <el-radio-group v-model="username">
-        <el-radio-button label="editor" value="editor" />
-        <el-radio-button label="admin" value="admin" />
-      </el-radio-group>
+      <div class="radios">
+        <Radio v-model="username" label="editor" value="editor" />
+        <Radio v-model="username" label="admin" value="admin" />
+      </div>
     </div>
     <div class="roles">
       <span>Your roles:</span>
-      <el-tag v-for="(role, index) in userStore.roles" :key="index" effect="plain" size="large">
+      <Badge v-for="role in userStore.roles" :key="role" variant="secondary">
         {{ role }}
-      </el-tag>
+      </Badge>
     </div>
     <div class="permissions">
       <span>Your permissions:</span>
-      <el-tag v-for="(permission, index) in userStore.permissions" :key="index" effect="plain" size="large">
+      <Badge v-for="permission in userStore.permissions" :key="permission" variant="secondary">
         {{ permission }}
-      </el-tag>
+      </Badge>
     </div>
-  </el-card>
+  </Card>
 </template>
 
 <style lang="scss" scoped>
@@ -40,13 +41,20 @@ watch(username, (value) => {
   align-items: center;
 }
 
+.radios {
+  display: inline-flex;
+  gap: var(--space-3);
+  margin-left: var(--space-3);
+}
+
 .roles {
   margin-top: 15px;
 }
 
 .permissions {
   margin-top: 15px;
-  .el-tag {
+  .roles :deep(.badge),
+  :deep(.badge) {
     margin-right: 5px;
   }
 }

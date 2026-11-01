@@ -1,5 +1,5 @@
 import type { AxiosInstance, AxiosRequestConfig } from "axios"
-import { getToken } from "@/shared/lib"
+import { getToken, message } from "@/shared/lib"
 import axios from "axios"
 import { get, merge } from "lodash-es"
 
@@ -38,7 +38,7 @@ function createInstance() {
       const code = apiData.code
       // If there is no code, it means this is not an api developed by the project's backend
       if (code === undefined) {
-        ElMessage.error("Not an API of this system")
+        message.error("Not an API of this system")
         return Promise.reject(new Error("Not an API of this system"))
       }
       switch (code) {
@@ -51,7 +51,7 @@ function createInstance() {
           return undefined
         default:
           // Not the correct code
-          ElMessage.error(apiData.message || "Error")
+          message.error(apiData.message || "Error")
           return Promise.reject(apiData)
       }
     },
@@ -96,7 +96,7 @@ function createInstance() {
           error.message = "HTTP version not supported"
           break
       }
-      ElMessage.error(error.message)
+      message.error(error.message)
       return Promise.reject(error)
     }
   )

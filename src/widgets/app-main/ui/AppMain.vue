@@ -11,21 +11,13 @@ const settingsStore = useSettingsStore()
 <template>
   <section class="app-main">
     <div class="app-scrollbar">
-      <!-- The key using route.path and route.fullPath has different effects; path is more universal in most cases -->
       <router-view v-slot="{ Component, route }">
-        <transition name="el-fade-in" mode="out-in">
-          <keep-alive :include="tagsViewStore.cachedViews">
-            <component :is="Component" :key="route.path" class="app-container-grow" />
-          </keep-alive>
-        </transition>
+        <keep-alive :include="tagsViewStore.cachedViews">
+          <component :is="Component" :key="route.path" class="app-container-grow" />
+        </keep-alive>
       </router-view>
-      <!-- Footer -->
       <Footer v-if="settingsStore.showFooter" />
     </div>
-    <!-- Back to top -->
-    <el-backtop />
-    <!-- Back to top (when Header is fixed) -->
-    <el-backtop target=".app-scrollbar" />
   </section>
 </template>
 

@@ -3,24 +3,35 @@ export interface ButtonGroupProps {
   size?: "sm" | "md" | "lg"
 }
 
-const props = withDefaults(defineProps<ButtonGroupProps>(), {
+withDefaults(defineProps<ButtonGroupProps>(), {
   size: "md"
-})
-
-const elSize = computed(() => {
-  switch (props.size) {
-    case "sm":
-      return "small"
-    case "lg":
-      return "large"
-    default:
-      return "default"
-  }
 })
 </script>
 
 <template>
-  <el-button-group :size="elSize">
+  <div class="button-group" :class="`button-group--${size}`" role="group">
     <slot />
-  </el-button-group>
+  </div>
 </template>
+
+<style scoped>
+.button-group {
+  display: inline-flex;
+}
+
+.button-group :deep(.button) {
+  border-radius: 0;
+}
+
+.button-group :deep(.button:first-child) {
+  border-radius: var(--radius-md) 0 0 var(--radius-md);
+}
+
+.button-group :deep(.button:last-child) {
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+
+.button-group :deep(.button + .button) {
+  margin-left: -1px;
+}
+</style>

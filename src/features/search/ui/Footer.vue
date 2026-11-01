@@ -34,7 +34,7 @@ const { isMobile } = useDevice()
 <style lang="scss" scoped>
 .search-footer {
   display: flex;
-  color: var(--el-text-color-secondary);
+  color: var(--color-text-secondary);
   font-size: 14px;
   &-item {
     display: flex;
@@ -44,7 +44,7 @@ const { isMobile } = useDevice()
       margin-right: 5px;
       padding: 2px;
       font-size: 20px;
-      background-color: var(--el-fill-color);
+      background-color: var(--color-surface-hover);
     }
   }
   &-total {

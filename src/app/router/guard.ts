@@ -1,7 +1,6 @@
 import type { Router } from "vue-router"
-import { setRouteChange } from "@/shared/lib"
+import { getToken, message, setRouteChange } from "@/shared/lib"
 import { useTitle } from "@/app/lib/use-title"
-import { getToken } from "@/shared/lib"
 import NProgress from "nprogress"
 import { usePermissionStore } from "@/entities/permission"
 import { useUserStore } from "@/entities/user"
@@ -45,7 +44,7 @@ export function registerNavigationGuard(router: Router) {
     } catch (error) {
       // If any error occurs during the process, reset the Token directly and redirect to the login page
       userStore.resetToken()
-      ElMessage.error((error as Error).message || "Route guard error")
+      message.error((error as Error).message || "Route guard error")
       return LOGIN_PATH
     }
   })

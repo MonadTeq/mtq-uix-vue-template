@@ -1,10 +1,7 @@
-import type * as ElementPlusIconsVue from "@element-plus/icons-vue"
 import type { SvgName } from "~virtual/svg-component"
 import "vue-router"
 
 export {}
-
-type ElementPlusIconsName = keyof typeof ElementPlusIconsVue
 
 declare module "vue-router" {
   interface RouteMeta {
@@ -16,10 +13,6 @@ declare module "vue-router" {
      * @description Set the icon for this route; remember to import the svg into src/common/assets/icons
      */
     svgIcon?: SvgName
-    /**
-     * @description Set the icon for this route by directly using an Element Plus Icon (when set together with svgIcon, svgIcon takes precedence)
-     */
-    elIcon?: ElementPlusIconsName
     /**
      * @description Defaults to false; when set to true, the route will not appear in the sidebar
      */

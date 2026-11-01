@@ -12,10 +12,7 @@ import App from "@/app/App.vue"
 // css
 import "normalize.css"
 import "nprogress/nprogress.css"
-import "element-plus/dist/index.css"
-import "vxe-table/lib/style.css"
 import "@/app/styles/index.scss"
-import "virtual:uno.css"
 
 // Create the app instance
 const app = createApp(App)

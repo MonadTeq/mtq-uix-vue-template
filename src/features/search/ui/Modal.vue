@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import type { RouteRecordNameGeneric, RouteRecordRaw } from "vue-router"
-import { useDevice } from "@/shared/lib"
-import { isExternal } from "@/shared/lib"
+import { isExternal, message, useDevice } from "@/shared/lib"
 import { cloneDeep, debounce } from "lodash-es"
 import { usePermissionStore } from "@/entities/permission"
 import Footer from "./Footer.vue"
@@ -40,7 +39,6 @@ const handleSearch = debounce(() => {
   const flatMenus = flatTree(menus.value)
   const _keywords = keyword.value.toLocaleLowerCase().trim()
   result.value = flatMenus.filter(menu => keyword.value ? menu.meta?.title?.toLocaleLowerCase().includes(_keywords) : false)
-  // Select the first search result by default
   const length = result.value?.length
   activeRouteName.value = length > 0 ? result.value[0].name : undefined
 }, 500)
@@ -57,7 +55,6 @@ function flatTree(arr: RouteRecordRaw[], result: RouteRecordRaw[] = []) {
 /** Close the search dialog */
 function handleClose() {
   modelValue.value = false
-  // Delay processing to prevent the user from seeing the data reset
   setTimeout(() => {
     keyword.value = ""
     result.value = []
@@ -66,10 +63,9 @@ function handleClose() {
 
 /** Scroll based on the index position */
 function scrollTo(index: number) {
-  if (!resultRef.value) return
+  if (!resultRef.value || !scrollbarRef.value) return
   const scrollTop = resultRef.value.getScrollTop(index)
-  // Manually control the el-scrollbar scrolling and set the distance of the scrollbar to the top
-  scrollbarRef.value?.setScrollTop(scrollTop)
+  scrollbarRef.value.scrollTop = scrollTop
 }
 
 /** Keyboard up key */
@@ -77,17 +73,13 @@ function handleUp() {
   isPressUpOrDown.value = true
   const { length } = result.value
   if (length === 0) return
-  // Get the position where this name first appears in the menus
   const index = result.value.findIndex(item => item.name === activeRouteName.value)
-  // If already at the top
   if (index === 0) {
     const bottomName = result.value[length - 1].name
-    // If the top and bottom bottomName are the same and the length is greater than 1, jump one more position (resolves the issue where the up key fails when the first and last names are the same)
     if (activeRouteName.value === bottomName && length > 1) {
       activeRouteName.value = result.value[length - 2].name
       scrollTo(length - 2)
     } else {
-      // Jump to the bottom
       activeRouteName.value = bottomName
       scrollTo(length - 1)
     }
@@ -102,17 +94,13 @@ function handleDown() {
   isPressUpOrDown.value = true
   const { length } = result.value
   if (length === 0) return
-  // Get the position where this name last appears in the menus (resolves the issue where the down key fails when two consecutive names are the same)
   const index = result.value.map(item => item.name).lastIndexOf(activeRouteName.value)
-  // If already at the bottom
   if (index === length - 1) {
     const topName = result.value[0].name
-    // If the bottom and top topName are the same and the length is greater than 1, jump one more position (resolves the issue where the down key fails when the first and last names are the same)
     if (activeRouteName.value === topName && length > 1) {
       activeRouteName.value = result.value[1].name
       scrollTo(1)
     } else {
-      // Jump to the top
       activeRouteName.value = topName
       scrollTo(0)
     }
@@ -129,11 +117,11 @@ function handleEnter() {
   const name = activeRouteName.value
   const path = result.value.find(item => item.name === name)?.path
   if (path && isExternal(path)) return window.open(path, "_blank", "noopener, noreferrer")
-  if (!name) return ElMessage.warning("Cannot enter this menu via search; please set a unique Name for the corresponding route")
+  if (!name) return message.warning("Cannot enter this menu via search; please set a unique Name for the corresponding route")
   try {
     router.push({ name })
   } catch {
-    return ElMessage.warning("This menu has required dynamic parameters and cannot be entered via search")
+    return message.warning("This menu has required dynamic parameters and cannot be entered via search")
   }
   handleClose()
 }
@@ -142,58 +130,106 @@ function handleEnter() {
 function handleReleaseUpOrDown() {
   isPressUpOrDown.value = false
 }
+
+watch(modelValue, (value) => {
+  if (value) nextTick(() => inputRef.value?.focus())
+})
 </script>
 
 <template>
-  <el-dialog
-    v-model="modelValue"
-    :before-close="handleClose"
-    :width="modalWidth"
-    top="5vh"
-    class="search-modal-private"
-    append-to-body
-    @opened="inputRef?.focus()"
-    @closed="inputRef?.blur()"
-    @keydown.up="handleUp"
-    @keydown.down="handleDown"
-    @keydown.enter="handleEnter"
-    @keyup.up.down="handleReleaseUpOrDown"
-  >
-    <el-input ref="inputRef" v-model="keyword" placeholder="Search menus" size="large" clearable @input="handleSearch">
-      <template #prefix>
-        <SvgIcon name="search" class="svg-icon" />
-      </template>
-    </el-input>
-    <el-empty v-if="result.length === 0" description="No search results" :image-size="100" />
-    <template v-else>
-      <p>Search results</p>
-      <el-scrollbar ref="scrollbarRef" max-height="40vh" always>
-        <Result
-          ref="resultRef"
-          v-model="activeRouteName"
-          :data="result"
-          :is-press-up-or-down="isPressUpOrDown"
-          @click="handleEnter"
-        />
-      </el-scrollbar>
-    </template>
-    <template #footer>
-      <Footer :total="result.length" />
-    </template>
-  </el-dialog>
+  <Teleport to="body">
+    <div v-if="modelValue" class="search-overlay" @click.self="handleClose">
+      <div
+        class="search-modal"
+        :style="{ width: modalWidth }"
+        @keydown.up="handleUp"
+        @keydown.down="handleDown"
+        @keydown.enter="handleEnter"
+        @keydown.esc="handleClose"
+        @keyup.up.down="handleReleaseUpOrDown"
+      >
+        <div class="search-input">
+          <SvgIcon name="search" class="svg-icon" />
+          <input ref="inputRef" v-model="keyword" placeholder="Search menus" class="search-field" @input="handleSearch">
+        </div>
+        <div v-if="result.length === 0" class="search-empty">No search results</div>
+        <template v-else>
+          <p>Search results</p>
+          <div ref="scrollbarRef" class="search-results">
+            <Result
+              ref="resultRef"
+              v-model="activeRouteName"
+              :data="result"
+              :is-press-up-or-down="isPressUpOrDown"
+              @click="handleEnter"
+            />
+          </div>
+        </template>
+        <div class="search-footer">
+          <Footer :total="result.length" />
+        </div>
+      </div>
+    </div>
+  </Teleport>
 </template>
 
-<style lang="scss">
-.search-modal-private {
+<style lang="scss" scoped>
+.search-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 5vh;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.search-modal {
+  background-color: var(--color-surface-default);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+}
+
+.search-input {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0 var(--space-3);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
   .svg-icon {
     font-size: 18px;
+    color: var(--color-text-secondary);
   }
-  .el-dialog__header {
-    display: none;
+  .search-field {
+    flex: 1;
+    padding: 10px 0;
+    border: none;
+    background: transparent;
+    color: var(--color-text-primary);
+    font-size: var(--font-size-md);
+    &:focus {
+      outline: none;
+    }
   }
-  .el-dialog__footer {
-    border-top: 1px solid var(--el-border-color);
-    padding-top: var(--el-dialog-padding-primary);
-  }
+}
+
+.search-empty {
+  padding: 60px 0;
+  text-align: center;
+  color: var(--color-text-secondary);
+}
+
+.search-results {
+  max-height: 40vh;
+  overflow-y: auto;
+}
+
+.search-footer {
+  border-top: 1px solid var(--color-border-default);
+  padding-top: var(--space-3);
+  margin-top: var(--space-3);
 }
 </style>

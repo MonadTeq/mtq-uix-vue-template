@@ -5,7 +5,7 @@ export interface ToastProps {
   dismissible?: boolean
 }
 
-const props = withDefaults(defineProps<ToastProps>(), {
+withDefaults(defineProps<ToastProps>(), {
   variant: "primary",
   visible: false,
   dismissible: true
@@ -14,32 +14,17 @@ const props = withDefaults(defineProps<ToastProps>(), {
 const emit = defineEmits<{
   (e: "close"): void
 }>()
-
-const elType = computed(() => {
-  switch (props.variant) {
-    case "success":
-      return "success"
-    case "warning":
-      return "warning"
-    case "danger":
-      return "error"
-    default:
-      return "info"
-  }
-})
 </script>
 
 <template>
-  <div v-if="visible" class="toast" role="status">
-    <el-icon class="toast__icon">
+  <div v-if="visible" class="toast" :class="`toast--${variant}`" role="status">
+    <span class="toast__icon" aria-hidden="true">
       <slot name="icon" />
-    </el-icon>
+    </span>
     <div class="toast__content">
       <slot />
     </div>
-    <button v-if="dismissible" class="toast__close" aria-label="Close" @click="emit('close')">
-      ×
-    </button>
+    <button v-if="dismissible" class="toast__close" aria-label="Close" @click="emit('close')">×</button>
   </div>
 </template>
 
@@ -54,7 +39,19 @@ const elType = computed(() => {
   border: 1px solid var(--color-border-default);
   border-left: 4px solid var(--color-action-primary);
   border-radius: var(--radius-md);
-  box-shadow: var(--el-box-shadow-light, 0 0 12px rgba(0, 0, 0, 0.12));
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.12);
+}
+
+.toast--success {
+  border-left-color: var(--color-status-success);
+}
+
+.toast--warning {
+  border-left-color: var(--color-status-warning);
+}
+
+.toast--danger {
+  border-left-color: var(--color-action-danger);
 }
 
 .toast__content {

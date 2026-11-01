@@ -1,56 +1,34 @@
+import { notification } from "@/shared/lib"
+
 function initStarNotification() {
   setTimeout(() => {
-    ElNotification({
+    notification({
       title: "Powered by love!",
       type: "success",
-      message: h(
-        "div",
-        null,
-        [
-          h("div", null, "All source code is free and open source. If it helps you, please give it a Star!"),
-          h("a", { style: "color: teal", target: "_blank", href: "https://github.com/un-pany/v3-admin-vite" }, "Click to visit")
-        ]
-      ),
-      duration: 0,
-      position: "bottom-right"
+      message: "All source code is free and open source. If it helps you, please give it a Star!",
+      duration: 0
     })
   }, 0)
 }
 
 function initStoreNotification() {
   setTimeout(() => {
-    ElNotification({
+    notification({
       title: "Lazy service?",
       type: "warning",
-      message: h(
-        "div",
-        null,
-        [
-          h("div", null, "Don't want to do it yourself but want to remove TS or other modules? There's a lazy package too!"),
-          h("a", { style: "color: teal", target: "_blank", href: "https://github.com/un-pany/v3-admin-vite/issues/225" }, "Click to get")
-        ]
-      ),
-      duration: 0,
-      position: "bottom-right"
+      message: "Don't want to do it yourself but want to remove TS or other modules? There's a lazy package too!",
+      duration: 0
     })
   }, 500)
 }
 
 function initMobileNotification() {
   setTimeout(() => {
-    ElNotification({
+    notification({
       title: "Mobile",
-      type: "primary",
-      message: h(
-        "div",
-        null,
-        [
-          h("div", null, "If you have mobile H5 requirements, try the new open-source template MobVue"),
-          h("a", { style: "color: teal", target: "_blank", href: "https://github.com/un-pany/mobvue" }, "Click to view")
-        ]
-      ),
-      duration: 0,
-      position: "bottom-right"
+      type: "info",
+      message: "If you have mobile H5 requirements, try the new open-source template MobVue",
+      duration: 0
     })
   }, 1000)
 }

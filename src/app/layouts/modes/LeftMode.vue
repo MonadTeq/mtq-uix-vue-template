@@ -169,7 +169,7 @@ $transition-time: 0.35s;
   // Both mobile and top or hybrid layout mode
   &.no-left {
     .sidebar-container {
-      background-color: var(--el-bg-color);
+      background-color: var(--color-surface-default);
     }
   }
 }

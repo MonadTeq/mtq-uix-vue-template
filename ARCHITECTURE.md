@@ -69,7 +69,7 @@ check. If a slice is empty, flag it for removal.
   implementation lives in the owning feature).
 - `providers` — the Pinia instance.
 - `router` — routes, guards, helpers.
-- `styles` — global styles, Element Plus/Vxe Table overrides, and theme schemes.
+- `styles` — global styles, theme schemes, and layout variables.
 
 ### `pages`
 
@@ -165,7 +165,7 @@ One file per scheme (`normal.css`, `dark.css`, `dark-blue.css`). Each defines a
 ## Naming conventions
 
 - Components: PascalCase (`NavigationBar.vue`).
-- Pages: kebab-case (`element-plus/index.vue`).
+- Pages: kebab-case (`ui-primitives/index.vue`).
 - Composables: camelCase with `use` prefix (`useTheme`, `use-device.ts`).
 - Files: kebab-case (`use-theme.ts`, `cache-key.ts`).
 - Slices: kebab-case (`access-control`, `settings-panel`).

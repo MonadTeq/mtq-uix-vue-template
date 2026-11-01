@@ -86,8 +86,7 @@ Primitive tokens live in `shared/styles/tokens/`; semantic schemes live in
 ## Base UI components (`shared/ui`)
 
 The `shared/ui` directory is a library of headless, themeable base primitives.
-They wrap Element Plus behind a neutral API so the app never couples to
-Element Plus prop names, and they are styled exclusively with semantic tokens.
+They are native Vue components styled exclusively with semantic tokens.
 
 Conventions:
 

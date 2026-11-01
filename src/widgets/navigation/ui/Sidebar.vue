@@ -7,17 +7,9 @@ import { useSettingsStore } from "@/entities/settings"
 import Logo from "./Logo.vue"
 import Item from "./Item.vue"
 
-const v3SidebarMenuBgColor = "var(--mtq-uix-sidebar-menu-bg-color)"
-
-const v3SidebarMenuTextColor = "var(--mtq-uix-sidebar-menu-text-color)"
-
-const v3SidebarMenuActiveTextColor = "var(--mtq-uix-sidebar-menu-active-text-color)"
-
 const { isMobile } = useDevice()
 
 const { isLeft, isTop } = useLayoutMode()
-
-const route = useRoute()
 
 const appStore = useAppStore()
 
@@ -25,125 +17,122 @@ const permissionStore = usePermissionStore()
 
 const settingsStore = useSettingsStore()
 
-const activeMenu = computed(() => route.meta.activeMenu || route.path)
-
 const noHiddenRoutes = computed(() => permissionStore.routes.filter(item => !item.meta?.hidden))
 
 const isCollapse = computed(() => !appStore.sidebar.opened)
 
 const isLogo = computed(() => isLeft.value && settingsStore.showLogo)
-
-const backgroundColor = computed(() => (isLeft.value ? v3SidebarMenuBgColor : undefined))
-
-const textColor = computed(() => (isLeft.value ? v3SidebarMenuTextColor : undefined))
-
-const activeTextColor = computed(() => (isLeft.value ? v3SidebarMenuActiveTextColor : undefined))
-
-const sidebarMenuItemHeight = computed(() => !isTop.value ? "var(--mtq-uix-sidebar-menu-item-height)" : "var(--mtq-uix-navigationbar-height)")
-
-const sidebarMenuHoverBgColor = computed(() => !isTop.value ? "var(--mtq-uix-sidebar-menu-hover-bg-color)" : "transparent")
-
-const tipLineWidth = computed(() => !isTop.value ? "2px" : "0px")
 </script>
 
 <template>
-  <div :class="{ 'has-logo': isLogo }">
+  <div
+    class="sidebar"
+    :class="{ 'has-logo': isLogo, 'is-collapse': isCollapse, 'is-horizontal': isTop && !isMobile }"
+  >
     <Logo v-if="isLogo" :collapse="isCollapse" />
-    <el-scrollbar wrap-class="scrollbar-wrapper">
-      <el-menu
-        :default-active="activeMenu"
-        :collapse="isCollapse && !isTop"
-        :background-color="backgroundColor"
-        :text-color="textColor"
-        :active-text-color="activeTextColor"
-        :collapse-transition="false"
-        :mode="isTop && !isMobile ? 'horizontal' : 'vertical'"
-      >
+    <div class="sidebar__scroll">
+      <ul class="sidebar__menu">
         <Item
           v-for="noHiddenRoute in noHiddenRoutes"
           :key="noHiddenRoute.path"
           :item="noHiddenRoute"
           :base-path="noHiddenRoute.path"
         />
-      </el-menu>
-    </el-scrollbar>
+      </ul>
+    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-%tip-line {
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: v-bind(tipLineWidth);
-    height: 100%;
-    background-color: var(--mtq-uix-sidebar-menu-tip-line-bg-color);
-  }
-}
-
-.has-logo {
-  .el-scrollbar {
-    height: calc(100% - var(--mtq-uix-header-height));
-  }
-}
-
-.el-scrollbar {
+.sidebar {
   height: 100%;
-  :deep(.scrollbar-wrapper) {
-    // Limit horizontal width
-    overflow-x: hidden;
-  }
-  // Scrollbar
-  :deep(.el-scrollbar__bar) {
-    &.is-horizontal {
-      // Hide the horizontal scrollbar
-      display: none;
-    }
-  }
 }
 
-.el-menu {
-  user-select: none;
-  border: none;
-  width: 100%;
+.has-logo .sidebar__scroll {
+  height: calc(100% - var(--mtq-uix-header-height));
 }
 
-.el-menu--horizontal {
-  height: v-bind(sidebarMenuItemHeight);
+.sidebar__scroll {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
-:deep(.el-menu-item),
-:deep(.el-sub-menu__title),
-:deep(.el-sub-menu .el-menu-item),
-:deep(.el-menu--horizontal .el-menu-item) {
-  height: v-bind(sidebarMenuItemHeight);
-  line-height: v-bind(sidebarMenuItemHeight);
-  &.is-active,
-  &:hover {
-    background-color: v-bind(sidebarMenuHoverBgColor);
-  }
+.sidebar__menu {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
-:deep(.el-sub-menu) {
-  &.is-active {
-    > .el-sub-menu__title {
-      color: v-bind(activeTextColor);
-    }
-  }
+/* Horizontal (top) mode */
+.sidebar.is-horizontal .sidebar__scroll {
+  height: var(--mtq-uix-navigationbar-height);
+  overflow: visible;
 }
 
-:deep(.el-menu-item.is-active) {
-  @extend %tip-line;
+.sidebar.is-horizontal .sidebar__menu {
+  display: flex;
+  align-items: center;
+  height: 100%;
 }
 
-.el-menu--collapse {
-  :deep(.el-sub-menu.is-active) {
-    .el-sub-menu__title {
-      @extend %tip-line;
-      background-color: v-bind(sidebarMenuHoverBgColor);
-    }
-  }
+.sidebar.is-horizontal :deep(.menu-item),
+.sidebar.is-horizontal :deep(.menu-sub) {
+  position: relative;
+}
+
+.sidebar.is-horizontal :deep(.menu-item__link),
+.sidebar.is-horizontal :deep(.menu-sub__title) {
+  height: var(--mtq-uix-navigationbar-height);
+  padding: 0 12px;
+}
+
+.sidebar.is-horizontal :deep(.menu-sub__children) {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 160px;
+  background-color: var(--mtq-uix-sidebar-menu-bg-color);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.sidebar.is-horizontal :deep(.menu-sub__arrow) {
+  display: none;
+}
+
+/* Collapse (icon-only) mode */
+.sidebar.is-collapse :deep(.menu-item__title) {
+  display: none;
+}
+
+.sidebar.is-collapse :deep(.menu-item__link),
+.sidebar.is-collapse :deep(.menu-sub__title) {
+  justify-content: center;
+  padding: 0;
+}
+
+.sidebar.is-collapse :deep(.menu-item__icon) {
+  margin-right: 0;
+}
+
+.sidebar.is-collapse :deep(.menu-sub__arrow) {
+  display: none;
+}
+
+.sidebar.is-collapse :deep(.menu-sub__children) {
+  position: absolute;
+  left: 100%;
+  top: 0;
+  min-width: 160px;
+  background-color: var(--mtq-uix-sidebar-menu-bg-color);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.sidebar.is-collapse :deep(.menu-sub) {
+  position: relative;
+}
+
+.sidebar.is-collapse :deep(.menu-sub:hover > .menu-sub__children) {
+  display: block;
 }
 </style>

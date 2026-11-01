@@ -16,5 +16,17 @@ const model = defineModel<number>({ default: 0 })
 </script>
 
 <template>
-  <el-slider v-model="model" :min="min" :max="max" :step="step" :disabled="disabled" />
+  <input v-model="model" type="range" class="range" :min="min" :max="max" :step="step" :disabled="disabled">
 </template>
+
+<style scoped>
+.range {
+  width: 100%;
+  accent-color: var(--color-action-primary);
+}
+
+.range:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+</style>

@@ -21,6 +21,8 @@ const SELECT_RESPONSE_DATA = {
 
 const ERROR_MESSAGE = "API error occurred"
 
+import { message } from "@/shared/lib"
+
 /** Mock API */
 export function getSelectDataApi() {
   return new Promise<typeof SELECT_RESPONSE_DATA>((resolve, reject) => {
@@ -32,7 +34,7 @@ export function getSelectDataApi() {
       } else {
         // Simulate API call error
         reject(new Error(ERROR_MESSAGE))
-        ElMessage.error(ERROR_MESSAGE)
+        message.error(ERROR_MESSAGE)
       }
     }, 2000)
   })

@@ -73,10 +73,9 @@ const loading = ref(false)
   <div class="app-container">
     <h1>UI Primitives</h1>
     <p class="lead">
-      Base, headless, themeable components in <code>src/shared/ui</code>. They wrap
-      Element Plus behind a neutral API and are styled exclusively with semantic
-      tokens. See <a href="/docs/style-schemes">Style Schemes</a> to see them
-      re-theme live.
+      Base, headless, themeable components in <code>src/shared/ui</code>. They are
+      native Vue components styled exclusively with semantic tokens. See
+      <a href="/docs/style-schemes">Style Schemes</a> to see them re-theme live.
     </p>
 
     <Card title="Actions" class="section">

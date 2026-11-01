@@ -2,7 +2,6 @@
 import type { RouterLink } from "vue-router"
 import Screenfull from "@/shared/ui/screenfull"
 import { useRouteListener } from "@/shared/lib"
-import { ArrowLeft, ArrowRight } from "@element-plus/icons-vue"
 import { useSettingsStore } from "@/entities/settings"
 
 interface Props {
@@ -17,7 +16,7 @@ const settingsStore = useSettingsStore()
 
 const { listenerRouteChange } = useRouteListener()
 
-/** Reference to the scrollbar component element */
+/** Reference to the scrollbar container element */
 const scrollbarRef = useTemplateRef("scrollbarRef")
 
 /** Reference to the scrollbar content element */
@@ -30,8 +29,8 @@ let currentScrollLeft = 0
 const translateDistance = 200
 
 /** Triggered on scroll */
-function scroll({ scrollLeft }: { scrollLeft: number }) {
-  currentScrollLeft = scrollLeft
+function onScroll(event: Event) {
+  currentScrollLeft = (event.target as HTMLElement).scrollLeft
 }
 
 /** Triggered on mouse wheel scroll */
@@ -45,13 +44,9 @@ function wheelScroll({ deltaY }: WheelEvent) {
 
 /** Get the widths that may be needed */
 function getWidth() {
-  // Length of the scrollable content
   const scrollbarContentRefWidth = scrollbarContentRef.value!.clientWidth
-  // Width of the visible scroll area
-  const scrollbarRefWidth = scrollbarRef.value!.wrapRef!.clientWidth
-  // The last remaining scrollable width
+  const scrollbarRefWidth = scrollbarRef.value!.clientWidth
   const lastDistance = scrollbarContentRefWidth - scrollbarRefWidth - currentScrollLeft
-
   return { scrollbarContentRefWidth, scrollbarRefWidth, lastDistance }
 }
 
@@ -59,14 +54,13 @@ function getWidth() {
 function scrollTo(direction: "left" | "right", distance: number = translateDistance) {
   let scrollLeft = 0
   const { scrollbarContentRefWidth, scrollbarRefWidth, lastDistance } = getWidth()
-  // No horizontal scrollbar; end directly
   if (scrollbarRefWidth > scrollbarContentRefWidth) return
   if (direction === "left") {
     scrollLeft = Math.max(0, currentScrollLeft - distance)
   } else {
     scrollLeft = Math.min(currentScrollLeft + distance, currentScrollLeft + lastDistance)
   }
-  scrollbarRef.value!.setScrollLeft(scrollLeft)
+  scrollbarRef.value!.scrollLeft = scrollLeft
 }
 
 /** Move to the target position */
@@ -80,13 +74,11 @@ function moveTo() {
       const offsetWidth = el.offsetWidth
       const offsetLeft = el.offsetLeft
       const { scrollbarRefWidth } = getWidth()
-      // When the current tag is on the left of the visible area
       if (offsetLeft < currentScrollLeft) {
         const distance = currentScrollLeft - offsetLeft
         scrollTo("left", distance)
         return
       }
-      // When the current tag is on the right of the visible area
       const width = scrollbarRefWidth + currentScrollLeft - offsetWidth
       if (offsetLeft > width) {
         const distance = offsetLeft - width
@@ -97,7 +89,6 @@ function moveTo() {
   }
 }
 
-// Listen to route changes and move to the target position
 listenerRouteChange(() => {
   nextTick(moveTo)
 })
@@ -105,21 +96,21 @@ listenerRouteChange(() => {
 
 <template>
   <div class="scroll-container">
-    <el-tooltip content="Scroll tags left (clickable when exceeding the max width)">
-      <el-icon class="arrow left" @click="scrollTo('left')">
-        <ArrowLeft />
-      </el-icon>
-    </el-tooltip>
-    <el-scrollbar ref="scrollbarRef" @wheel.passive="wheelScroll" @scroll="scroll" wrap-class="scrollbar-wrap">
+    <button class="arrow left" title="Scroll tags left (clickable when exceeding the max width)" @click="scrollTo('left')">
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+        <path fill="currentColor" d="M15 4l-8 8 8 8V4z" />
+      </svg>
+    </button>
+    <div ref="scrollbarRef" class="scrollbar" @wheel.passive="wheelScroll" @scroll="onScroll">
       <div ref="scrollbarContentRef" class="scrollbar-content">
         <slot />
       </div>
-    </el-scrollbar>
-    <el-tooltip content="Scroll tags right (clickable when exceeding the max width)">
-      <el-icon class="arrow right" @click="scrollTo('right')">
-        <ArrowRight />
-      </el-icon>
-    </el-tooltip>
+    </div>
+    <button class="arrow right" title="Scroll tags right (clickable when exceeding the max width)" @click="scrollTo('right')">
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+        <path fill="currentColor" d="M9 4l8 8-8 8V4z" />
+      </svg>
+    </button>
     <Screenfull v-if="settingsStore.showScreenfull" :content="true" class="screenfull" />
   </div>
 </template>
@@ -135,21 +126,26 @@ listenerRouteChange(() => {
     height: 100%;
     font-size: 18px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: transparent;
+    color: var(--mtq-uix-tagsview-text-color);
     &.left {
-      box-shadow: 5px 0 5px -6px var(--el-border-color-darker);
+      box-shadow: 5px 0 5px -6px var(--color-border-strong);
     }
     &.right {
-      box-shadow: -5px 0 5px -6px var(--el-border-color-darker);
+      box-shadow: -5px 0 5px -6px var(--color-border-strong);
     }
   }
-  .el-scrollbar {
+  .scrollbar {
     flex: 1;
-    // Prevent line wrapping (show the scrollbar when exceeding the width)
     white-space: nowrap;
-    :deep(.scrollbar-wrap) {
-      display: flex;
-      align-items: center;
-    }
+    overflow-x: auto;
+    overflow-y: hidden;
+    display: flex;
+    align-items: center;
     .scrollbar-content {
       display: inline-block;
     }

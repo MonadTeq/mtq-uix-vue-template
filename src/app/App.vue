@@ -2,7 +2,7 @@
 import { useGreyAndColorWeakness } from "@/features/color-mode"
 import { usePany } from "@/features/notifications"
 import { useTheme } from "@/features/theme"
-import zhCn from "element-plus/es/locale/lang/zh-cn" // Element Plus Chinese language pack
+import { FeedbackHost } from "@/shared/ui"
 
 const { initTheme } = useTheme()
 
@@ -26,7 +26,6 @@ initMobileNotification()
 </script>
 
 <template>
-  <el-config-provider :locale="zhCn">
-    <router-view />
-  </el-config-provider>
+  <router-view />
+  <FeedbackHost />
 </template>

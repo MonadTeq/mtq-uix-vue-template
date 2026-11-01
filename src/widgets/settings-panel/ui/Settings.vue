@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { useLayoutMode } from "@/features/layout-mode"
 import { removeLayoutsConfig } from "@/shared/lib"
-import { Refresh } from "@element-plus/icons-vue"
+import { Button } from "@/shared/ui"
 import { useSettingsStore } from "@/entities/settings"
 import SelectLayoutMode from "./SelectLayoutMode.vue"
 
@@ -9,7 +9,6 @@ const { isLeft } = useLayoutMode()
 
 const settingsStore = useSettingsStore()
 
-// Use storeToRefs to keep the extracted properties reactive
 const {
   showTagsView,
   showLogo,
@@ -57,15 +56,15 @@ function resetLayoutsConfig() {
   <div class="setting-container">
     <h4>Layout configuration</h4>
     <SelectLayoutMode />
-    <el-divider />
+    <hr class="divider">
     <h4>Feature configuration</h4>
     <div v-for="(settingValue, settingName, index) in switchSettings" :key="index" class="setting-item">
       <span class="setting-name">{{ settingName }}</span>
-      <el-switch v-model="settingValue.value" :disabled="!isLeft && settingName === 'Fix Header'" />
+      <input v-model="settingValue.value" type="checkbox" class="setting-switch" :disabled="!isLeft && settingName === 'Fix Header'">
     </div>
-    <el-button type="danger" :icon="Refresh" @click="resetLayoutsConfig">
+    <Button variant="danger" class="reset" @click="resetLayoutsConfig">
       Reset
-    </el-button>
+    </Button>
   </div>
 </template>
 
@@ -74,9 +73,14 @@ function resetLayoutsConfig() {
 
 .setting-container {
   padding: 20px;
+  .divider {
+    border: none;
+    border-top: 1px solid var(--color-border-default);
+    margin: 16px 0;
+  }
   .setting-item {
     font-size: 14px;
-    color: var(--el-text-color-regular);
+    color: var(--color-text-regular);
     padding: 5px 0;
     display: flex;
     justify-content: space-between;
@@ -85,7 +89,10 @@ function resetLayoutsConfig() {
       @extend %ellipsis;
     }
   }
-  .el-button {
+  .setting-switch {
+    accent-color: var(--color-action-primary);
+  }
+  .reset {
     margin-top: 40px;
     width: 100%;
   }

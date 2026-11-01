@@ -9,88 +9,146 @@ interface Props {
   basePath?: string
 }
 
-const { item, basePath = "" } = defineProps<Props>()
+const props = withDefaults(defineProps<Props>(), { basePath: "" })
 
-/** Whether to always show the root menu */
-const alwaysShowRootMenu = computed(() => item.meta?.alwaysShow)
+const route = useRoute()
 
-/** Child menus to show */
-const showingChildren = computed(() => item.children?.filter(child => !child.meta?.hidden) ?? [])
+const alwaysShowRootMenu = computed(() => props.item.meta?.alwaysShow)
 
-/** Number of child menus to show */
+const showingChildren = computed(() => props.item.children?.filter(child => !child.meta?.hidden) ?? [])
+
 const showingChildNumber = computed(() => showingChildren.value.length)
 
-/** The only child menu item */
 const theOnlyOneChild = computed(() => {
-  const number = showingChildNumber.value
-  switch (true) {
-    case number > 1:
-      return null
-    case number === 1:
+  switch (showingChildNumber.value) {
+    case 1:
       return showingChildren.value[0]
+    case 0:
+      return { ...props.item, path: "" }
     default:
-      return { ...item, path: "" }
+      return null
   }
 })
 
-/** Resolve the path */
 function resolvePath(routePath: string) {
-  switch (true) {
-    case isExternal(routePath):
-      return routePath
-    case isExternal(basePath):
-      return basePath
-    default:
-      return path.resolve(basePath, routePath)
-  }
+  if (isExternal(routePath)) return routePath
+  if (isExternal(props.basePath)) return props.basePath
+  return path.resolve(props.basePath, routePath)
+}
+
+const isLeaf = computed(() => !alwaysShowRootMenu.value && theOnlyOneChild.value && !theOnlyOneChild.value.children)
+
+const leafPath = computed(() => resolvePath(theOnlyOneChild.value?.path ?? ""))
+
+const parentPath = computed(() => resolvePath(props.item.path))
+
+const currentPath = computed(() => (route.meta.activeMenu as string) || route.path)
+
+const isActive = computed(() => (isLeaf.value ? currentPath.value === leafPath.value : currentPath.value.startsWith(`${parentPath.value}/`)))
+
+const hasActiveChild = computed(() => currentPath.value.startsWith(`${parentPath.value}/`))
+
+const open = ref(hasActiveChild.value)
+
+function toggleOpen() {
+  open.value = !open.value
 }
 </script>
 
 <template>
-  <template v-if="!alwaysShowRootMenu && theOnlyOneChild && !theOnlyOneChild.children">
-    <Link v-if="theOnlyOneChild.meta" :to="resolvePath(theOnlyOneChild.path)">
-      <el-menu-item :index="resolvePath(theOnlyOneChild.path)">
-        <SvgIcon v-if="theOnlyOneChild.meta.svgIcon" :name="theOnlyOneChild.meta.svgIcon" class="svg-icon" />
-        <component v-else-if="theOnlyOneChild.meta.elIcon" :is="theOnlyOneChild.meta.elIcon" class="el-icon" />
-        <template v-if="theOnlyOneChild.meta.title" #title>
-          <span class="title">{{ theOnlyOneChild.meta.title }}</span>
-        </template>
-      </el-menu-item>
+  <li v-if="isLeaf && theOnlyOneChild && theOnlyOneChild.meta" class="menu-item" :class="{ 'menu-item--active': isActive }">
+    <Link :to="leafPath" class="menu-item__link">
+      <SvgIcon v-if="theOnlyOneChild.meta.svgIcon" :name="theOnlyOneChild.meta.svgIcon" class="menu-item__icon" />
+      <span v-else-if="theOnlyOneChild.meta.title" class="menu-item__icon menu-item__icon--text">{{ theOnlyOneChild.meta.title.charAt(0) }}</span>
+      <span v-if="theOnlyOneChild.meta.title" class="menu-item__title">{{ theOnlyOneChild.meta.title }}</span>
     </Link>
-  </template>
-  <el-sub-menu v-else :index="resolvePath(item.path)" teleported>
-    <template #title>
-      <SvgIcon v-if="item.meta?.svgIcon" :name="item.meta.svgIcon" class="svg-icon" />
-      <component v-else-if="item.meta?.elIcon" :is="item.meta.elIcon" class="el-icon" />
-      <span v-if="item.meta?.title" class="title">{{ item.meta.title }}</span>
-    </template>
-    <template v-if="item.children">
+  </li>
+  <li v-else class="menu-sub" :class="{ 'menu-sub--active': hasActiveChild, 'menu-sub--open': open }">
+    <button class="menu-sub__title" :aria-expanded="open" @click="toggleOpen">
+      <SvgIcon v-if="item.meta?.svgIcon" :name="item.meta.svgIcon" class="menu-item__icon" />
+      <span v-else-if="item.meta?.title" class="menu-item__icon menu-item__icon--text">{{ item.meta.title.charAt(0) }}</span>
+      <span v-if="item.meta?.title" class="menu-item__title">{{ item.meta.title }}</span>
+      <span class="menu-sub__arrow" aria-hidden="true">▾</span>
+    </button>
+    <ul v-show="open" class="menu-sub__children">
       <Item
         v-for="child in showingChildren"
         :key="child.path"
         :item="child"
         :base-path="resolvePath(child.path)"
       />
-    </template>
-  </el-sub-menu>
+    </ul>
+  </li>
 </template>
 
 <style lang="scss" scoped>
 @import "@/shared/styles/mixins.scss";
 
-.svg-icon {
+.menu-item,
+.menu-sub {
+  list-style: none;
+}
+
+.menu-item__link,
+.menu-sub__title {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: var(--mtq-uix-sidebar-menu-item-height);
+  padding: 0 16px;
+  color: var(--mtq-uix-sidebar-menu-text-color);
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.menu-item__link:hover,
+.menu-sub__title:hover {
+  background-color: var(--mtq-uix-sidebar-menu-hover-bg-color);
+}
+
+.menu-item--active > .menu-item__link {
+  color: var(--mtq-uix-sidebar-menu-active-text-color);
+}
+
+.menu-sub--active > .menu-sub__title {
+  color: var(--mtq-uix-sidebar-menu-active-text-color);
+}
+
+.menu-item__icon {
   min-width: 1em;
   margin-right: 12px;
   font-size: 18px;
 }
 
-.el-icon {
-  width: 1em !important;
-  margin-right: 12px !important;
-  font-size: 18px;
+.menu-item__icon--text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  font-size: 12px;
 }
 
-.title {
+.menu-item__title {
   @extend %ellipsis;
+  flex: 1;
+  text-align: left;
+}
+
+.menu-sub__arrow {
+  transition: transform 0.2s;
+}
+
+.menu-sub--open > .menu-sub__title .menu-sub__arrow {
+  transform: rotate(180deg);
+}
+
+.menu-sub__children {
+  margin: 0;
+  padding: 0;
 }
 </style>

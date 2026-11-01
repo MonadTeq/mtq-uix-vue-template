@@ -66,45 +66,18 @@ export const constantRoutes: RouteRecordRaw[] = [
   {
     path: "/demo",
     component: Layouts,
-    redirect: "/demo/unocss",
+    redirect: "/demo/ui-primitives",
     name: "Demo",
     meta: {
-      title: "Demos",
-      elIcon: "DataBoard"
+      title: "Demos"
     },
     children: [
-      {
-        path: "unocss",
-        component: () => import("@/pages/demo/unocss/index.vue"),
-        name: "UnoCSS",
-        meta: {
-          title: "UnoCSS"
-        }
-      },
       {
         path: "ui-primitives",
         component: () => import("@/pages/demo/ui-primitives/index.vue"),
         name: "UIPrimitives",
         meta: {
           title: "UI Primitives"
-        }
-      },
-      {
-        path: "element-plus",
-        component: () => import("@/pages/demo/element-plus/index.vue"),
-        name: "ElementPlus",
-        meta: {
-          title: "Element Plus",
-          keepAlive: true
-        }
-      },
-      {
-        path: "vxe-table",
-        component: () => import("@/pages/demo/vxe-table/index.vue"),
-        name: "VxeTable",
-        meta: {
-          title: "Vxe Table",
-          keepAlive: true
         }
       },
       {
@@ -170,8 +143,7 @@ export const constantRoutes: RouteRecordRaw[] = [
     redirect: "/docs/architecture",
     name: "Docs",
     meta: {
-      title: "Documentation",
-      elIcon: "Reading"
+      title: "Documentation"
     },
     children: [
       {
@@ -211,8 +183,7 @@ export const constantRoutes: RouteRecordRaw[] = [
   {
     path: "/link",
     meta: {
-      title: "Docs Links",
-      elIcon: "Link"
+      title: "Docs Links"
     },
     children: [
       {
@@ -256,7 +227,6 @@ export const dynamicRoutes: RouteRecordRaw[] = [
     name: "Permission",
     meta: {
       title: "Permission Demo",
-      elIcon: "Lock",
       alwaysShow: true
     },
     children: [

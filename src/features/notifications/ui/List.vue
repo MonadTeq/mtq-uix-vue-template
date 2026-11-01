@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import type { NotifyItem } from "./type"
+import { Badge, Card } from "@/shared/ui"
 
 interface Props {
   data: NotifyItem[]
@@ -9,14 +10,14 @@ const props = defineProps<Props>()
 </script>
 
 <template>
-  <el-empty v-if="props.data.length === 0" />
-  <el-card v-else v-for="(item, index) in props.data" :key="index" shadow="never" class="card-container">
+  <div v-if="props.data.length === 0" class="empty">No data</div>
+  <Card v-else v-for="(item, index) in props.data" :key="index" shadow="never" class="card-container">
     <template #header>
       <div class="card-header">
         <div>
           <span>
             <span class="card-title">{{ item.title }}</span>
-            <el-tag v-if="item.extra" :type="item.status" effect="plain" size="small">{{ item.extra }}</el-tag>
+            <Badge v-if="item.extra" :variant="item.status">{{ item.extra }}</Badge>
           </span>
           <div class="card-time">
             {{ item.datetime }}
@@ -30,10 +31,16 @@ const props = defineProps<Props>()
     <div class="card-body">
       {{ item.description ?? "No Data" }}
     </div>
-  </el-card>
+  </Card>
 </template>
 
 <style lang="scss" scoped>
+.empty {
+  padding: 40px 0;
+  text-align: center;
+  color: var(--color-text-secondary);
+}
+
 .card-container {
   margin-bottom: 10px;
   .card-header {
@@ -46,7 +53,7 @@ const props = defineProps<Props>()
     }
     .card-time {
       font-size: 12px;
-      color: var(--el-text-color-secondary);
+      color: var(--color-text-secondary);
     }
     .card-avatar {
       display: flex;
