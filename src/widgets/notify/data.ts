@@ -3,13 +3,13 @@ import type { NotifyItem } from "./type"
 export const notifyData: NotifyItem[] = [
   {
     avatar: "https://gw.alipayobjects.com/zos/rmsportal/OKJXDXrmkNshAMvwtvhu.png",
-    title: "V3 Admin Vite is live",
+    title: "MTQ UiX Vue is live",
     datetime: "4 years ago",
     description: "An AI-friendly admin dashboard template based on mainstream technologies such as Vue3, Vite, TypeScript, and Element Plus"
   },
   {
     avatar: "https://gw.alipayobjects.com/zos/rmsportal/OKJXDXrmkNshAMvwtvhu.png",
-    title: "V3 Admin is live",
+    title: "MTQ UiX is live",
     datetime: "5 years ago",
     description: "A basic admin system solution based on Vue3, TypeScript, Element Plus, Pinia, and Vue CLI 5.x"
   }

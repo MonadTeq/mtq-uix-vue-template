@@ -91,7 +91,7 @@ pnpm test # Unit tests
 ### Directory Structure
 
 ```sh
-v3-admin-vite
+mtq-uix-vue
 ├─ .husky                # lint and format on commit
 ├─ .vscode               # vscode config and plugins
 ├─ public

@@ -1,4 +1,4 @@
-const SYSTEM_NAME = "v3-admin-vite"
+const SYSTEM_NAME = "mtq-uix-vue"
 
 /** Key used when caching data */
 export class CacheKey {

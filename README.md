@@ -1,6 +1,6 @@
 <div align="center">
-  <img alt="logo" width="120" height="120" src="./src/common/assets/images/layouts/logo.png">
-  <h1>V3 Admin Vite - AI Friendly</h1>
+  <img alt="logo" width="120" height="120" src="./src/shared/assets/images/layouts/logo.png">
+  <h1>MTQ UiX Vue - AI Friendly</h1>
 </div>
 
 [![github release](https://img.shields.io/github/v/release/un-pany/v3-admin-vite?style=flat)](https://github.com/un-pany/v3-admin-vite/releases)
@@ -10,49 +10,90 @@
 
 ## Introduction <a href="https://juejin.cn/post/7660780385584316454"><img src="https://img.shields.io/badge/AI-Coding-black" alt="AI Coding"></a>
 
-V3 Admin Vite is an AI-friendly admin dashboard template built on mainstream technologies such as Vue3, Vite, TypeScript, and Element Plus, offering an excellent "Vibe Coding" experience!
+MTQ UiX Vue is an AI-friendly admin dashboard template built on mainstream technologies such as Vue3, Vite, TypeScript, and Element Plus, organized with a strict Feature-Sliced Design (FSD) architecture.
 
 _Supports mainstream AI coding tools such as Claude Code, CodeX, Cursor, Trae, and Antigravity_
 
-## Notifications
+## Architecture
 
-> [!IMPORTANT]
-> Welcome to the all-new version 5.2, delivering a unique AI coding experience! It also introduces the long-awaited backend-controlled dynamic routing permission system
+The codebase follows Feature-Sliced Design. The `src` directory is split into six layers, ordered top → bottom:
 
-> [!WARNING]
-> Version 4.x will no longer be maintained unless there are critical bugs! [Click to switch to the 4.x branch](https://github.com/un-pany/v3-admin-vite/tree/4.x)
+| Layer | Responsibility | Example |
+|---|---|---|
+| `app` | Entry point, router, plugins, providers, global styles | `main.ts`, `router`, `providers/pinia` |
+| `pages` | Full pages: documentation, demos | `login`, `dashboard`, `demo` |
+| `widgets` | Composite blocks composed of entities/features | `layout` (nav shell), `search-menu`, `notify` |
+| `features` | User scenarios / business logic | `theme`, `permission`, `layout-mode` |
+| `entities` | Domain state and reusable UI entities | `user`, `settings`, `screenfull`, `hamburger` |
+| `shared` | Primitives: API client, utils, tokens, types, assets | `api`, `lib`, `constants`, `types` |
 
-> [!TIP]
-> Paid services are officially launched! If you don’t want to do it yourself but want to remove TS or other modules, try the lazy package! [Click to check it out](https://github.com/un-pany/v3-admin-vite/issues/225)
+### Dependency rules
 
-> [!NOTE]
-> If you have mobile web app requirements, give the new open-source template [MobVue](https://github.com/un-pany/mobvue) a try
+- A layer may import **only strictly lower layers** (e.g. `widgets → features → entities → shared`).
+- No upward imports, no sibling imports within a layer.
+- `shared` imports only external packages — it contains no business logic.
+- Path aliases are used everywhere (`@/shared`, `@/entities`, `@/features`, `@/widgets`, `@/pages`, `@/app`); no `../../../` chains.
+- Boundaries are enforced with `no-restricted-imports` in `eslint.config.js`.
 
-## Usage
+### Directory structure
 
-<details>
-<summary>Recommended Environment</summary>
+```sh
+src
+├─ app
+│  ├─ App.vue               # root component
+│  ├─ main.ts               # entry point
+│  ├─ providers             # pinia instance
+│  ├─ plugins               # global components, custom directives
+│  ├─ router                # routes, guards, helpers
+│  └─ styles                # global styles and themes
+├─ pages
+│  ├─ dashboard             # dashboard (role-based)
+│  ├─ demo                  # demos (element-plus, vxe-table, composables, permission)
+│  ├─ error                 # 403 / 404
+│  ├─ login                 # login
+│  └─ redirect              # redirect helper
+├─ widgets
+│  ├─ layout                # nav shell (sidebar, navbar, tags-view, breadcrumb, settings)
+│  ├─ notify                # notification panel
+│  └─ search-menu           # global search
+├─ features
+│  ├─ theme                 # theme switcher
+│  ├─ color-mode            # gray / color-weakness mode
+│  ├─ layout-mode           # left / top / hybrid layout
+│  ├─ permission            # permission check + v-permission directive
+│  ├─ notifications         # notification popups
+│  ├─ title                 # dynamic document title
+│  └─ device                # device detection
+├─ entities
+│  ├─ user                  # session store (token, roles, permissions)
+│  ├─ settings              # layout settings store
+│  ├─ app-ui                # device / sidebar state store
+│  ├─ permission            # accessible routes store
+│  ├─ tags-view             # tags bar store
+│  ├─ screenfull            # fullscreen toggle
+│  └─ hamburger             # sidebar collapse toggle
+└─ shared
+   ├─ api                   # axios client and API endpoints
+   ├─ lib                   # utils and pure composables
+   ├─ constants             # enums, cache keys, route paths
+   ├─ types                 # data contracts and ambient declarations
+   ├─ assets                # icons and images
+   └─ styles                # shared SCSS mixins
+```
 
-<br>
+## Requirements
 
-- Latest version of `Visual Studio Code` or AI IDE `Cursor` and `Trae`
-- Install the recommended plugins in the `.vscode/extensions.json` file
 - `node` 20.19+ or 22.12+
 - `pnpm` 10+
 
-</details>
-
-<details>
-<summary>Local Development</summary>
-
-<br>
+## Getting Started
 
 ```bash
 # Clone the project
 git clone https://github.com/un-pany/v3-admin-vite.git
 
 # Enter the project directory
-cd v3-admin-vite
+cd mtq-uix-vue
 
 # Install dependencies
 pnpm i
@@ -61,54 +102,33 @@ pnpm i
 pnpm dev
 ```
 
-</details>
-
-<details>
-<summary>Build</summary>
-
-<br>
-
-```bash
-# Build for the staging environment
-pnpm build:staging
-
-# Build for the production environment
-pnpm build
-```
-
-</details>
-
-<details>
-<summary>Local Preview</summary>
-
-<br>
-
-```bash
-# Execute the build command first to generate the dist directory, then run the preview command
-pnpm preview
-```
-
-</details>
-
-<details>
-<summary>Code Check</summary>
-
-<br>
+## Development
 
 ```bash
 # Code linting and formatting
 pnpm lint
 
-# Unit tests
+# Run unit tests (Vitest)
 pnpm test
+
+# Type checking (vue-tsc)
+pnpm exec vue-tsc --noEmit
 ```
 
-</details>
+## Build
 
-<details>
-<summary>Commit Guidelines</summary>
+```bash
+# Build for the staging environment
+pnpm build:staging
 
-<br>
+# Build for the production environment (runs vue-tsc type checking first)
+pnpm build
+
+# Preview the production build locally (run `pnpm build` first)
+pnpm preview
+```
+
+## Commit Guidelines
 
 `feat` New feature
 
@@ -129,39 +149,6 @@ pnpm test
 `revert` Revert changes
 
 `chore` Chores (update dependencies, modify configurations, etc)
-
-</details>
-
-<details>
-<summary>Install recommended skills</summary>
-
-<br>
-
-```bash
-npx skills experimental_install
-```
-
-</details>
-
-## Links
-
-**Online Preview**: [github-pages](https://un-pany.github.io/v3-admin-vite)
-
-**Chinese Documentation**: [link](https://juejin.cn/post/7445151895121543209)
-
-**Zero to Hero Tutorial**: [link](https://juejin.cn/column/7207659644487139387)
-
-**Mobile Web App**: [mobvue](https://github.com/un-pany/mobvue)
-
-**Electron Desktop Version**: [v3-electron-vite](https://github.com/un-pany/v3-electron-vite)
-
-**Chinese Repository**: [gitee](https://gitee.com/un-pany/v3-admin-vite), [atomgit](https://atomgit.com/un-pany/v3-admin-vite)
-
-**Optional Group**: [check how to join](https://github.com/un-pany/v3-admin-vite/issues/191)
-
-**Donations**: [buy a coffee for the author](https://github.com/un-pany/v3-admin-vite/issues/69)
-
-**Releases & Changelog**: [releases](https://github.com/un-pany/v3-admin-vite/releases)
 
 ## Features
 
@@ -221,15 +208,7 @@ npx skills experimental_install
 
 ## Project Preview Image
 
-![preview](./src/common/assets/images/docs/preview.png)
-
-## Contributors
-
-A big thank you to all the contributors!
-
-<a href="https://github.com/un-pany/v3-admin-vite/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=un-pany/v3-admin-vite" alt="contributors">
-</a>
+![preview](./src/shared/assets/images/docs/preview.png)
 
 ## License
 

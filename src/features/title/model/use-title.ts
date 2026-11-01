@@ -1,5 +1,5 @@
 /** Project title */
-const VITE_APP_TITLE = import.meta.env.VITE_APP_TITLE ?? "V3 Admin Vite"
+const VITE_APP_TITLE = import.meta.env.VITE_APP_TITLE ?? "MTQ UiX Vue"
 
 /** Dynamic title */
 const dynamicTitle = ref<string>("")
